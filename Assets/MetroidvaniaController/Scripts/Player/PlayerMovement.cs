@@ -13,12 +13,23 @@ public class PlayerMovement : MonoBehaviour
     float horizontalMove = 0f;
     bool jump = false;
     bool dash = false;
+    public bool isAttacking;
+    public bool isGrounded;
+    public bool canDoubleJump;
 
     //bool dashAxis = false;
-
+    private void Start()
+    {
+        
+    }
     // Update is called once per frame
     void Update()
     {
+        canDoubleJump = GetComponent<CharacterController2D>().canDoubleJump;
+
+        isGrounded = GetComponent<CharacterController2D>().m_Grounded;
+
+        isAttacking = GetComponent<Attack>().isAttacking;
 
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
@@ -62,9 +73,28 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Move our character
-        controller.Move(horizontalMove * Time.fixedDeltaTime, jump, dash);
-        jump = false;
-        dash = false;
+        if (!isAttacking)
+        {
+            // Move our character
+            controller.Move(horizontalMove * Time.fixedDeltaTime, jump, dash);
+            jump = false;
+            dash = false;           
+        }
+        else if(isAttacking && !isGrounded && canDoubleJump)
+        {
+            dash = false;
+            jump = false;
+            controller.Move(horizontalMove * Time.fixedDeltaTime, jump, dash);
+            jump = false;
+            canDoubleJump = false;
+        }
+        else if (isAttacking && isGrounded)
+        {
+            dash = false;
+            jump = false;
+            controller.Move(0, jump, dash);
+            jump = false;
+        }
+
     }
 }

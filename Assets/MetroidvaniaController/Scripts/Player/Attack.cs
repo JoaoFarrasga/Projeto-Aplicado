@@ -11,6 +11,11 @@ public class Attack : MonoBehaviour
 	public Animator animator;
 	public bool canAttack = true;
 	public bool isTimeToCheck = false;
+	public bool isAttacking = false;
+	public Weapon pointer;
+
+	public bool isAttackingLight = false;
+	public bool isAttackingHeavy = false;
 
 	public GameObject cam;
 
@@ -22,31 +27,46 @@ public class Attack : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-        
+		
     }
 
     // Update is called once per frame
     void Update()
     {
-		if (Input.GetKeyDown(KeyCode.Mouse0) && canAttack)
+		if (Input.GetKeyDown(KeyCode.Mouse0) && canAttack && !isAttacking)
 		{
+			isAttacking = true;
 			canAttack = false;
 			animator.SetBool("IsAttacking", true);
-			StartCoroutine(AttackCooldown());
+			StartCoroutine(LightAttackCooldown());
 		}
 
-		if (Input.GetKeyDown(KeyCode.Mouse1))
+		if (Input.GetKeyDown(KeyCode.Mouse1) && canAttack && !isAttacking)
 		{
+			/*
 			GameObject throwableWeapon = Instantiate(throwableObject, transform.position + new Vector3(transform.localScale.x * 0.5f,-0.2f), Quaternion.identity) as GameObject; 
 			Vector2 direction = new Vector2(transform.localScale.x, 0);
 			throwableWeapon.GetComponent<ThrowableWeapon>().direction = direction; 
 			throwableWeapon.name = "ThrowableWeapon";
+			*/
+			isAttacking = true;
+			canAttack = false;
+			animator.SetBool("IsAttacking", true);
+			StartCoroutine(HeavyAttackCooldown());
+
 		}
 	}
 
-	IEnumerator AttackCooldown()
+	IEnumerator LightAttackCooldown()
 	{
-		yield return new WaitForSeconds(0.25f);
+		yield return new WaitForSeconds(pointer.lightCooldown);
+		isAttacking = false;
+		canAttack = true;
+	}
+	IEnumerator HeavyAttackCooldown()
+	{
+		yield return new WaitForSeconds(pointer.heavyCooldown);
+		isAttacking = false;
 		canAttack = true;
 	}
 
