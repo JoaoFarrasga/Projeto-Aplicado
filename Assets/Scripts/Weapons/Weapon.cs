@@ -9,9 +9,11 @@ public class Weapon : ScriptableObject
 
     public float lightDamage;
     public float lightCooldown;
+    public float lightAttackSpeed;
 
     public float heavyDamage;
     public float heavyCooldown;
+    public float heavyAttackSpeed;
 
     public float range;
 

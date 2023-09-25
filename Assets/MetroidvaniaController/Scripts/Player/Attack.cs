@@ -28,7 +28,7 @@ public class Attack : MonoBehaviour
 	void Start()
     {
 		
-    }
+	}
 
     // Update is called once per frame
     void Update()
@@ -37,6 +37,7 @@ public class Attack : MonoBehaviour
 		{
 			isAttacking = true;
 			canAttack = false;
+			animator.SetFloat("AttackSpeed", pointer.lightAttackSpeed);
 			animator.SetBool("IsAttacking", true);
 			StartCoroutine(LightAttackCooldown());
 		}
@@ -51,6 +52,7 @@ public class Attack : MonoBehaviour
 			*/
 			isAttacking = true;
 			canAttack = false;
+			animator.SetFloat("AttackSpeed", pointer.heavyAttackSpeed);
 			animator.SetBool("IsAttacking", true);
 			StartCoroutine(HeavyAttackCooldown());
 

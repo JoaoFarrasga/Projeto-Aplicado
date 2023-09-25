@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Pointer
   lightDamage: 3
-  lightCooldown: 0.7
+  lightCooldown: 0.5
   heavyDamage: 8
   heavyCooldown: 1
   range: 3
