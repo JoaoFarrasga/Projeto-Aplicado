@@ -78,15 +78,17 @@ public class PlayerMovement : MonoBehaviour
             // Move our character
             controller.Move(horizontalMove * Time.fixedDeltaTime, jump, dash);
             jump = false;
-            dash = false;           
+            dash = false;
+            animator.SetBool("CanWalk", true);
         }
-        else if(isAttacking && !isGrounded && canDoubleJump)
+        else if(isAttacking && !isGrounded)
         {
             dash = false;
             jump = false;
             controller.Move(horizontalMove * Time.fixedDeltaTime, jump, dash);
             jump = false;
             canDoubleJump = false;
+            animator.SetBool("CanWalk", false);
         }
         else if (isAttacking && isGrounded)
         {
@@ -94,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
             jump = false;
             controller.Move(0, jump, dash);
             jump = false;
+            animator.SetBool("CanWalk", false);
         }
 
     }
