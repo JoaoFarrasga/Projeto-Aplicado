@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 using System.Threading;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public abstract class EnemyController : MonoBehaviour
 {
 
     [Header("Enemy Starter")]
@@ -33,7 +33,7 @@ public class EnemyController : MonoBehaviour
     private Transform _playerTransform;
 
     //Start to Initialize Variables
-    void Start()
+    public virtual void Start()
     {
         _isPatrol = true;
         _isChase = false;
@@ -42,7 +42,7 @@ public class EnemyController : MonoBehaviour
     }
 
     //Update to Update the Logic being used
-    void Update()
+    public void Update()
     {
         CheckDetection();
 
@@ -57,7 +57,7 @@ public class EnemyController : MonoBehaviour
     }
 
     //Checks if the Player is in Ranged of the Enemy View
-    private void CheckDetection()
+    public void CheckDetection()
     {
         Collider2D playerCollider = Physics2D.OverlapCircle(transform.position, viewRange, playerLayer);
 
@@ -76,7 +76,7 @@ public class EnemyController : MonoBehaviour
     }
 
     //Logic that the Enemy Uses to Chase the Enemy
-    private void Chase()
+    public void Chase()
     {
         Vector3 playerDirection = _playerTransform.position - transform.position;
         playerDirection.Normalize();
@@ -84,13 +84,17 @@ public class EnemyController : MonoBehaviour
     }
 
     //Logic that the Enemy Uses to Patrol Between Points
-    private void Patrol()
+    public virtual void Patrol()
     {
+        /*
+
         Vector2 patrolPointPosition = patrolPoints[currentPoint].position;
 
         transform.position = Vector2.MoveTowards(transform.position, patrolPointPosition, moveSpeed * Time.deltaTime);
 
         if (Vector2.Distance(transform.position, patrolPointPosition) <= 0.2f) NextPoint();
+        
+        */
     }
 
     //Changes the Patrol Point to the Next One
@@ -99,8 +103,9 @@ public class EnemyController : MonoBehaviour
         currentPoint = (currentPoint + 1) % patrolPoints.Length;
     }
 
+
     //Check if Collision with the Player Happend and Gives Damage to It
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
