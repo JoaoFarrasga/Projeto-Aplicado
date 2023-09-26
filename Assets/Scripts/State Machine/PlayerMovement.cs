@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
 
     public CharacterController2D controller;
+    public Inputs input;
     public Animator animator;
 
     public float runSpeed = 40f;
@@ -17,12 +16,6 @@ public class PlayerMovement : MonoBehaviour
     public bool isGrounded;
     public bool canDoubleJump;
 
-    //bool dashAxis = false;
-    private void Start()
-    {
-        
-    }
-    // Update is called once per frame
     void Update()
     {
         canDoubleJump = GetComponent<CharacterController2D>().canDoubleJump;
@@ -31,33 +24,12 @@ public class PlayerMovement : MonoBehaviour
 
         isAttacking = GetComponent<Attack>().isAttacking;
 
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        horizontalMove = input.move.x * runSpeed;
 
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
+        if (input.jump)
             jump = true;
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            dash = true;
-        }
-
-        //if (Input.GetAxisRaw("Dash") == 1 || Input.GetAxisRaw("Dash") == -1) //RT in Unity 2017 = -1, RT in Unity 2019 = 1
-        //{
-        //    if (dashAxis == false)
-        //    {
-        //        dashAxis = true;
-        //        dash = true;
-        //    }
-        //}
-        //else
-        //{
-        //    dashAxis = false;
-        //}
-
 
     }
 
@@ -78,15 +50,16 @@ public class PlayerMovement : MonoBehaviour
             // Move our character
             controller.Move(horizontalMove * Time.fixedDeltaTime, jump, dash);
             jump = false;
+            input.jump = false;
             dash = false;
             animator.SetBool("CanWalk", true);
         }
-        else if(isAttacking && !isGrounded)
+        else if (isAttacking && !isGrounded)
         {
             dash = false;
             jump = false;
+            input.jump = false;
             controller.Move(horizontalMove * Time.fixedDeltaTime, jump, dash);
-            jump = false;
             canDoubleJump = false;
             animator.SetBool("CanWalk", false);
         }
@@ -94,8 +67,8 @@ public class PlayerMovement : MonoBehaviour
         {
             dash = false;
             jump = false;
+            input.jump = false;
             controller.Move(0, jump, dash);
-            jump = false;
             animator.SetBool("CanWalk", false);
         }
 

@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class CharacterController2D : MonoBehaviour
 {
+    public float hitTimeout = 1f;
+    public float runSpeed = 100f;
 	[SerializeField] private float m_JumpForce = 400f;							// Amount of force added when the player jumps.
 	[Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;	// How much to smooth out the movement
 	[SerializeField] private bool m_AirControl = false;							// Whether or not a player can steer while jumping;
@@ -133,6 +135,7 @@ public class CharacterController2D : MonoBehaviour
 
 	public void Move(float move, bool jump, bool dash)
 	{
+		move *= runSpeed;
 		if (canMove) {
 			if (dash && canDash && !isWallSliding)
 			{

@@ -1,17 +1,32 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+
+public interface ITimeable
+{
+    void StartTimeCoroutine();
+    void StopAllCoroutines();
+}
+
+public interface IDamageable
+{
+    void Damage(float amount);
+}
+
+public interface IHealable
+{
+    void Heal(float amount);
+}
 
 public class TimeManager : Progressive, IDamageable, IHealable, ITimeable
 {
     [SerializeField] private bool isTimeCoroutineRunning = false;
+    public Action OnHit;
 
 
     private void Start()
     {
-        StartTimeCoroutine();
+        //StartTimeCoroutine();
     }
 
     private bool CheckMaxValue()
@@ -46,6 +61,7 @@ public class TimeManager : Progressive, IDamageable, IHealable, ITimeable
 
     public void Damage(float damageAmount)
     {
+        OnHit.Invoke();
         if (damageAmount > Value)
             damageAmount = Value;
 
@@ -71,21 +87,4 @@ public class TimeManager : Progressive, IDamageable, IHealable, ITimeable
         Value = 0f;
         Debug.Log("DEATH");
     }
-}
-
-
-public interface ITimeable
-{
-    void StartTimeCoroutine();
-    void StopAllCoroutines();
-}
-
-public interface IDamageable
-{
-    void Damage(float amount);
-}
-
-public interface IHealable
-{
-    void Heal(float amount);
 }
