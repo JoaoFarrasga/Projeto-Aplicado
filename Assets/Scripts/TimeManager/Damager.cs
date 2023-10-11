@@ -3,18 +3,34 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using UnityEngine;
 
+using UnityEngine;
 public class Damager : MonoBehaviour
 {
-    [SerializeField] private float _damageAmount;
+    [SerializeField] private float _damageAmountePerSecond = 10f;
+    private bool isDamaging;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        ApplyDamage(other.GetComponent<IDamageable>());
+        IDamageable damageable = other.GetComponent<IDamageable>();
+        if (damageable != null && !isDamaging)
+        {
+            isDamaging = true;
+            StartCoroutine(ApplyDamageOverTime(damageable));
+        }
     }
 
-    protected void ApplyDamage(IDamageable damageable)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        damageable?.Damage(_damageAmount);
+        isDamaging = false;
+    }
+
+    private IEnumerator ApplyDamageOverTime(IDamageable damageable)
+    {
+        while (isDamaging)
+        {
+            damageable.Damage(_damageAmountePerSecond);
+            yield return new WaitForSeconds(1f);
+        }
     }
 }
 

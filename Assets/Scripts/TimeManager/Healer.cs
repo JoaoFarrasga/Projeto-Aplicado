@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class Healer : MonoBehaviour
 {
-    [SerializeField] private float _healAmount;
+    [SerializeField] private float _damageAmountePerSecond = 10f;
+    private bool isHealing;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        ApplyHeal(other.GetComponent<IHealable>());
+        IHealable healable = other.GetComponent<IHealable>();
+        if (healable != null && !isHealing)
+        {
+            isHealing = true;
+            StartCoroutine(ApplyDamageOverTime(healable));
+        }
     }
 
-    protected void ApplyHeal(IHealable healable)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        healable.Heal(_healAmount);
+        isHealing = false;
+    }
+
+    private IEnumerator ApplyDamageOverTime(IHealable healable)
+    {
+        while (isHealing)
+        {
+            healable.Heal(_damageAmountePerSecond);
+            yield return new WaitForSeconds(1f);
+        }
     }
 }
