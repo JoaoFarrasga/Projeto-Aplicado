@@ -5,16 +5,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Weapon/Create New weapon")]
 public class Weapon : ScriptableObject
 {
-    public string name;
+    public string weaponName;
 
-    public float lightDamage;
-    public float lightCooldown;
-    public float lightAttackSpeed;
+    public float primaryDamage;
+    public float primaryAttackSpeed;
+    public float primaryCooldown;
 
-    public float heavyDamage;
-    public float heavyCooldown;
-    public float heavyAttackSpeed;
+    public float secondaryDamage;
+    public float secondaryAttackSpeed;
+    public float secondaryCooldown;
 
     public float range;
-
 }

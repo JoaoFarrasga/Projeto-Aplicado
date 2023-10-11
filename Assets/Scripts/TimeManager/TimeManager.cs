@@ -1,12 +1,29 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+
+public interface ITimeable
+{
+    void StartTimeCoroutine();
+    void StopAllCoroutines();
+}
+
+public interface IDamageable
+{
+    void Damage(float amount);
+}
+
+public interface IHealable
+{
+    void Heal(float amount);
+}
 
 public class TimeManager : Progressive, IDamageable, IHealable, ITimeable
 {
-    [SerializeField] private bool isTimeCoroutineRunning = false;
+    private bool isTimeCoroutineRunning = false;
+    public Action OnHitAction;
+    public Action OnDeathAction;
+
 
 
     private void Start()
@@ -38,7 +55,7 @@ public class TimeManager : Progressive, IDamageable, IHealable, ITimeable
     private IEnumerator TimeCoroutine()
     {
         Value -= Time.deltaTime;
-        if (CheckMinValue()) OnBreak();
+        if (CheckMinValue()) OnDeath();
 
         yield return new WaitForSeconds(0);
         StartCoroutine(TimeCoroutine());
@@ -46,12 +63,13 @@ public class TimeManager : Progressive, IDamageable, IHealable, ITimeable
 
     public void Damage(float damageAmount)
     {
+        OnHitAction?.Invoke();
         if (damageAmount > Value)
             damageAmount = Value;
 
         Value -= damageAmount;
 
-        if (CheckMinValue()) OnBreak();
+        if (CheckMinValue()) OnDeath();
     }
 
     public void Heal(float healAmount)
@@ -64,28 +82,11 @@ public class TimeManager : Progressive, IDamageable, IHealable, ITimeable
         Value += healAmount;
     }
 
-    private void OnBreak()
+    private void OnDeath()
     {
         StopAllCoroutines();
         isTimeCoroutineRunning = false;
         Value = 0f;
-        Debug.Log("DEATH");
+        OnDeathAction?.Invoke();
     }
-}
-
-
-public interface ITimeable
-{
-    void StartTimeCoroutine();
-    void StopAllCoroutines();
-}
-
-public interface IDamageable
-{
-    void Damage(float amount);
-}
-
-public interface IHealable
-{
-    void Heal(float amount);
 }
