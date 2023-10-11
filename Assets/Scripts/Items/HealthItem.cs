@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemHealth : Item
@@ -12,5 +10,7 @@ public class ItemHealth : Item
     public override void OnPickUp(Collider2D collision)
     {
         collision.GetComponent<IHealable>().Heal(health);
+
+        Destroy(gameObject);
     }
 }

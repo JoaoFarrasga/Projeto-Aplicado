@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TimerItem : Item
@@ -10,5 +8,7 @@ public class TimerItem : Item
     public override void OnPickUp(Collider2D collision)
     {
         collision.GetComponent<TimeManager>().MaxValue += extraTime;
+
+        Destroy(gameObject);
     }
 }

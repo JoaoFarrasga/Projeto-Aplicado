@@ -20,13 +20,13 @@ public class EnemyFlyIdle : EnemyController
     private Transform _playerTransform;
 
     //Override Start to make the _isChase False
-    public override void Start()
+    public void Start()
     {
         _isChase = false;
     }
 
     //Override Update to make the Enemy check if the player is close if yes chase, if not stay idle.
-    public override void Update()
+    public void Update()
     {
         CheckDetection();
 
@@ -63,7 +63,7 @@ public class EnemyFlyIdle : EnemyController
     }
 
     //If the Enemey sees the Player it starts chasing him
-    public override void Chase()
+    public void Chase()
     {
         Vector3 playerDirection = _playerTransform.position - transform.position;
         playerDirection.Normalize();

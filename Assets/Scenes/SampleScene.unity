@@ -719,8 +719,8 @@ GameObject:
   m_Component:
   - component: {fileID: 439312114}
   - component: {fileID: 439312113}
-  - component: {fileID: 439312112}
   - component: {fileID: 439312111}
+  - component: {fileID: 439312115}
   m_Layer: 0
   m_Name: Health Item
   m_TagString: Untagged
@@ -773,19 +773,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.8828125}
   m_EdgeRadius: 0
---- !u!114 &439312112
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 439312110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8ad680f02d520e4c9f1898c40f60949, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 10
 --- !u!212 &439312113
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -853,6 +840,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &439312115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439312110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe7536c9c08e6b043bafa7a6e5d518d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reduceMultiplyer: 2
+  effectTime: 5
 --- !u!4 &643216485 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4660076192433278, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
@@ -873,6 +874,7 @@ MonoBehaviour:
   _value: 100
   <MaxValue>k__BackingField: 100
   isTimeCoroutineRunning: 0
+  multiplyer: 1
 --- !u!1 &798110896
 GameObject:
   m_ObjectHideFlags: 0

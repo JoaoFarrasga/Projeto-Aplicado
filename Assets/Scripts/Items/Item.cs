@@ -1,9 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    //Update to update Logic of the Item
+    public virtual void Update()
+    {
+
+    }
+
     //On Pick Up happens when the Items Collides with the Player, Item Logic Here
     public virtual void OnPickUp(Collider2D collision)
     {
@@ -17,7 +21,5 @@ public class Item : MonoBehaviour
         {
             OnPickUp(collision);
         }
-
-        Destroy(gameObject);
     }
 }

@@ -23,13 +23,13 @@ public class EnemyFly : EnemyController
     private bool _isRoof;
     private bool _isFront;
 
-    public override void Start()
+    public void Start()
     {
         enemyRB = GetComponent<Rigidbody2D>();
         moveDirection = new Vector2(1f, 0.25f);
     }
 
-    public override void Update()
+    public void Update()
     {
         Patrol();
     }
@@ -39,7 +39,7 @@ public class EnemyFly : EnemyController
         enemyRB.velocity = moveDirection * moveSpeed;
     }
 
-    public override void Patrol()
+    public void Patrol()
     {
         _isGround = Physics2D.OverlapCircle(checkGround.transform.position, 0.1f, groundLayer);
         _isRoof = Physics2D.OverlapCircle(checkRoof.transform.position, 0.1f, groundLayer);

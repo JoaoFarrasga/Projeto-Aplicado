@@ -8,6 +8,8 @@ public class TimeManager : Progressive, IDamageable, IHealable, ITimeable
 {
     [SerializeField] private bool isTimeCoroutineRunning = false;
 
+    [HideInInspector]
+    public int multiplyer = 1;
 
     private void Start()
     {
@@ -49,7 +51,7 @@ public class TimeManager : Progressive, IDamageable, IHealable, ITimeable
         if (damageAmount > Value)
             damageAmount = Value;
 
-        Value -= damageAmount;
+        Value -= damageAmount * multiplyer;
 
         if (CheckMinValue()) OnBreak();
     }
