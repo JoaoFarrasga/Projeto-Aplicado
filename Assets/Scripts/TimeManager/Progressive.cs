@@ -6,11 +6,11 @@ using UnityEngine;
 public abstract class Progressive : MonoBehaviour
 {
     [SerializeField] private float _value;
-    //public Action OnChange;
+    public Action OnChange;
 
     public virtual void Awake()
     {
-        //OnChange.Invoke();
+        OnChange?.Invoke();
     }
 
     public float Value
@@ -22,7 +22,7 @@ public abstract class Progressive : MonoBehaviour
         set
         {
             _value = value;
-            //OnChange?.Invoke();
+            OnChange?.Invoke();
         }
     }
     [field: SerializeField] public float MaxValue { get; set; }

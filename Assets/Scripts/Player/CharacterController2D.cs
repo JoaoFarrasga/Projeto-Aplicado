@@ -33,14 +33,14 @@ public class CharacterController2D : MonoBehaviour
     public float attackGravityCancel = 5f;
 
     [Header("PrimaryAttack")]
-    public float primaryAttackDamage;
-    public float primaryAttackTimeout;
-    public float primaryAttackSpeed;
+    public float primaryAttackDamage = 5f;
+    public float primaryAttackTimeout = 0.3f;
+    public float primaryAttackSpeed = 2f;
 
     [Header("SecondaryAttack")]
-    public float secondaryAttackDamage;
-    public float secondaryAttackTimeout;
-    public float secondaryAttackSpeed;
+    public float secondaryAttackDamage = 10f;
+    public float secondaryAttackTimeout = 0.5f;
+    public float secondaryAttackSpeed = 1f;
 
     [Header("Jump")]
     public bool doubleJump;
@@ -50,7 +50,7 @@ public class CharacterController2D : MonoBehaviour
     public float maxFallSpeed = 25f;
 
     [Header("Dash")]
-    [SerializeField] private float dashForce = 100f;
+    [SerializeField] private float dashForce = 50f;
     public float dashTimeout = 0.25f;
     public bool canDash;
 
@@ -143,5 +143,10 @@ public class CharacterController2D : MonoBehaviour
                 damageable?.Damage(damageAmount);
             }
         }
+    }
+
+    public void Grapple()
+    {
+
     }
 }

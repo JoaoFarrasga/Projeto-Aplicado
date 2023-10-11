@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class EnemyFly : EnemyController
 {
@@ -11,22 +7,30 @@ public class EnemyFly : EnemyController
     public GameObject checkGround;
     public GameObject checkRoof;
     public GameObject checkFront;
+    public GameObject checkBack;
     public LayerMask groundLayer;
 
     private Rigidbody2D enemyRB;
 
     //Move Direction
-    private Vector2 moveDirection;
+    [SerializeField] private Vector2 moveDirection = new Vector2(0f, 0f);
 
     //Checks
     private bool _isGround;
     private bool _isRoof;
     private bool _isFront;
+    private bool _isBack;
 
     public void Start()
     {
         enemyRB = GetComponent<Rigidbody2D>();
-        moveDirection = new Vector2(1f, 0.25f);
+        if (moveDirection != Vector2.zero)
+            return;
+
+        do
+        {
+            moveDirection = new Vector2(Random.Range(-1, 2), Random.Range(-1, 2));
+        } while (moveDirection.x == 0 && moveDirection.y == 0);
     }
 
     public void Update()
@@ -44,14 +48,15 @@ public class EnemyFly : EnemyController
         _isGround = Physics2D.OverlapCircle(checkGround.transform.position, 0.1f, groundLayer);
         _isRoof = Physics2D.OverlapCircle(checkRoof.transform.position, 0.1f, groundLayer);
         _isFront = Physics2D.OverlapCircle(checkFront.transform.position, 0.1f, groundLayer);
+        _isBack = Physics2D.OverlapCircle(checkBack.transform.position, 0.1f, groundLayer);
 
-        if (_isFront) FlipX();
+        if (_isFront || _isBack) FlipX();
         if (_isGround || _isRoof) FlipY();
     }
 
     void FlipX()
     {
-        transform.Rotate(new Vector2(0, 180));
+        //transform.Rotate(new Vector2(0, 180));
         moveDirection.x *= -1f;
     }
 

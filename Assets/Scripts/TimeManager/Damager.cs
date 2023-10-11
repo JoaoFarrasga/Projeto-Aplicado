@@ -8,6 +8,7 @@ public class Damager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.tag != "Player") return;
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null && !isDamaging)
         {
@@ -23,6 +24,7 @@ public class Damager : MonoBehaviour
 
     private IEnumerator ApplyDamageOverTime(IDamageable damageable)
     {
+
         while (isDamaging)
         {
             damageable.Damage(_damageAmountePerSecond);

@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class EnemyMelee : EnemyController
 {
@@ -13,7 +9,7 @@ public class EnemyMelee : EnemyController
     //States
     private bool _isGround;
     private bool _facingRight;
-    
+
     //Override in Update to have the Logic of the Patrol Start
     public void Update()
     {

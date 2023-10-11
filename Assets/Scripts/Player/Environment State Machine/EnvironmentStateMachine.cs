@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class EnvironmentStateMachine : MonoBehaviour
 {
@@ -20,7 +21,6 @@ public class EnvironmentStateMachine : MonoBehaviour
     private void Awake()
     {
         player = GetComponent<PlayerStateMachine>();
-
         groundedState = new GroundedState(this);
         airboneState = new AirboneState(this);
         wallState = new WallState(this);

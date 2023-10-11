@@ -50,7 +50,7 @@ public class WalkingState : PlayerState
     public override void OnUpdate()
     {
         controller.Move(input.move.x);
-        animator.SetFloat(ANIM_PARAM_ATTACK_SPEED, Mathf.Abs(input.move.x * controller.speed * Time.deltaTime));
+        animator.SetFloat(ANIM_PARAM_SPEED, Mathf.Abs(input.move.x * controller.speed * Time.deltaTime));
 
         if (input.primaryAttack || input.secondaryAttack)
             playerStateMachine.SwitchState(playerStateMachine.attackingState);
@@ -65,7 +65,7 @@ public class WalkingState : PlayerState
 
     public override void OnExit()
     {
-        animator.SetFloat(ANIM_PARAM_ATTACK_SPEED, 0);
+        animator.SetFloat(ANIM_PARAM_SPEED, 0);
     }
 }
 

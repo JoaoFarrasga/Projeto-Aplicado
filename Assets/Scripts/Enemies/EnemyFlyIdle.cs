@@ -1,15 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class EnemyFlyIdle : EnemyController
 {
-    [Header("Enemy Fly Idle")]
-    public Transform starterPosition;
+    public Vector3 starterPosition;
 
-    [Header("Detection")]
+    [Header("Enemy Fly Idle")]
     public float viewRange;
     public LayerMask playerLayer;
 
@@ -23,6 +18,7 @@ public class EnemyFlyIdle : EnemyController
     public void Start()
     {
         _isChase = false;
+        starterPosition = transform.position;
     }
 
     //Override Update to make the Enemy check if the player is close if yes chase, if not stay idle.
@@ -44,13 +40,12 @@ public class EnemyFlyIdle : EnemyController
     private void CheckDetection()
     {
         Collider2D playerCollider = Physics2D.OverlapCircle(transform.position, viewRange, playerLayer);
-
-        if (playerCollider != null)
+        if (playerCollider != null && playerCollider.gameObject != gameObject)
         {
             _isChase = true;
             _playerTransform = playerCollider.transform;
         }
-        else if (_isChase)
+        else
         {
             _isChase = false;
         }
@@ -59,7 +54,7 @@ public class EnemyFlyIdle : EnemyController
     //If the Enemy doesn't see the Player it stays Idle
     private void Idle()
     {
-        transform.position = Vector2.MoveTowards(transform.position, starterPosition.position, moveSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, starterPosition, moveSpeed * Time.deltaTime);
     }
 
     //If the Enemey sees the Player it starts chasing him
