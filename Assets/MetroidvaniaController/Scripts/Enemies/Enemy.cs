@@ -80,10 +80,10 @@ public class Enemy : MonoBehaviour {
 
 	void OnCollisionStay2D(Collision2D collision)
 	{
-		if (collision.gameObject.tag == "Player" && life > 0)
-		{
-			collision.gameObject.GetComponent<CharacterController2D>().ApplyDamage(2f, transform.position);
-		}
+		//if (collision.gameObject.tag == "Player" && life > 0)
+		//{
+		//	//collision.gameObject.GetComponent<CharacterController2Dold>().ApplyDamage(2f, transform.position);
+		//}
 	}
 
 	IEnumerator HitTime()

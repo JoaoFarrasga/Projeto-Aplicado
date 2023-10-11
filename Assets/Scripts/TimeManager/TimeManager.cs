@@ -20,13 +20,15 @@ public interface IHealable
 
 public class TimeManager : Progressive, IDamageable, IHealable, ITimeable
 {
-    [SerializeField] private bool isTimeCoroutineRunning = false;
-    public Action OnHit;
+    private bool isTimeCoroutineRunning = false;
+    public Action OnHitAction;
+    public Action OnDeathAction;
+
 
 
     private void Start()
     {
-        //StartTimeCoroutine();
+        StartTimeCoroutine();
     }
 
     private bool CheckMaxValue()
@@ -53,7 +55,7 @@ public class TimeManager : Progressive, IDamageable, IHealable, ITimeable
     private IEnumerator TimeCoroutine()
     {
         Value -= Time.deltaTime;
-        if (CheckMinValue()) OnBreak();
+        if (CheckMinValue()) OnDeath();
 
         yield return new WaitForSeconds(0);
         StartCoroutine(TimeCoroutine());
@@ -61,13 +63,13 @@ public class TimeManager : Progressive, IDamageable, IHealable, ITimeable
 
     public void Damage(float damageAmount)
     {
-        OnHit.Invoke();
+        OnHitAction?.Invoke();
         if (damageAmount > Value)
             damageAmount = Value;
 
         Value -= damageAmount;
 
-        if (CheckMinValue()) OnBreak();
+        if (CheckMinValue()) OnDeath();
     }
 
     public void Heal(float healAmount)
@@ -80,11 +82,11 @@ public class TimeManager : Progressive, IDamageable, IHealable, ITimeable
         Value += healAmount;
     }
 
-    private void OnBreak()
+    private void OnDeath()
     {
         StopAllCoroutines();
         isTimeCoroutineRunning = false;
         Value = 0f;
-        Debug.Log("DEATH");
+        OnDeathAction?.Invoke();
     }
 }
