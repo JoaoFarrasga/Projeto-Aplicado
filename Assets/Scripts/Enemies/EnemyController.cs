@@ -9,7 +9,6 @@ using UnityEngine;
 
 public abstract class EnemyController : MonoBehaviour
 {
-
     [Header("Enemy Starter")]
     public int enemyDamage;
     public float moveSpeed;

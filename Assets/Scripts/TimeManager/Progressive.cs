@@ -25,7 +25,7 @@ public abstract class Progressive : MonoBehaviour
             //OnChange?.Invoke();
         }
     }
-    [field: SerializeField] public float MaxValue { get; private set; }
+    [field: SerializeField] public float MaxValue { get; set; }
 
     public float Ratio { get { return Value / MaxValue; } }
 
