@@ -162,24 +162,24 @@ public class Ally : MonoBehaviour
 
 	public void MeleeAttack()
 	{
-		//transform.GetComponent<Animator>().SetBool("Attack", true);
-		//Collider2D[] collidersEnemies = Physics2D.OverlapCircleAll(attackCheck.position, 0.9f);
-		//for (int i = 0; i < collidersEnemies.Length; i++)
-		//{
-		//	if (collidersEnemies[i].gameObject.tag == "Enemy" && collidersEnemies[i].gameObject != gameObject )
-		//	{
-		//		if (transform.localScale.x < 1)
-		//		{
-		//			dmgValue = -dmgValue;
-		//		}
-		//		collidersEnemies[i].gameObject.SendMessage("ApplyDamage", dmgValue);
-		//	}
-		//	else if (collidersEnemies[i].gameObject.tag == "Player")
-		//	{
-		//		collidersEnemies[i].gameObject.GetComponent<CharacterController2Dold>().ApplyDamage(2f, transform.position);
-		//	}
-		//}
-		//StartCoroutine(WaitToAttack(0.5f));
+		transform.GetComponent<Animator>().SetBool("Attack", true);
+		Collider2D[] collidersEnemies = Physics2D.OverlapCircleAll(attackCheck.position, 0.9f);
+		for (int i = 0; i < collidersEnemies.Length; i++)
+		{
+			if (collidersEnemies[i].gameObject.tag == "Enemy" && collidersEnemies[i].gameObject != gameObject )
+			{
+				if (transform.localScale.x < 1)
+				{
+					dmgValue = -dmgValue;
+				}
+				collidersEnemies[i].gameObject.SendMessage("ApplyDamage", dmgValue);
+			}
+			else if (collidersEnemies[i].gameObject.tag == "Player")
+			{
+				collidersEnemies[i].gameObject.GetComponent<CharacterController2D>().ApplyDamage(2f, transform.position);
+			}
+		}
+		StartCoroutine(WaitToAttack(0.5f));
 	}
 
 	public void RangeAttack()

@@ -14,8 +14,6 @@ public class Damager : MonoBehaviour
 
     protected void ApplyDamage(IDamageable damageable)
     {
-        damageable?.Damage(_damageAmount);
+        damageable.Damage(_damageAmount);
     }
 }
-
-

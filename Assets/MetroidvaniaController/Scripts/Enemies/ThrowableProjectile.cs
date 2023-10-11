@@ -18,19 +18,19 @@ public class ThrowableProjectile : MonoBehaviour
 
 	void OnCollisionEnter2D(Collision2D collision)
 	{
-		//if (collision.gameObject.tag == "Player")
-		//{
-		//	collision.gameObject.GetComponent<CharacterController2Dold>().ApplyDamage(2f, transform.position);
-		//	Destroy(gameObject);
-		//}
-		//else if ( owner != null && collision.gameObject != owner && collision.gameObject.tag == "Enemy" )
-		//{
-		//	collision.gameObject.SendMessage("ApplyDamage", Mathf.Sign(direction.x) * 2f);
-		//	Destroy(gameObject);
-		//}
-		//else if (collision.gameObject.tag != "Enemy" && collision.gameObject.tag != "Player")
-		//{
-		//	Destroy(gameObject);
-		//}
+		if (collision.gameObject.tag == "Player")
+		{
+			collision.gameObject.GetComponent<CharacterController2D>().ApplyDamage(2f, transform.position);
+			Destroy(gameObject);
+		}
+		else if ( owner != null && collision.gameObject != owner && collision.gameObject.tag == "Enemy" )
+		{
+			collision.gameObject.SendMessage("ApplyDamage", Mathf.Sign(direction.x) * 2f);
+			Destroy(gameObject);
+		}
+		else if (collision.gameObject.tag != "Enemy" && collision.gameObject.tag != "Player")
+		{
+			Destroy(gameObject);
+		}
 	}
 }

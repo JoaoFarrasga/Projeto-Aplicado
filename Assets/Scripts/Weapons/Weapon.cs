@@ -7,13 +7,14 @@ public class Weapon : ScriptableObject
 {
     public string weaponName;
 
-    public float primaryDamage;
-    public float primaryAttackSpeed;
-    public float primaryCooldown;
+    public float lightDamage;
+    public float lightCooldown;
+    public float lightAttackSpeed;
 
-    public float secondaryDamage;
-    public float secondaryAttackSpeed;
-    public float secondaryCooldown;
+    public float heavyDamage;
+    public float heavyCooldown;
+    public float heavyAttackSpeed;
 
     public float range;
+
 }
