@@ -76,7 +76,7 @@ public class TimeManager : Progressive, IDamageable, IHealable, ITimeable
 
     public void Heal(float healAmount)
     {
-        if (CheckMaxValue())
+        if (CheckMaxValue() || CheckMinValue())
             return;
 
         if (healAmount > MaxValue - Value)

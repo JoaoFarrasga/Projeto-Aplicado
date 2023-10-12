@@ -318,11 +318,12 @@ public class DeathState : PlayerState
         timePassed += Time.deltaTime;
 
         if (timePassed > controller.deathTimeout)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GameManager.instance.DeathMenu();
 
     }
 
     public override void OnExit()
     {
+
     }
 }

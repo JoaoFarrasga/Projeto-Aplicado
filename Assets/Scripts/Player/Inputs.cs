@@ -10,6 +10,7 @@ public class Inputs : MonoBehaviour
     public bool primaryAttack;
     public bool secondaryAttack;
     public bool dash;
+    public bool pause;
 
     [Header("Movement Settings")]
     public bool analogMovement;
@@ -51,7 +52,10 @@ public class Inputs : MonoBehaviour
     {
         DashInput(value.isPressed);
     }
-
+    public void OnPause(InputValue value)
+    {
+        GameManager.instance.PauseMenu();
+    }
 
 
     public void MoveInput(Vector2 newMoveDirection)
