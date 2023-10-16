@@ -6,53 +6,96 @@ using TMPro;
 
 public class NPCSystem : MonoBehaviour
 {
-    public string[] dialogueLines;
+    public bool isBarter = false;
+    public string[] startDialogueLines;
+    public string[] endDialogueLines;
     public GameObject canvas;
     public GameObject dialogueTemplate;
+    public GameObject buyMenu;
     public TextMeshProUGUI pressKeyToTalk;
     public string pressKeyToTalkText = "Press F to talk";
 
+    private bool hasBarted = false;
     private string dialogueText;
     private bool playerDetection = false;
-    private int index = 0;
+    private int startIndex = 0;
+    private int endIndex = 0;
+    private int indexCheckpoint = 0;
 
     // Update is called once per frame
     void Update()
     {
+        NPCActions(startDialogueLines, endDialogueLines);
+    }
+
+    private void NPCActions(string[] startDialogue, string[] endDialogue) 
+    {
         if (playerDetection)
         {
             pressKeyToTalk.text = pressKeyToTalkText;
-            Debug.Log("Press F to talk");
 
             if (Input.GetKeyDown(KeyCode.F))
             {
-                if (index == dialogueLines.Length)
+                if (startIndex == startDialogue.Length && endIndex != endDialogue.Length)
                 {
-                    pressKeyToTalk.text = "";
-                    dialogueTemplate.SetActive(false);
-                    index = 0;
+                    if (isBarter && !hasBarted)
+                    {
+                        BuyMenuActions();
+                    }
+                    else
+                    {
+                        buyMenu.SetActive(false);
+
+                        WriteDialogue(endDialogue, ref endIndex);
+                    }
+                }
+                else if (startIndex != startDialogue.Length)
+                {
+
+                    WriteDialogue(startDialogue, ref startIndex);
                 }
                 else
                 {
-                    dialogueTemplate.SetActive(true);
-
-                    dialogueTemplate.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = dialogueLines[index];
-
-                    index++;
+                    DialogueVariablesReset();
                 }
             }
         }
         else
         {
-            pressKeyToTalk.text = "";
-            dialogueTemplate.SetActive(false);
-            index = 0;
+            DialogueVariablesReset();
         }
     }
 
-    private void NewDialogue(string text) 
+    private void WriteDialogue(string[] dialogue, ref int index) 
     {
-        
+        dialogueTemplate.SetActive(true);
+
+        dialogueTemplate.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = dialogue[index];
+
+        index++;
+    }
+
+    private void DialogueVariablesReset() 
+    {
+        pressKeyToTalk.text = "";
+        dialogueTemplate.SetActive(false);
+        buyMenu.SetActive(false);
+        startIndex = 0;
+        endIndex = 0;
+        hasBarted = false;
+    }
+
+    private void BuyMenuActions() 
+    {
+        pressKeyToTalk.text = "";
+        dialogueTemplate.SetActive(false);
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
+        buyMenu.SetActive(true);
+
+        hasBarted = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
