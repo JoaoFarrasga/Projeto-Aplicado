@@ -54,9 +54,13 @@ public class CharacterController2D : MonoBehaviour
     public float dashTimeout = 0.25f;
     public bool canDash;
 
+    [Header("Inventory")]
+    public Inventory inventory;
+
     private void Awake()
     {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        inventory = new Inventory(24);
     }
 
     private void FixedUpdate()

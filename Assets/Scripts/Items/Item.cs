@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    public ItemType type;
+    public Sprite icon;
+
     //Update to update Logic of the Item
     public virtual void Update()
     {
@@ -19,7 +22,13 @@ public class Item : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            collision.GetComponent<CharacterController2D>().inventory.Add(this);
             OnPickUp(collision);
         }
     }
+}
+
+public enum ItemType
+{
+    NONE, TIMER_ITEM
 }
