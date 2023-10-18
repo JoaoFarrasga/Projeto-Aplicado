@@ -30,5 +30,5 @@ public class Item : MonoBehaviour
 
 public enum ItemType
 {
-    NONE, TIMER_ITEM
+    NONE, TIMER_ITEM, WOOD
 }

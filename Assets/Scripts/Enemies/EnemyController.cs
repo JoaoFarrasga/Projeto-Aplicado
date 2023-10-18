@@ -51,7 +51,7 @@ public abstract class EnemyController : MonoBehaviour
     }
 
     //Check if Collision with the Player Happend and Gives Damage to It
-    public void Attack()
+    public virtual void Attack()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(gameObject.transform.position, 1.0f);
         for (int i = 0; i < colliders.Length; i++)
