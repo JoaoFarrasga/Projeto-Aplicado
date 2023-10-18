@@ -10,14 +10,8 @@ public class EnemyMelee : EnemyController
     private bool _isGround;
     private bool _facingRight;
 
-    //Override in Update to have the Logic of the Patrol Start
-    public void Update()
-    {
-        Patrol();
-    }
-
     //Patrol Logic, this Enemy does not chase the player, making him change directions when it doesn't have ground
-    public void Patrol()
+    public override void Patrol()
     {
         _isGround = Physics2D.OverlapCircle(checkGround.transform.position, 0.1f, groundLayer);
 
