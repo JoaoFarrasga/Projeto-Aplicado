@@ -1,24 +1,29 @@
 using UnityEngine;
 
-public class EnemyMelee : EnemyController
+public class EnemyHidden : EnemyController
 {
     [Header("Enemy")]
     public GameObject checkGround;
     public LayerMask groundLayer;
 
-    //States
     private bool _isGround;
     private bool _facingRight;
 
-    //Override in Update to have the Logic of the Patrol Start
-    public void Update()
+    private bool _isHidden;
+    private SpriteRenderer _spriteRenderer;
+
+    [Tooltip("This is a False Chase")]
+
+    public void Start()
     {
-        Patrol();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        Hide();
     }
 
-    //Patrol Logic, this Enemy does not chase the player, making him change directions when it doesn't have ground
-    public void Patrol()
+    public override void Chase()
     {
+        Appear();
+
         _isGround = Physics2D.OverlapCircle(checkGround.transform.position, 0.1f, groundLayer);
 
         float checkRotation = _facingRight ? 1f : -1f;
@@ -32,7 +37,11 @@ public class EnemyMelee : EnemyController
         }
     }
 
-    //Flips the Enemy, used in Patrol whenever needed
+    public override void Patrol()
+    {
+        Hide();
+    }
+
     void Flip()
     {
         _facingRight = !_facingRight;
@@ -40,5 +49,17 @@ public class EnemyMelee : EnemyController
         transform.Rotate(new Vector3(0, 180, 0));
 
         moveSpeed = -moveSpeed;
+    }
+
+    void Appear()
+    {
+        _isHidden = false;
+        _spriteRenderer.enabled = true;
+    }
+
+    void Hide()
+    {
+        _isHidden = true;
+        _spriteRenderer.enabled = false;
     }
 }

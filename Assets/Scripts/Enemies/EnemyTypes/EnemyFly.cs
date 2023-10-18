@@ -33,17 +33,12 @@ public class EnemyFly : EnemyController
         } while (moveDirection.x == 0 && moveDirection.y == 0);
     }
 
-    public void Update()
-    {
-        Patrol();
-    }
-
     private void FixedUpdate()
     {
         enemyRB.velocity = moveDirection * moveSpeed;
     }
 
-    public void Patrol()
+    public override void Patrol()
     {
         _isGround = Physics2D.OverlapCircle(checkGround.transform.position, 0.1f, groundLayer);
         _isRoof = Physics2D.OverlapCircle(checkRoof.transform.position, 0.1f, groundLayer);

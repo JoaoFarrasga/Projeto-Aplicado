@@ -322,7 +322,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7759893021501898926}
   - component: {fileID: 8103517745778710586}
-  - component: {fileID: 8251731649293551353}
+  - component: {fileID: -6245716926262912168}
+  - component: {fileID: -2255851183737417826}
   - component: {fileID: 8214846543956348442}
   - component: {fileID: 782045805716830056}
   - component: {fileID: 7077740975086053856}
@@ -368,7 +369,23 @@ MonoBehaviour:
   _value: 25
   <MaxValue>k__BackingField: 25
   multiplyer: 1
---- !u!114 &8251731649293551353
+--- !u!114 &-6245716926262912168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5488688429655985107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a151f61c952fa0e45a0accf3f95c5884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 0}
+  currentStateName: 
+  hasPatrol: 1
+  hasChase: 0
+--- !u!114 &-2255851183737417826
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -380,9 +397,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38395674f5f2bb549a9e5bdbcbda6646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyDamage: 10
-  moveSpeed: 7
+  enemyDamage: 5
+  moveSpeed: 5
+  attackTimeOut: 1
+  deathTimeOut: 1
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  viewRange: 15
   _isHeavy: 0
+  seePlayer: 0
   checkGround: {fileID: 6039700127665328353}
   checkRoof: {fileID: 3580094178815134435}
   checkFront: {fileID: 7982899888744252751}
