@@ -11,6 +11,7 @@ public class BuyMenuManager : MonoBehaviour
     public CellVariation[] cells;
 
     public Inventory inventory;
+    Inventory.Slot slot;
 
     void Start()
     {
@@ -40,7 +41,8 @@ public class BuyMenuManager : MonoBehaviour
             if (textComponent != null)
             {
                 textComponent1.text = selectedVariation.woodValue.ToString();
-                if ((inventory.CheckQuantity(ItemType.WOOD) < selectedVariation.woodValue) || inventory.CheckQuantity(ItemType.IRON) < selectedVariation.ironValue)
+                /*
+                if ((inventory.CheckQuantity(ItemType.WOOD) < selectedVariation.woodValue) || (inventory.CheckQuantity(ItemType.IRON) < selectedVariation.ironValue))
                 {
                     cells[i].isAffordable = false;
                 }
@@ -48,6 +50,7 @@ public class BuyMenuManager : MonoBehaviour
                 {
                     cells[i].isAffordable = true;
                 }
+                */
             }
 
             Transform textTransform2 = cell.transform.GetChild(5);
