@@ -1293,8 +1293,8 @@ MonoBehaviour:
   inventoryPanel: {fileID: 1901680689}
   player: {fileID: 0}
   slots:
-  - {fileID: 644463151}
-  - {fileID: 1954580193}
+  - {fileID: 3002930837471957718, guid: 6cf89a55d920bcd40b6ee35cacc41f35, type: 3}
+  - {fileID: 3002930837471957718, guid: 6cf89a55d920bcd40b6ee35cacc41f35, type: 3}
   - {fileID: 595966364}
   - {fileID: 2095391266}
   - {fileID: 727172625}
@@ -1842,17 +1842,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fadc6efafdbda6d4ba538a3e89355a95, type: 2}
   - {fileID: 11400000, guid: 69818dc80a769274e97e3a78159b4c93, type: 2}
   - {fileID: 11400000, guid: 0c841ed9ff9d3a74cae84ec7faeb45ce, type: 2}
---- !u!114 &644463151 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3002930837471957718, guid: 6cf89a55d920bcd40b6ee35cacc41f35, type: 3}
-  m_PrefabInstance: {fileID: 200601908}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 839d42c680159cd4e8796107543f58cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &644463152 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7931823831162747493, guid: 6cf89a55d920bcd40b6ee35cacc41f35, type: 3}
@@ -4414,17 +4403,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1901680689}
   m_CullTransparentMesh: 1
---- !u!114 &1954580193 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3002930837471957718, guid: 6cf89a55d920bcd40b6ee35cacc41f35, type: 3}
-  m_PrefabInstance: {fileID: 1510083334}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 839d42c680159cd4e8796107543f58cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &1954580194 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7931823831162747493, guid: 6cf89a55d920bcd40b6ee35cacc41f35, type: 3}
