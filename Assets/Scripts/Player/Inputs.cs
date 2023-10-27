@@ -10,6 +10,7 @@ public class Inputs : MonoBehaviour
     public bool primaryAttack;
     public bool secondaryAttack;
     public bool dash;
+    public bool grapple;
     public bool pause;
 
     [Header("Movement Settings")]
@@ -52,6 +53,12 @@ public class Inputs : MonoBehaviour
     {
         DashInput(value.isPressed);
     }
+
+    public void OnGrapple(InputValue value)
+    {
+        GrappleInput(value.Get<float>() > 0.5f);
+    }
+
     public void OnPause(InputValue value)
     {
         GameManager.instance.PauseMenu();
@@ -86,6 +93,11 @@ public class Inputs : MonoBehaviour
     public void DashInput(bool newDashState)
     {
         dash = newDashState;
+    }
+
+    public void GrappleInput(bool newGrappleState)
+    {
+        grapple = newGrappleState;
     }
 
     private void OnApplicationFocus(bool hasFocus)
