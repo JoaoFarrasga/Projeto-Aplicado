@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2808676690112793819}
   - component: {fileID: 313071826854052312}
+  - component: {fileID: 8349823949338227471}
   - component: {fileID: 88635169965510879}
   - component: {fileID: 7670128693319452351}
   - component: {fileID: 4941322419197151914}
@@ -53,6 +54,22 @@ MonoBehaviour:
   _value: 25
   <MaxValue>k__BackingField: 5
   multiplyer: 1
+--- !u!114 &8349823949338227471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315928538332244304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a151f61c952fa0e45a0accf3f95c5884, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 0}
+  currentStateName: 
+  hasPatrol: 1
+  hasChase: 0
 --- !u!114 &88635169965510879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,7 +84,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDamage: 10
   moveSpeed: 5
+  attackTimeOut: 0
+  deathTimeOut: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  viewRange: 0
   _isHeavy: 0
+  seePlayer: 0
   checkGround: {fileID: 4903613151392779999}
   groundLayer:
     serializedVersion: 2

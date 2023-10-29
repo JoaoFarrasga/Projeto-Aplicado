@@ -1,14 +1,16 @@
 using System;
-using System.Net.NetworkInformation;
+using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
 public class CharacterController2D : MonoBehaviour
 {
-    [HideInInspector] public Rigidbody2D m_Rigidbody2D;
+    [HideInInspector] public Rigidbody2D rigidBody;
 
     [Header("Checks")]
-    [SerializeField] private LayerMask groundLayer;
+    public LayerMask groundLayer;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private Transform wallCheck;
     [SerializeField] private Transform attackCheck;
@@ -57,9 +59,18 @@ public class CharacterController2D : MonoBehaviour
     [Header("Inventory")]
     public Inventory inventory;
 
+
+    [Header("Grapple")]
+    public bool canGrapple;
+    public float grappleRange = 10f;
+    [SerializeField] private float grappleSpeed = 25f;
+    [SerializeField] private float grappleDeadzone = 0.25f;
+    [SerializeField] private float grappleCooldown = 3f;
+    public float grappleTimeout = 0.3f;
+
     private void Awake()
     {
-        m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        rigidBody = GetComponent<Rigidbody2D>();
         inventory = new Inventory(24);
     }
 
@@ -108,25 +119,25 @@ public class CharacterController2D : MonoBehaviour
     public void Move(float move)
     {
         move *= speed * 100 * Time.fixedDeltaTime;
-        Vector3 targetVelocity = new Vector2(move, m_Rigidbody2D.velocity.y);
-        m_Rigidbody2D.velocity = Vector3.SmoothDamp(m_Rigidbody2D.velocity, targetVelocity, ref zero, smoothing);
+        Vector3 targetVelocity = new Vector2(move, rigidBody.velocity.y);
+        rigidBody.velocity = Vector3.SmoothDamp(rigidBody.velocity, targetVelocity, ref zero, smoothing);
         Flip(move);
     }
 
     public void Dash()
     {
         canDash = false;
-        m_Rigidbody2D.velocity = new Vector2(transform.localScale.x * dashForce, 0);
+        rigidBody.velocity = new Vector2(transform.localScale.x * dashForce, 0);
     }
 
     public void Jump(bool isDoubleJump = false, bool isWallJump = false)
     {
-        m_Rigidbody2D.velocity = new Vector2(m_Rigidbody2D.velocity.x, 0f); // Reset vertical velocity
+        rigidBody.velocity = new Vector2(rigidBody.velocity.x, 0f); // Reset vertical velocity
 
         float horizontalForce = (isWallJump) ? -transform.localScale.x * jumpForce * 1.2f : 0f;
         float verticalForce = jumpForce * (isDoubleJump ? doubleJumpMultiplier : 1f);
 
-        m_Rigidbody2D.AddForce(new Vector2(horizontalForce, verticalForce));
+        rigidBody.AddForce(new Vector2(horizontalForce, verticalForce));
     }
 
     public void Flip(float move)
@@ -140,17 +151,25 @@ public class CharacterController2D : MonoBehaviour
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(attackCheck.position, attackRadius);
         for (int i = 0; i < colliders.Length; i++)
-        {
             if (colliders[i].gameObject != gameObject)
-            {
-                IDamageable damageable = colliders[i].GetComponent<IDamageable>();
-                damageable?.Damage(damageAmount);
-            }
-        }
+                colliders[i].GetComponent<IDamageable>()?.Damage(damageAmount);
     }
 
-    public void Grapple()
+    public void GrapplePull(Vector2 targetPosition)
     {
+        Vector2 direction = (targetPosition - (Vector2)transform.position);
+        if (Vector2.Distance(transform.position, targetPosition) > grappleDeadzone)
+            rigidBody.MovePosition((Vector2)transform.position + (grappleSpeed * Time.deltaTime * direction.normalized));
+    }
 
+    public void StartGrappleCooldown()
+    {
+        StartCoroutine(GrappleCooldown());
+    }
+
+    private IEnumerator GrappleCooldown()
+    {
+        yield return new WaitForSeconds(grappleCooldown);
+        canGrapple = true;
     }
 }

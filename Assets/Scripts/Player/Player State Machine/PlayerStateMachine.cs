@@ -13,6 +13,7 @@ public class PlayerStateMachine : MonoBehaviour
     public JumpingState jumpingState;
     public AttackingState attackingState;
     public DashingState dashingState;
+    public GrapplingState grapplingState;
     public HurtState hurtState;
     public DeathState deathState;
 
@@ -34,6 +35,7 @@ public class PlayerStateMachine : MonoBehaviour
         jumpingState = new JumpingState(this);
         attackingState = new AttackingState(this);
         dashingState = new DashingState(this);
+        grapplingState = new GrapplingState(this);
         hurtState = new HurtState(this);
         deathState = new DeathState(this);
 

@@ -104,8 +104,8 @@ public class AirboneState : EnvironmentState
     {
 
 
-        if (controller.m_Rigidbody2D.velocity.y < -controller.maxFallSpeed)
-            controller.m_Rigidbody2D.velocity = new Vector2(controller.m_Rigidbody2D.velocity.x, -controller.maxFallSpeed);
+        if (controller.rigidBody.velocity.y < -controller.maxFallSpeed)
+            controller.rigidBody.velocity = new Vector2(controller.rigidBody.velocity.x, -controller.maxFallSpeed);
 
 
         if (controller.grounded)

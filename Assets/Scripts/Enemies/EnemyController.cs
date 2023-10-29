@@ -8,25 +8,59 @@ public abstract class EnemyController : MonoBehaviour
     public int enemyDamage;
     public float moveSpeed;
 
+    [Header("Enemy TimeOuts")]
+    public float attackTimeOut;
+    public float deathTimeOut;
+
+    [Header("Player")]
+    public LayerMask playerLayer;
+    public int viewRange;
+
     [Header("Weight")]
     public bool _isHeavy;
+
+    [HideInInspector] public bool seePlayer;
+
     private void Awake()
     {
         timeManager = GetComponent<TimeManager>();
-        timeManager.OnDeathAction += OnDeath;
         timeManager.MaxValue = Random.Range(15, 61);
         timeManager.Value = timeManager.MaxValue;
     }
 
-    //Check if Collision with the Player Happend and Gives Damage to It
-    public void OnCollisionEnter2D(Collision2D collision)
+    public virtual void Patrol()
     {
-        if (collision.gameObject.tag == "Player")
-            collision.gameObject.GetComponent<IDamageable>()?.Damage(enemyDamage);
+
     }
 
-    private void OnDeath()
+    public virtual void Chase()
     {
-        Destroy(gameObject);
+
+    }
+
+    public void Update()
+    {
+        CheckDetection();
+    }
+
+    public void CheckDetection()
+    {
+        Collider2D playerCollider = Physics2D.OverlapCircle(transform.position, viewRange, playerLayer);
+
+        seePlayer = (playerCollider != null);
+    }
+
+    //Check if Collision with the Player Happend and Gives Damage to It
+    public virtual void Attack()
+    {
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(gameObject.transform.position, 1.0f);
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].gameObject.tag == "Player")
+            {
+                IDamageable damageable = colliders[i].GetComponent<IDamageable>();
+                damageable?.Damage(enemyDamage);
+            }
+        }
     }
 }
