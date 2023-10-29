@@ -7,7 +7,8 @@ public class Inventory
     [SerializeField]
     public class Slot
     {
-        public ItemType type;
+        public string name;
+        //public ItemType type;
         public int quantity;
         public int maxQuantity;
 
@@ -15,7 +16,8 @@ public class Inventory
 
         public Slot() 
         {
-            type = ItemType.NONE;
+            name = "";
+            //type = ItemType.NONE;
             quantity = 0;
             maxQuantity = 99;
         }
@@ -32,7 +34,8 @@ public class Inventory
 
         public void AddItem(Item item)
         {
-            this.type = item.type;
+            this.name = item.itemName;
+            //this.type = item.type;
             this.icon = item.icon;
             quantity++;
         }
@@ -51,22 +54,55 @@ public class Inventory
 
     public void Add(Item item)
     {
-        foreach(Slot slot in slots)
+        foreach (Slot slot in slots)
         {
-            if (slot.type == item.type && slot.CanAddItem())
+            if (slot.name == item.itemName && slot.CanAddItem())
             {
                 slot.AddItem(item);
                 return;
+            }
+        }
+        
+        foreach (Slot slot in slots)
+        {
+            if (slot.name == "")
+            {
+                slot.AddItem(item);
+                return;
+            }
+        }
+    }
+
+    public void RemoveItem(string itemName, int quantityToRemove)
+    {
+        foreach (Slot slot in slots)
+        {
+            if (slot.name == itemName)
+            {
+                if (slot.quantity >= quantityToRemove)
+                {
+                    slot.quantity -= quantityToRemove;
+                }
+                else
+                {
+                    // If the quantity to remove is greater than the available quantity, set quantity to 0.
+                    slot.quantity = 0;
+                }
+                return;
+            }
+        }
+    }
+
+    public int CheckQuantity(Material material)
+    {
+        foreach (Slot slot in slots)
+        {
+            if (slot.name == material.name)
+            {
+                return slot.quantity;
             }
         }
 
-        foreach(Slot slot in slots)
-        {
-            if(slot.type == ItemType.NONE)
-            {
-                slot.AddItem(item);
-                return;
-            }
-        }
+        return 0;
     }
 }

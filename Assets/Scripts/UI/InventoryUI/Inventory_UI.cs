@@ -35,7 +35,7 @@ public class Inventory_UI : MonoBehaviour
         {
             for(int i = 0; i < slots.Count; i++)
             {
-                if (player.inventory.slots[i].type != ItemType.NONE)
+                if (player.inventory.slots[i].name != "")
                 {
                     slots[i].SetItem(player.inventory.slots[i]);
                 }
