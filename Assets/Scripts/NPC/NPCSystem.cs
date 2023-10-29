@@ -14,6 +14,7 @@ public class NPCSystem : MonoBehaviour
     public GameObject buyMenu;
     public TextMeshProUGUI pressKeyToTalk;
     public string pressKeyToTalkText = "Press F to talk";
+    public GameObject buyMenuContainer;
 
     private bool hasBarted = false;
     private string dialogueText;
@@ -93,7 +94,7 @@ public class NPCSystem : MonoBehaviour
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
-        buyMenu.SetActive(true);
+        buyMenu.SetActive(true);       
 
         hasBarted = true;
     }

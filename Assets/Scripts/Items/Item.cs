@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public ItemType type;
+    public string itemName;
     public Sprite icon;
 
     //Update to update Logic of the Item
@@ -28,7 +28,4 @@ public class Item : MonoBehaviour
     }
 }
 
-public enum ItemType
-{
-    NONE, TIMER_ITEM, WOOD, IRON
-}
+

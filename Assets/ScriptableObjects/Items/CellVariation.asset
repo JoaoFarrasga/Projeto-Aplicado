@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51dd022a5d9ecf5458c00e227daa8c65, type: 3}
-  m_Name: LightAxe
+  m_Name: CellVariation
   m_EditorClassIdentifier: 
-  cellPrefab: {fileID: 4339119288319403960, guid: 095848b06a720fd4e8db8b64a85d0693, type: 3}
-  itemName: Light Axe
+  cellPrefab: {fileID: 0}
+  itemName: 
   image: {fileID: 0}
-  ironValue: 3
-  woodValue: 1
+  ironValue: 0
+  woodValue: 0
   isAffordable: 0
