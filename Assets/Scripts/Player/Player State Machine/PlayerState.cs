@@ -54,6 +54,8 @@ public class WalkingState : PlayerState
 
         if (input.primaryAttack || input.secondaryAttack)
             playerStateMachine.SwitchState(playerStateMachine.attackingState);
+        else if (input.interact)
+            playerStateMachine.SwitchState(playerStateMachine.interactingState);
         else if (input.dash && controller.canDash)
             playerStateMachine.SwitchState(playerStateMachine.dashingState);
         else if (input.jump && controller.grounded || input.jump && controller.doubleJump)
@@ -85,6 +87,8 @@ public class IdlingState : PlayerState
 
         if (input.primaryAttack || input.secondaryAttack)
             playerStateMachine.SwitchState(playerStateMachine.attackingState);
+        else if (input.interact)
+            playerStateMachine.SwitchState(playerStateMachine.interactingState);
         else if (input.dash && controller.canDash)
             playerStateMachine.SwitchState(playerStateMachine.dashingState);
         else if (input.jump)
@@ -203,6 +207,38 @@ public class DashingState : PlayerState
         input.dash = false;
     }
 }
+
+public class InteractingState : PlayerState
+{
+    public InteractingState(PlayerStateMachine player) : base(player) { }
+
+    public override void OnEnter()
+    {
+        //animator.SetTrigger(ANIM_PARAM_DASH);
+        controller.Interact();
+    }
+
+    public override void OnUpdate()
+    {
+
+        controller.Move(input.move.x);
+
+        if (input.primaryAttack || input.secondaryAttack)
+            playerStateMachine.SwitchState(playerStateMachine.attackingState);
+        else if (input.jump && controller.grounded || input.jump && controller.doubleJump)
+            playerStateMachine.SwitchState(playerStateMachine.jumpingState);
+        else if (Mathf.Abs(input.move.x) > controller.deadZone)
+            playerStateMachine.SwitchState(playerStateMachine.walkingState);
+        else if (Mathf.Abs(input.move.x) <= controller.deadZone)
+            playerStateMachine.SwitchState(playerStateMachine.idlingState);
+    }
+
+    public override void OnExit()
+    {
+        
+    }
+}
+
 
 public class AttackingState : PlayerState
 {

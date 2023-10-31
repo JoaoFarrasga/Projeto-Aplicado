@@ -15,6 +15,7 @@ public class PlayerStateMachine : MonoBehaviour
     public DashingState dashingState;
     public HurtState hurtState;
     public DeathState deathState;
+    public InteractingState interactingState;
 
     public string currentStateName;
 
@@ -36,6 +37,7 @@ public class PlayerStateMachine : MonoBehaviour
         dashingState = new DashingState(this);
         hurtState = new HurtState(this);
         deathState = new DeathState(this);
+        interactingState = new InteractingState(this);
 
         SwitchState(idlingState);
     }

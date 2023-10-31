@@ -11,6 +11,7 @@ public class Inputs : MonoBehaviour
     public bool secondaryAttack;
     public bool dash;
     public bool pause;
+    public bool interact;
 
     [Header("Movement Settings")]
     public bool analogMovement;
@@ -52,6 +53,12 @@ public class Inputs : MonoBehaviour
     {
         DashInput(value.isPressed);
     }
+
+    public void OnInteract(InputValue value)
+    {
+        InteractInput(value.isPressed);
+    }
+
     public void OnPause(InputValue value)
     {
         GameManager.instance.PauseMenu();
@@ -86,6 +93,11 @@ public class Inputs : MonoBehaviour
     public void DashInput(bool newDashState)
     {
         dash = newDashState;
+    }
+
+    public void InteractInput(bool newInteractState)
+    {
+        interact = newInteractState;
     }
 
     private void OnApplicationFocus(bool hasFocus)
