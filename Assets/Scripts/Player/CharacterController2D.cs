@@ -57,6 +57,9 @@ public class CharacterController2D : MonoBehaviour
     [Header("Inventory")]
     public Inventory inventory;
 
+    [Header("Interact")]
+    public float interactDistance = 2;
+
     private void Awake()
     {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -152,5 +155,15 @@ public class CharacterController2D : MonoBehaviour
     public void Grapple()
     {
 
+    }
+
+    public void Interact()
+    {
+        Ray ray = new(transform.position, new Vector2(transform.localScale.x, 0));
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, interactDistance))
+        {
+            InteractableInterface interactable = hitInfo.transform.GetComponent<InteractableInterface>();
+            interactable?.Interact();
+        }
     }
 }
