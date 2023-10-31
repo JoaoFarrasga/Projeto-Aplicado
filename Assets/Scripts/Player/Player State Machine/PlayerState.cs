@@ -259,7 +259,7 @@ public class GrapplingState : PlayerState
             playerStateMachine.SwitchState(playerStateMachine.idlingState);
     }
 
-    public override OnExit(){
+    public override void OnExit(){
          if (!controller.canGrapple)
             controller.StartGrappleCooldown();
     }

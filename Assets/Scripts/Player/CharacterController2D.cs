@@ -177,9 +177,9 @@ public class CharacterController2D : MonoBehaviour
 
     public void Interact()
     {
-        Ray ray = new(transform.position, new Vector2(transform.localScale.x, 0));
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, interactDistance))
+        if (Physics.SphereCast(transform.position, interactDistance, new Vector2(transform.localScale.x, 0), out RaycastHit hitInfo, interactDistance))
         {
+            Debug.Log(hitInfo);
             InteractableInterface interactable = hitInfo.transform.GetComponent<InteractableInterface>();
             interactable?.Interact();
         }
