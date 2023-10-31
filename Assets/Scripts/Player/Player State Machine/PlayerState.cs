@@ -63,6 +63,8 @@ public class WalkingState : PlayerState
         //    playerStateMachine.SwitchState(playerStateMachine.dashingState);
         else if (input.grapple && controller.canGrapple)
             playerStateMachine.SwitchState(playerStateMachine.grapplingState);
+        else if (input.interact)
+            playerStateMachine.SwitchState(playerStateMachine.interactingState);
         else if (input.jump && controller.grounded || input.jump && controller.doubleJump)
             playerStateMachine.SwitchState(playerStateMachine.jumpingState);
         else if (environment.isWallState && input.move.x * controller.transform.localScale.x > controller.deadZone || Mathf.Abs(input.move.x) <= controller.deadZone)
@@ -96,6 +98,8 @@ public class IdlingState : PlayerState
         //    playerStateMachine.SwitchState(playerStateMachine.dashingState);
         else if (input.grapple && controller.canGrapple)
             playerStateMachine.SwitchState(playerStateMachine.grapplingState);
+        else if (input.interact)
+            playerStateMachine.SwitchState(playerStateMachine.interactingState);
         else if (input.jump)
         {
             if (controller.grounded || controller.doubleJump || environment.isWallState && input.move.x * controller.transform.localScale.x > controller.deadZone)
@@ -234,16 +238,17 @@ public class GrapplingState : PlayerState
         timePassed = 0f;
         animator.SetTrigger(ANIM_PARAM_JUMP);
         controller.canGrapple = false;
+    
     }
 
-    public override void OnUpdate()
-    {
-        timePassed += Time.deltaTime;
+    public override void OnUpdate(){
+                timePassed += Time.deltaTime;
         if (!controller.canGrapple)
             controller.GrapplePull(targetPosition);
 
         if (timePassed < controller.grappleTimeout )
             return;
+
         if (input.primaryAttack || input.secondaryAttack)
             playerStateMachine.SwitchState(playerStateMachine.attackingState);
         else if (input.jump && controller.grounded || input.jump && controller.doubleJump)
@@ -254,12 +259,47 @@ public class GrapplingState : PlayerState
             playerStateMachine.SwitchState(playerStateMachine.idlingState);
     }
 
-    public override void OnExit()
-    {
-        if (!controller.canGrapple)
+    public override OnExit(){
+         if (!controller.canGrapple)
             controller.StartGrappleCooldown();
     }
 }
+
+    
+public class InteractingState : PlayerState
+{
+    public InteractingState(PlayerStateMachine player) : base(player) { }
+
+    public override void OnEnter()
+    {
+        //animator.SetTrigger(ANIM_PARAM_DASH);
+        controller.Interact();
+    }
+
+    public override void OnUpdate()
+    {
+
+
+        controller.Move(input.move.x);
+
+        if (input.primaryAttack || input.secondaryAttack)
+            playerStateMachine.SwitchState(playerStateMachine.attackingState);
+        else if (input.jump && controller.grounded || input.jump && controller.doubleJump)
+            playerStateMachine.SwitchState(playerStateMachine.jumpingState);
+        else if (Mathf.Abs(input.move.x) > controller.deadZone)
+            playerStateMachine.SwitchState(playerStateMachine.walkingState);
+        else if (Mathf.Abs(input.move.x) <= controller.deadZone)
+            playerStateMachine.SwitchState(playerStateMachine.idlingState);
+    }
+
+    public override void OnExit()
+    {
+       
+        
+    }
+}
+
+
 public class AttackingState : PlayerState
 {
     public AttackingState(PlayerStateMachine player) : base(player) { }

@@ -16,6 +16,7 @@ public class PlayerStateMachine : MonoBehaviour
     public GrapplingState grapplingState;
     public HurtState hurtState;
     public DeathState deathState;
+    public InteractingState interactingState;
 
     public string currentStateName;
 
@@ -38,6 +39,7 @@ public class PlayerStateMachine : MonoBehaviour
         grapplingState = new GrapplingState(this);
         hurtState = new HurtState(this);
         deathState = new DeathState(this);
+        interactingState = new InteractingState(this);
 
         SwitchState(idlingState);
     }

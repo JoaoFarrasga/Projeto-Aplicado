@@ -67,6 +67,8 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] private float grappleDeadzone = 0.25f;
     [SerializeField] private float grappleCooldown = 3f;
     public float grappleTimeout = 0.3f;
+    [Header("Interact")]
+    public float interactDistance = 2;
 
     private void Awake()
     {
@@ -171,5 +173,15 @@ public class CharacterController2D : MonoBehaviour
     {
         yield return new WaitForSeconds(grappleCooldown);
         canGrapple = true;
+    }
+
+    public void Interact()
+    {
+        Ray ray = new(transform.position, new Vector2(transform.localScale.x, 0));
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, interactDistance))
+        {
+            InteractableInterface interactable = hitInfo.transform.GetComponent<InteractableInterface>();
+            interactable?.Interact();
+        }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class NPCSystem : MonoBehaviour
+public class NPCSystem : MonoBehaviour, InteractableInterface
 {
     public bool isBarter = false;
     public string[] startDialogueLines;
@@ -26,40 +26,9 @@ public class NPCSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        NPCActions(startDialogueLines, endDialogueLines);
-    }
-
-    private void NPCActions(string[] startDialogue, string[] endDialogue) 
-    {
         if (playerDetection)
         {
             pressKeyToTalk.text = pressKeyToTalkText;
-
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                if (startIndex == startDialogue.Length && endIndex != endDialogue.Length)
-                {
-                    if (isBarter && !hasBarted)
-                    {
-                        BuyMenuActions();
-                    }
-                    else
-                    {
-                        buyMenu.SetActive(false);
-
-                        WriteDialogue(endDialogue, ref endIndex);
-                    }
-                }
-                else if (startIndex != startDialogue.Length)
-                {
-
-                    WriteDialogue(startDialogue, ref startIndex);
-                }
-                else
-                {
-                    DialogueVariablesReset();
-                }
-            }
         }
         else
         {
@@ -67,7 +36,40 @@ public class NPCSystem : MonoBehaviour
         }
     }
 
-    private void WriteDialogue(string[] dialogue, ref int index) 
+    public void Interact()
+    {
+        NPCActions(startDialogueLines, endDialogueLines);
+    }
+
+    private void NPCActions(string[] startDialogue, string[] endDialogue)
+    {
+
+        if (startIndex == startDialogue.Length && endIndex != endDialogue.Length)
+        {
+            if (isBarter && !hasBarted)
+            {
+                BuyMenuActions();
+            }
+            else
+            {
+                buyMenu.SetActive(false);
+
+                WriteDialogue(endDialogue, ref endIndex);
+            }
+        }
+        else if (startIndex != startDialogue.Length)
+        {
+
+            WriteDialogue(startDialogue, ref startIndex);
+        }
+        else
+        {
+            DialogueVariablesReset();
+        }
+
+    }
+
+    private void WriteDialogue(string[] dialogue, ref int index)
     {
         dialogueTemplate.SetActive(true);
 
@@ -76,7 +78,7 @@ public class NPCSystem : MonoBehaviour
         index++;
     }
 
-    private void DialogueVariablesReset() 
+    private void DialogueVariablesReset()
     {
         pressKeyToTalk.text = "";
         dialogueTemplate.SetActive(false);
@@ -86,7 +88,7 @@ public class NPCSystem : MonoBehaviour
         hasBarted = false;
     }
 
-    private void BuyMenuActions() 
+    private void BuyMenuActions()
     {
         pressKeyToTalk.text = "";
         dialogueTemplate.SetActive(false);
