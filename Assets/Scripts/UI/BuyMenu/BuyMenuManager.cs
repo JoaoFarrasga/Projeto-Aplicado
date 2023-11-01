@@ -57,14 +57,13 @@ public class BuyMenuManager : MonoBehaviour
                 if (playerMaterialAmount < materialQuantity)
                 {
                     affordableChecker++;
-                    Debug.Log(materialQuantity + " " + materialName + " > " + playerMaterialAmount);
+                    //Debug.Log(materialQuantity + " " + materialName + " > " + playerMaterialAmount);
                 }
 
                 cellVariation.isAffordable = true;
                 if (affordableChecker > 0)
                 {
                     cellVariation.isAffordable = false;
-                    Debug.Log("Hello this works");
                 }
 
                 GameObject mat = Instantiate(materialPrefab, cellItem.materials);

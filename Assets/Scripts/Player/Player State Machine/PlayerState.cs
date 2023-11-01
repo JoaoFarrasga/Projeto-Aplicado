@@ -260,6 +260,7 @@ public class GrapplingState : PlayerState
     }
 
     public override void OnExit(){
+        controller.rigidBody.velocity = Vector3.zero;
          if (!controller.canGrapple)
             controller.StartGrappleCooldown();
     }
@@ -294,7 +295,7 @@ public class InteractingState : PlayerState
 
     public override void OnExit()
     {
-       
+       input.interact = false;
         
     }
 }

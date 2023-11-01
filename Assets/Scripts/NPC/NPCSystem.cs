@@ -14,7 +14,6 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
     public GameObject buyMenu;
     public TextMeshProUGUI pressKeyToTalk;
     public string pressKeyToTalkText = "Press F to talk";
-    public GameObject buyMenuContainer;
 
     private bool hasBarted = false;
     private string dialogueText;
@@ -22,23 +21,34 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
     private int startIndex = 0;
     private int endIndex = 0;
     private int indexCheckpoint = 0;
+    [SerializeField] private bool isInteracting = false;
 
     // Update is called once per frame
     void Update()
     {
+
         if (playerDetection)
         {
             pressKeyToTalk.text = pressKeyToTalkText;
+            if (isInteracting)
+            {    
+                NPCActions(startDialogueLines, endDialogueLines);               
+            }
         }
         else
         {
             DialogueVariablesReset();
         }
+        if (isInteracting)
+        {
+            Debug.Log(isInteracting);
+        }
+        isInteracting = false;
     }
 
     public void Interact()
     {
-        NPCActions(startDialogueLines, endDialogueLines);
+        isInteracting = true;
     }
 
     private void NPCActions(string[] startDialogue, string[] endDialogue)
@@ -96,7 +106,7 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
-        buyMenu.SetActive(true);       
+        buyMenu.SetActive(true);
 
         hasBarted = true;
     }
@@ -117,3 +127,4 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
         }
     }
 }
+

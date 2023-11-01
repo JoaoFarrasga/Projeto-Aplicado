@@ -61,7 +61,7 @@ public class Inputs : MonoBehaviour
     }
     public void OnInteract(InputValue value)
     {
-        InteractInput(value.Get<float>() > 0.5f);
+        InteractInput(value.isPressed);
     }
 
     public void OnPause(InputValue value)

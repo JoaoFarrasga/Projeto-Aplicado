@@ -61,7 +61,7 @@ public class CharacterController2D : MonoBehaviour
 
 
     [Header("Grapple")]
-    public bool canGrapple;
+    public bool canGrapple = true;
     public float grappleRange = 10f;
     [SerializeField] private float grappleSpeed = 25f;
     [SerializeField] private float grappleDeadzone = 0.25f;
@@ -177,11 +177,17 @@ public class CharacterController2D : MonoBehaviour
 
     public void Interact()
     {
-        if (Physics.SphereCast(transform.position, interactDistance, new Vector2(transform.localScale.x, 0), out RaycastHit hitInfo, interactDistance))
+        Collider2D[] nearbyObjects = Physics2D.OverlapCircleAll(transform.position, interactDistance);
+
+        foreach (Collider2D col in nearbyObjects)
         {
-            Debug.Log(hitInfo);
-            InteractableInterface interactable = hitInfo.transform.GetComponent<InteractableInterface>();
-            interactable?.Interact();
+            InteractableInterface interactableInterface = col.transform.GetComponent<InteractableInterface>();
+            interactableInterface?.Interact();
+
+            if (interactableInterface != null)
+            {
+                return;
+            }
         }
     }
 }
