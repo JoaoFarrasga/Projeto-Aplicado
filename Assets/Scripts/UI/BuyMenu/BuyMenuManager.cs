@@ -33,7 +33,7 @@ public class BuyMenuManager : MonoBehaviour
         AddItemsToContainer();
     }
     void AddItemsToContainer()
-    {     
+    {
         foreach (CellVariation cellVariation in cells)
         {
             GameObject cell = Instantiate(cellPrefab, transform);

@@ -26,5 +26,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scripts/Scenes/Village/Village5.unity
     guid: 463e8a08389834b49b1ab41cab9676a6
+  - enabled: 1
+    path: Assets/Scripts/Scenes/Village/Room1.unity
+    guid: 3b8a7ddedf5e45347a6b2b0f0853d152
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: c9e37d5560afa784ea5fbbcb51eccba9, type: 2}

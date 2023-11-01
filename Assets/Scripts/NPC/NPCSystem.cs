@@ -6,21 +6,26 @@ using TMPro;
 
 public class NPCSystem : MonoBehaviour, InteractableInterface
 {
-    public bool isBarter = false;
-    public string[] startDialogueLines;
-    public string[] endDialogueLines;
-    public GameObject canvas;
-    public GameObject dialogueTemplate;
-    public GameObject buyMenu;
-    public TextMeshProUGUI pressKeyToTalk;
-    public string pressKeyToTalkText = "Press F to talk";
+    [SerializeField] private bool isBarter = false;
+    [SerializeField] private string[] startDialogueLines;
+    [SerializeField] private string[] endDialogueLines;
+    [SerializeField] private GameObject canvas;
+    [SerializeField] private GameObject dialogueTemplatePrefab;
+    [SerializeField] private GameObject buyMenu;
+    [SerializeField] private string pressKeyToTalkText = "Press F to talk";
+    [SerializeField] private GameObject pressKeyToTalkPrefab;
 
     private bool hasBarted = false;
-    private string dialogueText;
+    //private string dialogueText;
     private bool playerDetection = false;
     private int startIndex = 0;
     private int endIndex = 0;
     private int indexCheckpoint = 0;
+    private bool isNearObject;
+    private bool isWritingDialogue;
+    private GameObject textPrefab;
+    private GameObject dialoguePrefab;
+    private TMP_Text dialogueText;
     [SerializeField] private bool isInteracting = false;
 
     // Update is called once per frame
@@ -29,19 +34,22 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
 
         if (playerDetection)
         {
-            pressKeyToTalk.text = pressKeyToTalkText;
+            
+            if (!isNearObject)
+            {
+                textPrefab = Instantiate(pressKeyToTalkPrefab, canvas.transform);
+                textPrefab.GetComponent<TMP_Text>().text = pressKeyToTalkText;
+                isNearObject = true;
+            }
+            
             if (isInteracting)
             {    
                 NPCActions(startDialogueLines, endDialogueLines);               
             }
         }
-        else
+        else if(isNearObject)
         {
             DialogueVariablesReset();
-        }
-        if (isInteracting)
-        {
-            Debug.Log(isInteracting);
         }
         isInteracting = false;
     }
@@ -72,7 +80,7 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
 
             WriteDialogue(startDialogue, ref startIndex);
         }
-        else
+        else if(isWritingDialogue)
         {
             DialogueVariablesReset();
         }
@@ -81,27 +89,35 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
 
     private void WriteDialogue(string[] dialogue, ref int index)
     {
-        dialogueTemplate.SetActive(true);
-
-        dialogueTemplate.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = dialogue[index];
+        //dialogueTemplate.SetActive(true);
+        if (!isWritingDialogue)
+        {
+            dialoguePrefab = Instantiate(dialogueTemplatePrefab, canvas.transform);      
+            dialogueText = dialoguePrefab.transform.GetComponentInChildren<TMP_Text>();
+            isWritingDialogue = true;
+        }
+        dialogueText.text = dialogue[index];
 
         index++;
     }
 
     private void DialogueVariablesReset()
     {
-        pressKeyToTalk.text = "";
-        dialogueTemplate.SetActive(false);
+        Destroy(textPrefab);
+        //dialogueTemplate.SetActive(false);
+        Destroy(dialoguePrefab);
         buyMenu.SetActive(false);
         startIndex = 0;
         endIndex = 0;
         hasBarted = false;
+        isNearObject = false;
+        isWritingDialogue = false;
     }
 
     private void BuyMenuActions()
     {
-        pressKeyToTalk.text = "";
-        dialogueTemplate.SetActive(false);
+        Destroy(textPrefab);
+        Destroy(dialoguePrefab);
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;

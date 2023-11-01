@@ -2,18 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class DoorManager : MonoBehaviour, InteractableInterface
 {
     [SerializeField] public string[] startDialogueLines;
     [SerializeField] public GameObject canvas;
-    [SerializeField] public GameObject dialogueTemplate;
-    public TextMeshProUGUI pressKeyToInteract;
+    [SerializeField] private GameObject dialogueTemplatePrefab;
     [SerializeField] public string pressKeyToInteractText = "Press F to Open";
+    [SerializeField] private GameObject pressKeyToTalkPrefab;
+    [SerializeField] private bool isLocked = false;
+    [SerializeField] private CharacterController2D player;
+    [SerializeField] private string sceneName;
 
+    private GameObject textPrefab;
     private bool isInteracting = false;
     private bool playerDetection = false;
     private int startIndex = 0;
+    private GameObject dialoguePrefab;
+    private TMP_Text dialogueText;
+    private bool isNearObject;
+    private bool isWritingDialogue;
+    private int keyAmount;
     public void Interact()
     {
         isInteracting = true;
@@ -23,27 +33,49 @@ public class DoorManager : MonoBehaviour, InteractableInterface
     {
         if (playerDetection)
         {
-            pressKeyToInteract.text = pressKeyToInteractText;
-            Debug.Log(pressKeyToInteract.text);
+            if (!isNearObject)
+            {
+                textPrefab = Instantiate(pressKeyToTalkPrefab, canvas.transform);
+                textPrefab.GetComponent<TMP_Text>().text = pressKeyToInteractText;
+                isNearObject = true;
+            }
             if (isInteracting)
             {
-                DoorLockedDialogue(startDialogueLines);
+                isLocked = SearchPlayerKey(isLocked);
+                if (!isLocked)
+                {
+                    SceneManager.LoadScene(sceneName);
+                    Debug.Log("Door unlocked");
+                }
+                else 
+                {
+                    DoorLockedDialogue(startDialogueLines);
+                }
             }
+
         }
-        else
+        else if(isNearObject)
         {
             DialogueVariablesReset();
         }
         isInteracting = false;
     }
 
+
     private void DoorLockedDialogue(string[] startDialogue) 
     {
         if (startIndex != startDialogue.Length)
         {
-            WriteDialogue(startDialogue, ref startIndex);
+            if (isLocked)
+            {
+                WriteDialogue(startDialogue, ref startIndex);
+            }
+            else
+            {
+                Debug.Log("Unlocked/Change scene to room");
+            }
         }
-        else
+        else if(isWritingDialogue)
         {
             DialogueVariablesReset();
         }
@@ -51,19 +83,39 @@ public class DoorManager : MonoBehaviour, InteractableInterface
 
     private void WriteDialogue(string[] dialogue, ref int index)
     {
-        dialogueTemplate.SetActive(true);
-
-        dialogueTemplate.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = dialogue[index];
+        if (!isWritingDialogue)
+        {
+            dialoguePrefab = Instantiate(dialogueTemplatePrefab, canvas.transform);
+            dialogueText = dialoguePrefab.transform.GetComponentInChildren<TMP_Text>();
+            isWritingDialogue = true;
+        }
+        dialogueText.text = dialogue[index];
 
         index++;
     }
 
     private void DialogueVariablesReset()
     {
-        pressKeyToInteract.text = "";
-        dialogueTemplate.SetActive(false);
-        //startIndex = 0;
-        //endIndex = 0;
+        Destroy(textPrefab);
+        //dialogueTemplate.SetActive(false);
+        Destroy(dialoguePrefab);
+        isNearObject = false;
+        isWritingDialogue = false;
+        startIndex = 0;
+    }
+
+    private bool SearchPlayerKey(bool lockedState) 
+    {
+        foreach (Inventory.Slot slot in player.inventory.slots)
+        {
+            if (slot.name == "Door Key")
+            {
+                player.inventory.RemoveItem(slot.name, 1);
+                lockedState = false;
+                return false;
+            }
+        }
+        return true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

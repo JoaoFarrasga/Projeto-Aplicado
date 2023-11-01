@@ -20,7 +20,7 @@ public interface IHealable
 
 public class TimeManager : Progressive, IDamageable, IHealable, ITimeable
 {
-    private bool isTimeCoroutineRunning = false;
+    [SerializeField] private bool isTimeCoroutineRunning = false;
     public Action OnHitAction;
     public Action OnDeathAction;
 
