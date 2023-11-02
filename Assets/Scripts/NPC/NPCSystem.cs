@@ -9,9 +9,9 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
     [SerializeField] private bool isBarter = false;
     [SerializeField] private string[] startDialogueLines;
     [SerializeField] private string[] endDialogueLines;
-    [SerializeField] private GameObject canvas;
+    //[SerializeField] private GameObject canvas;
     [SerializeField] private GameObject dialogueTemplatePrefab;
-    [SerializeField] private GameObject buyMenu;
+    //[SerializeField] private GameObject buyMenu;
     [SerializeField] private string pressKeyToTalkText = "Press F to talk";
     [SerializeField] private GameObject pressKeyToTalkPrefab;
 
@@ -26,8 +26,29 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
     private GameObject textPrefab;
     private GameObject dialoguePrefab;
     private TMP_Text dialogueText;
+    private Canvas canvas;
+    private GameObject buyMenu;
     [SerializeField] private bool isInteracting = false;
 
+    private void Start()
+    {
+        // Find the Canvas component in the scene and assign it to the canvas variable
+        canvas = FindObjectOfType<Canvas>();
+
+        // Find the BuyMenu script in the scene and assign it to the buyMenu variable
+        buyMenu = FindObjectOfType<GameObject>();
+
+        // Now you can use canvas and buyMenu references in your script
+        if (canvas != null)
+        {
+            // Do something with the canvas
+        }
+
+        if (buyMenu != null)
+        {
+            // Do something with the buyMenu
+        }
+    }
     // Update is called once per frame
     void Update()
     {
