@@ -22,7 +22,6 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
     private int endIndex = 0;
     private int indexCheckpoint = 0;
     private bool isNearObject;
-    private bool isWritingDialogue = false;
     private GameObject textPrefab;
     private GameObject dialoguePrefab;
     private TMP_Text dialogueText;
@@ -72,13 +71,12 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
     private void NPCActions(string[] startDialogue, string[] endDialogue)
     {
 
-        if (startIndex != startDialogue.Length)
+        if (startIndex != startDialogue.Length )
         {
             WriteDialogue(startDialogue, ref startIndex);
         }
         else if (startIndex == startDialogue.Length && endIndex != endDialogue.Length)
         {
-            isWritingDialogue = false; // Reset the flag before displaying ending lines
             if (isBarter && !hasBarted)
             {
                 BuyMenuActions();
@@ -90,7 +88,7 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
                 WriteDialogue(endDialogue, ref endIndex);
             }
         }
-        else if (isWritingDialogue)
+        else
         {
             DialogueVariablesReset();
         }
@@ -103,7 +101,6 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
         {
             dialoguePrefab = Instantiate(dialogueTemplatePrefab, canvas.transform);
             dialogueText = dialoguePrefab.GetComponentInChildren<TMP_Text>();
-            isWritingDialogue = true;
         }
 
         // Check if index is within the bounds of the dialogue array
@@ -135,7 +132,6 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
         endIndex = 0;
         hasBarted = false;
         isNearObject = false;
-        isWritingDialogue = false;
     }
 
     private void BuyMenuActions()
