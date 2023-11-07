@@ -361,6 +361,7 @@ GameObject:
   - component: {fileID: 48662471}
   - component: {fileID: 48662470}
   - component: {fileID: 48662469}
+  - component: {fileID: 48662472}
   m_Layer: 0
   m_Name: NPC
   m_TagString: NPC
@@ -481,6 +482,31 @@ Transform:
   - {fileID: 1880462713}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &48662472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48662468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b40814b36ec053f44bca2bc5f5a4b75e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBarter: 1
+  startDialogueLines:
+  - Hello
+  - Do you want to buy something?
+  endDialogueLines:
+  - Thank you
+  - Please come again!
+  canvas: {fileID: 2098171726}
+  dialogueTemplatePrefab: {fileID: 3291840627716365866, guid: 09b81323608b8b245a234a8d6d165daf, type: 3}
+  buyMenu: {fileID: 1505402950}
+  pressKeyToTalkText: Press F to talk
+  pressKeyToTalkPrefab: {fileID: 1350024999209430084, guid: 4cf458b50fa394c4c9628436d6c51cfa, type: 3}
+  isInteracting: 0
 --- !u!1001 &82128168
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5163,7 +5189,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1880462713
 Transform:
   m_ObjectHideFlags: 0
@@ -5285,9 +5311,9 @@ MonoBehaviour:
   endDialogueLines:
   - Thank you
   - Please come again!
-  canvas: {fileID: 2098171726}
+  canvas: {fileID: 0}
   dialogueTemplatePrefab: {fileID: 0}
-  buyMenu: {fileID: 1505402950}
+  buyMenu: {fileID: 0}
   pressKeyToTalkText: Press F to talk
   pressKeyToTalkPrefab: {fileID: 0}
   isInteracting: 0

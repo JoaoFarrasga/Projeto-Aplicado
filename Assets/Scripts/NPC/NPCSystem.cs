@@ -9,9 +9,9 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
     [SerializeField] private bool isBarter = false;
     [SerializeField] private string[] startDialogueLines;
     [SerializeField] private string[] endDialogueLines;
-    //[SerializeField] private GameObject canvas;
+    [SerializeField] private GameObject canvas;
     [SerializeField] private GameObject dialogueTemplatePrefab;
-    //[SerializeField] private GameObject buyMenu;
+    [SerializeField] private GameObject buyMenu;
     [SerializeField] private string pressKeyToTalkText = "Press F to talk";
     [SerializeField] private GameObject pressKeyToTalkPrefab;
 
@@ -22,37 +22,26 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
     private int endIndex = 0;
     private int indexCheckpoint = 0;
     private bool isNearObject;
-    private bool isWritingDialogue;
+    private bool isWritingDialogue = false;
     private GameObject textPrefab;
     private GameObject dialoguePrefab;
     private TMP_Text dialogueText;
-    private Canvas canvas;
-    private GameObject buyMenu;
+    //private Canvas canvas;
+    //private GameObject buyMenu;
     [SerializeField] private bool isInteracting = false;
 
     private void Start()
     {
         // Find the Canvas component in the scene and assign it to the canvas variable
-        canvas = FindObjectOfType<Canvas>();
+        //canvas = FindObjectOfType<Canvas>();
 
         // Find the BuyMenu script in the scene and assign it to the buyMenu variable
-        buyMenu = FindObjectOfType<GameObject>();
+        //buyMenu = FindObjectOfType<GameObject>();
 
-        // Now you can use canvas and buyMenu references in your script
-        if (canvas != null)
-        {
-            // Do something with the canvas
-        }
-
-        if (buyMenu != null)
-        {
-            // Do something with the buyMenu
-        }
     }
     // Update is called once per frame
     void Update()
     {
-
         if (playerDetection)
         {
             
@@ -83,25 +72,25 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
     private void NPCActions(string[] startDialogue, string[] endDialogue)
     {
 
-        if (startIndex == startDialogue.Length && endIndex != endDialogue.Length)
+        if (startIndex != startDialogue.Length)
         {
+            WriteDialogue(startDialogue, ref startIndex);
+        }
+        else if (startIndex == startDialogue.Length && endIndex != endDialogue.Length)
+        {
+            isWritingDialogue = false; // Reset the flag before displaying ending lines
             if (isBarter && !hasBarted)
             {
                 BuyMenuActions();
             }
             else
             {
+                Debug.Log(endDialogue.Length + " lenght");
                 buyMenu.SetActive(false);
-
                 WriteDialogue(endDialogue, ref endIndex);
             }
         }
-        else if (startIndex != startDialogue.Length)
-        {
-
-            WriteDialogue(startDialogue, ref startIndex);
-        }
-        else if(isWritingDialogue)
+        else if (isWritingDialogue)
         {
             DialogueVariablesReset();
         }
@@ -110,22 +99,36 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
 
     private void WriteDialogue(string[] dialogue, ref int index)
     {
-        //dialogueTemplate.SetActive(true);
-        if (!isWritingDialogue)
+        if (dialoguePrefab == null) // Instantiate the dialoguePrefab if it doesn't exist
         {
-            dialoguePrefab = Instantiate(dialogueTemplatePrefab, canvas.transform);      
-            dialogueText = dialoguePrefab.transform.GetComponentInChildren<TMP_Text>();
+            dialoguePrefab = Instantiate(dialogueTemplatePrefab, canvas.transform);
+            dialogueText = dialoguePrefab.GetComponentInChildren<TMP_Text>();
             isWritingDialogue = true;
         }
-        dialogueText.text = dialogue[index];
 
-        index++;
+        // Check if index is within the bounds of the dialogue array
+        
+        if (index < dialogue.Length)
+        {
+            dialogueText.text = dialogue[index];
+            Debug.Log(dialogueText.text);
+            index++;
+            Debug.Log(index);
+        }
+        else
+        {
+
+            // All dialogue lines have been displayed, reset dialogue variables and destroy UI elements
+            DialogueVariablesReset();
+            Destroy(dialoguePrefab); // Destroy the dialoguePrefab after the last line
+        }
+        
     }
 
     private void DialogueVariablesReset()
     {
+        Debug.Log("Dialogue variables reset");
         Destroy(textPrefab);
-        //dialogueTemplate.SetActive(false);
         Destroy(dialoguePrefab);
         buyMenu.SetActive(false);
         startIndex = 0;
