@@ -12,6 +12,7 @@ public class Inputs : MonoBehaviour
     public bool dash;
     public bool grapple;
     public bool pause;
+    public bool interact;
 
     [Header("Movement Settings")]
     public bool analogMovement;
@@ -58,6 +59,10 @@ public class Inputs : MonoBehaviour
     {
         GrappleInput(value.Get<float>() > 0.5f);
     }
+    public void OnInteract(InputValue value)
+    {
+        InteractInput(value.isPressed);
+    }
 
     public void OnPause(InputValue value)
     {
@@ -98,6 +103,10 @@ public class Inputs : MonoBehaviour
     public void GrappleInput(bool newGrappleState)
     {
         grapple = newGrappleState;
+    }
+    public void InteractInput(bool newInteractState)
+    {
+        interact = newInteractState;
     }
 
     private void OnApplicationFocus(bool hasFocus)

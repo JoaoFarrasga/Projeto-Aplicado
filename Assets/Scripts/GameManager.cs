@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        _player = GameObject.Find("Player");
+        
+
         if (instance != null && instance != this)
         {
             Destroy(this);

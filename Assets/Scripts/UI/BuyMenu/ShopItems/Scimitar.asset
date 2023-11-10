@@ -19,10 +19,11 @@ MonoBehaviour:
   - name: Iron
     quantity: 1
   isAffordable: 1
+  hasBeenForged: 0
   attackRadius: 0
-  primaryAttackDamage: 0
-  primaryAttackTimeout: 0
-  primaryAttackSpeed: 0
-  secondaryAttackDamage: 0
-  secondaryAttackTimeout: 0
-  secondaryAttackSpeed: 0
+  primaryAttackDamage: 3
+  primaryAttackTimeout: 0.1
+  primaryAttackSpeed: 2
+  secondaryAttackDamage: 6
+  secondaryAttackTimeout: 0.3
+  secondaryAttackSpeed: 1.5

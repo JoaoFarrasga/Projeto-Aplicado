@@ -61,12 +61,14 @@ public class CharacterController2D : MonoBehaviour
 
 
     [Header("Grapple")]
-    public bool canGrapple;
+    public bool canGrapple = true;
     public float grappleRange = 10f;
     [SerializeField] private float grappleSpeed = 25f;
     [SerializeField] private float grappleDeadzone = 0.25f;
     [SerializeField] private float grappleCooldown = 3f;
     public float grappleTimeout = 0.3f;
+    [Header("Interact")]
+    public float interactDistance = 2;
 
     private void Awake()
     {
@@ -171,5 +173,21 @@ public class CharacterController2D : MonoBehaviour
     {
         yield return new WaitForSeconds(grappleCooldown);
         canGrapple = true;
+    }
+
+    public void Interact()
+    {
+        Collider2D[] nearbyObjects = Physics2D.OverlapCircleAll(transform.position, interactDistance);
+
+        foreach (Collider2D col in nearbyObjects)
+        {
+            InteractableInterface interactableInterface = col.transform.GetComponent<InteractableInterface>();
+            interactableInterface?.Interact();
+
+            if (interactableInterface != null)
+            {
+                return;
+            }
+        }
     }
 }

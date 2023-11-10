@@ -15,12 +15,15 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: 786b021cbbd4b7c499bd200616a81d21, type: 3}
   materials:
   - name: Wood
+    quantity: 4
+  - name: Stone
     quantity: 2
   isAffordable: 1
-  attackRadius: 0
-  primaryAttackDamage: 0
-  primaryAttackTimeout: 0
-  primaryAttackSpeed: 0
-  secondaryAttackDamage: 0
-  secondaryAttackTimeout: 0
-  secondaryAttackSpeed: 0
+  hasBeenForged: 0
+  attackRadius: 0.5
+  primaryAttackDamage: 3
+  primaryAttackTimeout: 0.3
+  primaryAttackSpeed: 1.5
+  secondaryAttackDamage: 13
+  secondaryAttackTimeout: 0.6
+  secondaryAttackSpeed: 1

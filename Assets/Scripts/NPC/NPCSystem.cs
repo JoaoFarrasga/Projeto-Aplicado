@@ -4,97 +4,165 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class NPCSystem : MonoBehaviour
+public class NPCSystem : MonoBehaviour, InteractableInterface
 {
-    public bool isBarter = false;
-    public string[] startDialogueLines;
-    public string[] endDialogueLines;
-    public GameObject canvas;
-    public GameObject dialogueTemplate;
-    public GameObject buyMenu;
-    public TextMeshProUGUI pressKeyToTalk;
-    public string pressKeyToTalkText = "Press F to talk";
-    public GameObject buyMenuContainer;
+    [SerializeField] private bool isBarter = false;
+    [SerializeField] private string[] startDialogueLines;
+    [SerializeField] private string[] endDialogueLines;
+    //[SerializeField] private GameObject canvas;
+    [SerializeField] private GameObject dialogueTemplatePrefab;
+    [SerializeField] private GameObject buyMenu;
+    [SerializeField] private string pressKeyToTalkText = "Press F to talk";
+    [SerializeField] private GameObject pressKeyToTalkPrefab;
 
     private bool hasBarted = false;
-    private string dialogueText;
+    //private string dialogueText;
     private bool playerDetection = false;
     private int startIndex = 0;
     private int endIndex = 0;
     private int indexCheckpoint = 0;
+    private bool isNearObject;
+    private GameObject textPrefab;
+    private GameObject dialoguePrefab;
+    private TMP_Text dialogueText;
+    private Canvas canvas;
+    //private GameObject buyMenu;
+    [SerializeField] private bool isInteracting = false;
 
+    private void Awake()
+    {
+
+    }
     // Update is called once per frame
     void Update()
     {
-        NPCActions(startDialogueLines, endDialogueLines);
-    }
+        // Find the CanvasPlayer GameObject by name and assign its Canvas component to the canvas variable
+        GameObject canvasPlayer = GameObject.Find("CanvasPlayer");
+        if (canvasPlayer != null)
+        {
+            canvas = canvasPlayer.GetComponent<Canvas>();
+        }
+        else
+        {
+            Debug.LogError("CanvasPlayer not found in the scene.");
+        }
 
-    private void NPCActions(string[] startDialogue, string[] endDialogue) 
-    {
+        // Find the BuyMenu GameObject by name and assign it to the buyMenu variable
+        //buyMenu = GameObject.Find("YourBuyMenuObjectName");
+
+
+
+
+
         if (playerDetection)
         {
-            pressKeyToTalk.text = pressKeyToTalkText;
-
-            if (Input.GetKeyDown(KeyCode.F))
+            
+            if (!isNearObject)
             {
-                if (startIndex == startDialogue.Length && endIndex != endDialogue.Length)
-                {
-                    if (isBarter && !hasBarted)
-                    {
-                        BuyMenuActions();
-                    }
-                    else
-                    {
-                        buyMenu.SetActive(false);
+                textPrefab = Instantiate(pressKeyToTalkPrefab, canvas.transform);
+                textPrefab.GetComponent<TMP_Text>().text = pressKeyToTalkText;
+                isNearObject = true;
+            }
+            
+            if (isInteracting)
+            {    
+                NPCActions(startDialogueLines, endDialogueLines);               
+            }
+        }
+        else if(isNearObject)
+        {
+            DialogueVariablesReset();
+        }
+        isInteracting = false;
+    }
 
-                        WriteDialogue(endDialogue, ref endIndex);
-                    }
-                }
-                else if (startIndex != startDialogue.Length)
-                {
+    public void Interact()
+    {
+        isInteracting = true;
+    }
 
-                    WriteDialogue(startDialogue, ref startIndex);
-                }
-                else
+    private void NPCActions(string[] startDialogue, string[] endDialogue)
+    {
+
+        if (startIndex != startDialogue.Length)
+        {
+            WriteDialogue(startDialogue, ref startIndex);
+        }
+        else if (startIndex == startDialogue.Length && endIndex != endDialogue.Length)
+        {
+            if (isBarter && !hasBarted)
+            {
+                BuyMenuActions();
+            }
+            else
+            {
+                Debug.Log(endDialogue.Length + " length");
+                // Check if the NPC is set to barter, if not, skip showing the buy menu
+                if (isBarter)
                 {
-                    DialogueVariablesReset();
+                    buyMenu.SetActive(false);
                 }
+                WriteDialogue(endDialogue, ref endIndex);
             }
         }
         else
         {
             DialogueVariablesReset();
         }
+
     }
 
-    private void WriteDialogue(string[] dialogue, ref int index) 
+    private void WriteDialogue(string[] dialogue, ref int index)
     {
-        dialogueTemplate.SetActive(true);
+        if (dialoguePrefab == null) // Instantiate the dialoguePrefab if it doesn't exist
+        {
+            dialoguePrefab = Instantiate(dialogueTemplatePrefab, canvas.transform);
+            dialogueText = dialoguePrefab.GetComponentInChildren<TMP_Text>();
+        }
 
-        dialogueTemplate.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = dialogue[index];
+        // Check if index is within the bounds of the dialogue array
+        
+        if (index < dialogue.Length)
+        {
+            dialogueText.text = dialogue[index];
+            Debug.Log(dialogueText.text);
+            index++;
+            Debug.Log(index);
+        }
+        else
+        {
 
-        index++;
+            // All dialogue lines have been displayed, reset dialogue variables and destroy UI elements
+            DialogueVariablesReset();
+            Destroy(dialoguePrefab); // Destroy the dialoguePrefab after the last line
+        }
+        
     }
 
-    private void DialogueVariablesReset() 
+    private void DialogueVariablesReset()
     {
-        pressKeyToTalk.text = "";
-        dialogueTemplate.SetActive(false);
-        buyMenu.SetActive(false);
+        Debug.Log("Dialogue variables reset");
+        Destroy(textPrefab);
+        Destroy(dialoguePrefab);
+        if (buyMenu !=null)
+        {
+            buyMenu.SetActive(false);
+        }
         startIndex = 0;
         endIndex = 0;
         hasBarted = false;
+        isNearObject = false;
     }
 
-    private void BuyMenuActions() 
+    private void BuyMenuActions()
     {
-        pressKeyToTalk.text = "";
-        dialogueTemplate.SetActive(false);
+        Destroy(textPrefab);
+        Destroy(dialoguePrefab);
 
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
-        buyMenu.SetActive(true);       
+        buyMenu.SetActive(true);
 
         hasBarted = true;
     }
@@ -115,3 +183,4 @@ public class NPCSystem : MonoBehaviour
         }
     }
 }
+

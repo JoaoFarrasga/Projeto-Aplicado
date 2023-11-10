@@ -11,6 +11,30 @@ public class BuyMenuManager : MonoBehaviour
     public CellVariation[] cells;
     public CharacterController2D player;
 
+
+    
+    private void Start()
+    {
+        GameObject findPlayer = GameObject.Find("Player");
+        if (findPlayer != null)
+        {
+            player = findPlayer.GetComponent<CharacterController2D>();
+            if (player != null && player.inventory != null)
+            {
+                // Player and player.inventory are properly initialized
+                InitializeShop();
+            }
+            else
+            {
+                //Debug.LogError("Player's CharacterController2D component or inventory is null.");
+            }
+        }
+        else
+        {
+            //Debug.LogError("Player not found in the scene.");
+        }
+    }
+    
     //private GameObject[] cellStore;
     private List<GameObject> cellStore = new List<GameObject>();
     private int affordableChecker = 0;
@@ -33,7 +57,7 @@ public class BuyMenuManager : MonoBehaviour
         AddItemsToContainer();
     }
     void AddItemsToContainer()
-    {     
+    {
         foreach (CellVariation cellVariation in cells)
         {
             GameObject cell = Instantiate(cellPrefab, transform);
@@ -64,7 +88,6 @@ public class BuyMenuManager : MonoBehaviour
                 if (affordableChecker > 0)
                 {
                     cellVariation.isAffordable = false;
-                    Debug.Log("Hello this works");
                 }
 
                 GameObject mat = Instantiate(materialPrefab, cellItem.materials);
@@ -83,15 +106,42 @@ public class BuyMenuManager : MonoBehaviour
 
     public void ForgeButton(CellVariation cellClick) 
     {
-        if (cellClick.isAffordable == true)
+        if (cellClick.hasBeenForged)
         {
-            foreach (Material material in cellClick.materials) 
-            {
-                string materialName = material.name;
-                int materialQuantity = material.quantity;
+            player.primaryAttackDamage = cellClick.primaryAttackDamage;
+            player.primaryAttackTimeout = cellClick.primaryAttackTimeout;
+            player.primaryAttackSpeed = cellClick.primaryAttackSpeed;
 
-                player.inventory.RemoveItem(materialName, materialQuantity);
+            player.secondaryAttackDamage = cellClick.secondaryAttackDamage;
+            player.secondaryAttackTimeout = cellClick.secondaryAttackTimeout;
+            player.secondaryAttackSpeed = cellClick.secondaryAttackSpeed;
+        }
+        else 
+        {
+            if (cellClick.isAffordable == true)
+            {
+                foreach (Material material in cellClick.materials)
+                {
+                    string materialName = material.name;
+                    int materialQuantity = material.quantity;
+
+                    player.primaryAttackDamage = cellClick.primaryAttackDamage;
+                    player.primaryAttackTimeout = cellClick.primaryAttackTimeout;
+                    player.primaryAttackSpeed = cellClick.primaryAttackSpeed;
+
+                    player.secondaryAttackDamage = cellClick.secondaryAttackDamage;
+                    player.secondaryAttackTimeout = cellClick.secondaryAttackTimeout;
+                    player.secondaryAttackSpeed = cellClick.secondaryAttackSpeed;
+
+                    player.inventory.RemoveItem(materialName, materialQuantity);
+                    cellClick.hasBeenForged = true;
+                }
             }
+            else
+            {
+                Debug.Log("Item not affordable");
+            }
+
         }
     }
 }
