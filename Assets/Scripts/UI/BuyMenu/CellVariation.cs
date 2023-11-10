@@ -10,6 +10,7 @@ public class CellVariation : ScriptableObject
     public List<Material> materials = new List<Material>();
 
     public bool isAffordable;
+    public bool hasBeenForged = false;
 
     [Header("Attack Modifiers")]
     public float attackRadius;

@@ -10,6 +10,16 @@ public class Inventory_UI : MonoBehaviour
 
     void Update()
     {
+        GameObject playerObject = GameObject.Find("Player");
+        if (playerObject != null)
+        {
+            player = playerObject.GetComponent<CharacterController2D>();
+        }
+        else
+        {
+            Debug.LogError("CanvasPlayer not found in the scene.");
+        }
+
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             ToggleInventory();

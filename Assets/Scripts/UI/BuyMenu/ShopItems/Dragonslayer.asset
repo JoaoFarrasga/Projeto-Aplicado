@@ -21,7 +21,8 @@ MonoBehaviour:
   - name: Stone
     quantity: 1
   isAffordable: 0
-  attackRadius: 0.7
+  hasBeenForged: 0
+  attackRadius: 0.5
   primaryAttackDamage: 10
   primaryAttackTimeout: 0.5
   primaryAttackSpeed: 1

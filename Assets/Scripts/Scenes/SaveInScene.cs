@@ -6,8 +6,10 @@ public class SaveInScene : MonoBehaviour
 {
     public string targetObjectName = "Target"; // Name of the GameObject you want to remove
 
-    void Start()
+    void Awake()
     {
+        DontDestroyOnLoad(gameObject);
+
         GameObject targetObject = GameObject.Find(gameObject.name);
 
         if (targetObject != null && targetObject != gameObject)

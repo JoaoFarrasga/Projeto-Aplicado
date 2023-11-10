@@ -7,12 +7,10 @@ using UnityEngine.SceneManagement;
 public class DoorManager : MonoBehaviour, InteractableInterface
 {
     [SerializeField] public string[] startDialogueLines;
-    [SerializeField] public GameObject canvas;
     [SerializeField] private GameObject dialogueTemplatePrefab;
     [SerializeField] public string pressKeyToInteractText = "Press F to Open";
     [SerializeField] private GameObject pressKeyToTalkPrefab;
     [SerializeField] private bool isLocked = false;
-    [SerializeField] private CharacterController2D player;
     [SerializeField] private string sceneName;
 
     private GameObject textPrefab;
@@ -21,16 +19,55 @@ public class DoorManager : MonoBehaviour, InteractableInterface
     private int startIndex = 0;
     private GameObject dialoguePrefab;
     private TMP_Text dialogueText;
+    private Canvas canvas;
     private bool isNearObject;
     private bool isWritingDialogue;
     private int keyAmount;
+
+    public CharacterController2D player;
+
     public void Interact()
     {
         isInteracting = true;
     }
 
+    private void Start()
+    {
+        
+    }
+
     private void Update()
     {
+        player = FindObjectOfType<CharacterController2D>();
+
+        if (player == null)
+        {
+            Debug.LogError("CharacterController2D object not found in the scene.");
+        }
+
+        GameObject canvasPlayer = GameObject.Find("CanvasPlayer");
+        if (canvasPlayer != null)
+        {
+            canvas = canvasPlayer.GetComponent<Canvas>();
+            if (canvas == null)
+            {
+                Debug.LogError("Canvas component not found on CanvasPlayer GameObject.");
+            }
+        }
+        else
+        {
+            Debug.LogError("CanvasPlayer not found in the scene.");
+        }
+
+        // Find the BuyMenu GameObject by name and assign it to the buyMenu variable
+        //buyMenu = GameObject.Find("YourBuyMenuObjectName");
+
+
+
+
+
+
+
         if (playerDetection)
         {
             if (!isNearObject)
@@ -41,6 +78,7 @@ public class DoorManager : MonoBehaviour, InteractableInterface
             }
             if (isInteracting)
             {
+                textPrefab.GetComponent<TMP_Text>().text = "";
                 isLocked = SearchPlayerKey(isLocked);
                 if (!isLocked)
                 {

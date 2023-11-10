@@ -9,7 +9,7 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
     [SerializeField] private bool isBarter = false;
     [SerializeField] private string[] startDialogueLines;
     [SerializeField] private string[] endDialogueLines;
-    [SerializeField] private GameObject canvas;
+    //[SerializeField] private GameObject canvas;
     [SerializeField] private GameObject dialogueTemplatePrefab;
     [SerializeField] private GameObject buyMenu;
     [SerializeField] private string pressKeyToTalkText = "Press F to talk";
@@ -25,22 +25,35 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
     private GameObject textPrefab;
     private GameObject dialoguePrefab;
     private TMP_Text dialogueText;
-    //private Canvas canvas;
+    private Canvas canvas;
     //private GameObject buyMenu;
     [SerializeField] private bool isInteracting = false;
 
-    private void Start()
+    private void Awake()
     {
-        // Find the Canvas component in the scene and assign it to the canvas variable
-        //canvas = FindObjectOfType<Canvas>();
-
-        // Find the BuyMenu script in the scene and assign it to the buyMenu variable
-        //buyMenu = FindObjectOfType<GameObject>();
 
     }
     // Update is called once per frame
     void Update()
     {
+        // Find the CanvasPlayer GameObject by name and assign its Canvas component to the canvas variable
+        GameObject canvasPlayer = GameObject.Find("CanvasPlayer");
+        if (canvasPlayer != null)
+        {
+            canvas = canvasPlayer.GetComponent<Canvas>();
+        }
+        else
+        {
+            Debug.LogError("CanvasPlayer not found in the scene.");
+        }
+
+        // Find the BuyMenu GameObject by name and assign it to the buyMenu variable
+        //buyMenu = GameObject.Find("YourBuyMenuObjectName");
+
+
+
+
+
         if (playerDetection)
         {
             
@@ -71,7 +84,7 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
     private void NPCActions(string[] startDialogue, string[] endDialogue)
     {
 
-        if (startIndex != startDialogue.Length )
+        if (startIndex != startDialogue.Length)
         {
             WriteDialogue(startDialogue, ref startIndex);
         }
@@ -83,8 +96,12 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
             }
             else
             {
-                Debug.Log(endDialogue.Length + " lenght");
-                buyMenu.SetActive(false);
+                Debug.Log(endDialogue.Length + " length");
+                // Check if the NPC is set to barter, if not, skip showing the buy menu
+                if (isBarter)
+                {
+                    buyMenu.SetActive(false);
+                }
                 WriteDialogue(endDialogue, ref endIndex);
             }
         }
@@ -127,7 +144,10 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
         Debug.Log("Dialogue variables reset");
         Destroy(textPrefab);
         Destroy(dialoguePrefab);
-        buyMenu.SetActive(false);
+        if (buyMenu !=null)
+        {
+            buyMenu.SetActive(false);
+        }
         startIndex = 0;
         endIndex = 0;
         hasBarted = false;
