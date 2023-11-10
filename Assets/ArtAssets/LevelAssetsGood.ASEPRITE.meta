@@ -95,7 +95,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638339250416209086
+  platformSettingsDirtyTick: 638350787561719442
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -647,10 +647,10 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 265
-      y: 522
-      width: 376
-      height: 66
+      x: 268
+      y: 571
+      width: 373
+      height: 64
     spriteID: 3d029b6912344924b9938ac24cf1ea64
     spriteBone: []
     spriteOutline: []
@@ -667,11 +667,91 @@ ScriptedImporter:
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 526
-      y: 5
-      width: 66
+      x: 574
+      y: 56
+      width: 65
       height: 512
     spriteID: 1c3ab19db340a794ab8c93449e44bd37
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: Platform1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 341
+      y: 484
+      width: 191
+      height: 64
+    spriteID: ba7ee09fde0e03746a9d4d3d6834ba5e
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: Platform2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 338
+      y: 399
+      width: 127
+      height: 64
+    spriteID: 239455fe7055cd4459a0d68bc17edcb2
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: Platform3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 388
+      y: 259
+      width: 127
+      height: 64
+    spriteID: 716b6d3641cda144cbe06ae177839cb7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  - name: Platform4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 435
+      y: 149
+      width: 127
+      height: 64
+    spriteID: d65d04fc9a0e312479316eb5e3939913
     spriteBone: []
     spriteOutline: []
     vertices: []
