@@ -692,7 +692,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   viewRange: 15
-  _isHeavy: 0
+  _isHeavy: 1
   seePlayer: 0
   checkGround: {fileID: 5817548128800603337}
   checkRoof: {fileID: 3567433442942959036}
@@ -700,7 +700,7 @@ MonoBehaviour:
   checkBack: {fileID: 996909041882753888}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 704
+    m_Bits: 64
   moveDirection: {x: 0, y: 0}
 --- !u!50 &2376509894822182470
 Rigidbody2D:

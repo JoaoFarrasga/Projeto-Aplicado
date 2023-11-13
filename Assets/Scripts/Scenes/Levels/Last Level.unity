@@ -7140,7 +7140,7 @@ PrefabInstance:
       objectReference: {fileID: 1613456578}
     - target: {fileID: -2255851183737417826, guid: fe52409e1ad0dc04880b457b2ec99803, type: 3}
       propertyPath: groundLayer.m_Bits
-      value: 192
+      value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 1177498852708273650, guid: fe52409e1ad0dc04880b457b2ec99803, type: 3}
       propertyPath: m_Layer
@@ -9231,7 +9231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnInterval: 3
-  smallFly: {fileID: 5488688429655985107, guid: fe52409e1ad0dc04880b457b2ec99803, type: 3}
+  smallFly: {fileID: 8847116111830353387, guid: f747d0a001a5fff4e848d2553cff6343, type: 3}
   spawnLocation: {fileID: 15986080}
 --- !u!1001 &1671107372
 PrefabInstance:
