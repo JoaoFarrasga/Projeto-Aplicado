@@ -10,7 +10,7 @@ public class DoorManager : MonoBehaviour, InteractableInterface
     [SerializeField] private GameObject dialogueTemplatePrefab;
     [SerializeField] public string pressKeyToInteractText = "Press F to Open";
     [SerializeField] private GameObject pressKeyToTalkPrefab;
-    [SerializeField] private bool isLocked = false;
+    [SerializeField] public bool isLocked = false;
     [SerializeField] private string sceneName;
 
     private GameObject textPrefab;
@@ -23,6 +23,7 @@ public class DoorManager : MonoBehaviour, InteractableInterface
     private bool isNearObject;
     private bool isWritingDialogue;
     private int keyAmount;
+    private bool hasKey = false;
 
     public CharacterController2D player;
 
@@ -79,15 +80,27 @@ public class DoorManager : MonoBehaviour, InteractableInterface
             if (isInteracting)
             {
                 textPrefab.GetComponent<TMP_Text>().text = "";
-                isLocked = SearchPlayerKey(isLocked);
+                //isLocked = SearchPlayerKey(isLocked);
                 if (!isLocked)
                 {
+                    DontDestroyOnLoad(player);
                     SceneManager.LoadScene(sceneName);
                     Debug.Log("Door unlocked");
                 }
                 else 
                 {
-                    DoorLockedDialogue(startDialogueLines);
+                    hasKey = SearchPlayerKey(hasKey);
+                    if (hasKey == false)
+                    {
+                        isLocked = false;
+                        DontDestroyOnLoad(player);
+                        SceneManager.LoadScene(sceneName);
+                        Debug.Log("Door unlocked");
+                    }
+                    else
+                    {
+                        DoorLockedDialogue(startDialogueLines);
+                    }
                 }
             }
 

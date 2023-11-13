@@ -2012,7 +2012,7 @@ MonoBehaviour:
   dialogueTemplatePrefab: {fileID: 3291840627716365866, guid: 09b81323608b8b245a234a8d6d165daf, type: 3}
   pressKeyToInteractText: Press F to Open
   pressKeyToTalkPrefab: {fileID: 1350024999209430084, guid: 4cf458b50fa394c4c9628436d6c51cfa, type: 3}
-  isLocked: 1
+  isLocked: 0
   sceneName: Room1
   player: {fileID: 0}
 --- !u!212 &759299172
