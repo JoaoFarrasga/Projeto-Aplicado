@@ -35,7 +35,7 @@ public abstract class EnemyController : MonoBehaviour
 
     public virtual void Chase()
     {
-
+        
     }
 
     public void Update()
