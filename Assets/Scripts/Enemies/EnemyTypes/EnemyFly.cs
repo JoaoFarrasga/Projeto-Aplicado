@@ -9,6 +9,7 @@ public class EnemyFly : EnemyController
     public GameObject checkFront;
     public GameObject checkBack;
     public LayerMask groundLayer;
+    
 
     private Rigidbody2D enemyRB;
 
@@ -20,6 +21,11 @@ public class EnemyFly : EnemyController
     private bool _isRoof;
     private bool _isFront;
     private bool _isBack;
+
+    public override void Awake()
+    {
+        
+    }
 
     public void Start()
     {
