@@ -1026,6 +1026,8 @@ MonoBehaviour:
   - {fileID: 5473032983201066519, guid: 5fa70afa99bf0144d8f15ca358fd29fe, type: 3}
   - {fileID: 1590120615260644696, guid: 599023d5df1fdef4582bdc6a02141397, type: 3}
   rooms: []
+  waitTime: 10
+  boss: {fileID: 4794978537490621, guid: 1ba56d200a634534b8d615225cb48001, type: 3}
 --- !u!1 &420992043
 GameObject:
   m_ObjectHideFlags: 0
