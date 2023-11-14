@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - NPC
   - Wall
+  - SpawnPoint
+  - Rooms
   layers:
   - Default
   - TransparentFX
