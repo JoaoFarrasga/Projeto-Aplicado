@@ -414,7 +414,7 @@ MonoBehaviour:
   checkBack: {fileID: 1177498852708273650}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1088
+    m_Bits: 64
   moveDirection: {x: 0, y: 0}
 --- !u!50 &8214846543956348442
 Rigidbody2D:

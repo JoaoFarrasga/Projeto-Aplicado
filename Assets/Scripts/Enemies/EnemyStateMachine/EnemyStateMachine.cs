@@ -11,6 +11,8 @@ public class EnemyStateMachine : MonoBehaviour
     public AttackState attackState;
     public EnemyDeathState deathState;
 
+    public float attackRange;
+
     public string currentStateName;
 
     [Header("EnemyStates")]
