@@ -31,6 +31,9 @@ public class PatrolState : EnemyState
 
         if(enemyStateMachine.hasChase && enemyController.seePlayer)
             enemyStateMachine.SwitchState(enemyStateMachine.chaseState);
+
+        if (Physics2D.OverlapCircle(enemyController.center.transform.position, enemyStateMachine.attackRange, enemyController.playerLayer))
+            enemyStateMachine.SwitchState(enemyStateMachine.attackState);
     }
 
     public override void OnExit()
@@ -77,7 +80,7 @@ public class ChaseState : EnemyState
         if (!enemyController.seePlayer)
             enemyStateMachine.SwitchState(enemyStateMachine.idleState);
     
-        if (Physics2D.OverlapCircle(enemyController.gameObject.transform.position, 1.0f, enemyController.playerLayer))
+        if (Physics2D.OverlapCircle(enemyController.center.transform.position, enemyStateMachine.attackRange, enemyController.playerLayer))
             enemyStateMachine.SwitchState(enemyStateMachine.attackState);
     }
 
