@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public interface ITimeable
 {
@@ -27,9 +28,7 @@ public class TimeManager : Progressive, IDamageable, IHealable, ITimeable
 
     [HideInInspector]
     public int multiplyer = 1;
-
     
-
     private bool CheckMaxValue()
     {
         if (Value >= MaxValue) return true;

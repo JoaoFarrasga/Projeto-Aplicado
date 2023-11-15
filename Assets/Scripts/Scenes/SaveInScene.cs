@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveInScene : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class SaveInScene : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
 
+        
         GameObject targetObject = GameObject.Find(gameObject.name);
 
         if (targetObject != null && targetObject != gameObject)
@@ -24,5 +26,6 @@ public class SaveInScene : MonoBehaviour
         {
             Debug.LogWarning("No other GameObject found with the name: " + targetObjectName);
         }
+        
     }
 }
