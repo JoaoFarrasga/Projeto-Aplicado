@@ -1,11 +1,6 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Prefabs/Enemies/Boss.prefab.meta
-guid: 30ce1a17151233546bc003072c2df76e
+guid: 4c1df34d881f4cd4d90aa5b04bbfd509
 PrefabImporter:
-========
-guid: 3830a689eac27594ead509be7ed37fc5
-DefaultImporter:
->>>>>>>> DungeonGenerator:Assets/Scripts/Scenes/Levels/B.unity.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
