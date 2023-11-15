@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name != "Village1")
+        if (SceneManager.GetActiveScene().name == "FirstLevel")
         {
             timeManager.StartTimeCoroutine();
         }
