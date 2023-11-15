@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -27,9 +28,23 @@ public class GameManager : MonoBehaviour
         }
         else
             instance = this;
+        DontDestroyOnLoad(instance);
         Application.runInBackground = true;
         CursorToggle(false);
 
+    }
+
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name != "Village1")
+        {
+            timeManager.StartTimeCoroutine();
+        }
+        else
+        {
+            timeManager.StopTimeCoroutine();
+            timeManager.Value = timeManager.MaxValue;
+        }
     }
 
     public GameObject Player

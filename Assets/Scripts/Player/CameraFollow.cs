@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class CameraFollow : MonoBehaviour
 	// Amplitude of the shake. A larger value shakes the camera harder.
 	public float shakeAmount = 0.1f;
 	public float decreaseFactor = 1.0f;
+
+	public bool shouldFollow;
+	public string firstSceneName = "FirstLevel";
 
 	Vector3 originalPos;
 
@@ -36,15 +40,23 @@ public class CameraFollow : MonoBehaviour
 
 	private void Update()
 	{
-		Vector3 newPosition = Target.position;
-		newPosition.z = -10;
-		transform.position = Vector3.Slerp(transform.position, newPosition, FollowSpeed * Time.deltaTime);
-
-		if (shakeDuration > 0)
+		if (SceneManager.GetActiveScene().name == firstSceneName)
 		{
-			camTransform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
+			shouldFollow = true;
+		}
 
-			shakeDuration -= Time.deltaTime * decreaseFactor;
+		if (shouldFollow) 
+		{
+			Vector3 newPosition = Target.position;
+			newPosition.z = -10;
+			transform.position = Vector3.Slerp(transform.position, newPosition, FollowSpeed * Time.deltaTime);
+
+			if (shakeDuration > 0)
+			{
+				camTransform.localPosition = originalPos + Random.insideUnitSphere * shakeAmount;
+
+				shakeDuration -= Time.deltaTime * decreaseFactor;
+			}
 		}
 	}
 

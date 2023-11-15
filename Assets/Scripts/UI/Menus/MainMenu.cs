@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour {
 
     public void StartGame()
     {
-        SceneManager.LoadScene("Prototipe");
+        SceneManager.LoadScene("Village1");
     }
 
     public void ExitGame ()
