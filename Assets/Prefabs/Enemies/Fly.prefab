@@ -368,6 +368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _value: 25
   <MaxValue>k__BackingField: 25
+  isTimeCoroutineRunning: 0
   multiplyer: 1
 --- !u!114 &-6245716926262912168
 MonoBehaviour:

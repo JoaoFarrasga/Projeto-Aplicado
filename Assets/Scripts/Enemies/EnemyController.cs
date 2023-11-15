@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public abstract class EnemyController : MonoBehaviour
 {
@@ -7,6 +8,9 @@ public abstract class EnemyController : MonoBehaviour
     [Header("Enemy Starter")]
     public int enemyDamage;
     public float moveSpeed;
+    public float attackRange;
+    public float attackSpeed;
+    public GameObject center;
 
     [Header("Enemy TimeOuts")]
     public float attackTimeOut;
@@ -21,7 +25,14 @@ public abstract class EnemyController : MonoBehaviour
 
     [HideInInspector] public bool seePlayer;
 
-    private void Awake()
+    public int circleSegments = 30;
+
+    public Color attackColor = Color.red;
+    private Color originalColor;
+    public SpriteRenderer spriteRenderer;
+
+
+    public virtual void Awake()
     {
         timeManager = GetComponent<TimeManager>();
         timeManager.MaxValue = Random.Range(15, 61);
@@ -35,7 +46,7 @@ public abstract class EnemyController : MonoBehaviour
 
     public virtual void Chase()
     {
-
+        
     }
 
     public void Update()
@@ -53,7 +64,14 @@ public abstract class EnemyController : MonoBehaviour
     //Check if Collision with the Player Happend and Gives Damage to It
     public virtual void Attack()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(gameObject.transform.position, 1.0f);
+        StartCoroutine(AttackDelay());
+    }
+
+    private IEnumerator AttackDelay() 
+    {
+        yield return new WaitForSeconds(attackSpeed);
+
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(center.transform.position, attackRange);
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].gameObject.tag == "Player")
@@ -62,5 +80,37 @@ public abstract class EnemyController : MonoBehaviour
                 damageable?.Damage(enemyDamage);
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(center.transform.position, attackRange);
+
+        // Draw a circle to visualize the attack range
+        float angleStep = 360f / circleSegments;
+        Vector3 prevPos = Vector3.zero;
+        for (int i = 0; i <= circleSegments; i++)
+        {
+            float angle = Mathf.Deg2Rad * i * angleStep;
+            Vector3 newPos = center.transform.position + new Vector3(Mathf.Cos(angle) * attackRange, Mathf.Sin(angle) * attackRange, 0f);
+            if (i > 0)
+            {
+                Gizmos.DrawLine(prevPos, newPos);
+            }
+            prevPos = newPos;
+        }
+    }
+
+    private IEnumerator FlashColor(Color flashColor, float duration)
+    {
+        // Change the color temporarily
+        spriteRenderer.color = flashColor;
+
+        // Wait for the specified duration
+        yield return new WaitForSeconds(duration);
+
+        // Restore the original color
+        spriteRenderer.color = originalColor;
     }
 }

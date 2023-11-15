@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public interface ITimeable
 {
@@ -27,12 +28,7 @@ public class TimeManager : Progressive, IDamageable, IHealable, ITimeable
 
     [HideInInspector]
     public int multiplyer = 1;
-
-    private void Start()
-    {
-        StartTimeCoroutine();
-    }
-
+    
     private bool CheckMaxValue()
     {
         if (Value >= MaxValue) return true;
@@ -52,6 +48,12 @@ public class TimeManager : Progressive, IDamageable, IHealable, ITimeable
         isTimeCoroutineRunning = true;
         StopAllCoroutines();
         StartCoroutine(TimeCoroutine());
+    }
+
+    public void StopTimeCoroutine() 
+    {
+        StopAllCoroutines();
+        isTimeCoroutineRunning = false;
     }
 
     private IEnumerator TimeCoroutine()
