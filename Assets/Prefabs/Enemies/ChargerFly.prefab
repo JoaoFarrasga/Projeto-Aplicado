@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4615186692117375596}
   - component: {fileID: 4388787384544953014}
   - component: {fileID: 4167321218060945037}
+  - component: {fileID: 6182714787481309670}
   m_Layer: 0
   m_Name: ChargerFly
   m_TagString: Untagged
@@ -34,7 +35,8 @@ Transform:
   m_LocalPosition: {x: 5, y: -5, z: 0.12439172}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2079130747222394690}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &321933501911111827
@@ -103,6 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _value: 25
   <MaxValue>k__BackingField: 25
+  isTimeCoroutineRunning: 0
   multiplyer: 1
 --- !u!114 &7388190868003573041
 MonoBehaviour:
@@ -118,6 +121,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDamage: 5
   moveSpeed: 5
+  attackRange: 0
+  attackSpeed: 0
+  center: {fileID: 6630163598748705360}
   attackTimeOut: 1
   deathTimeOut: 1
   playerLayer:
@@ -126,6 +132,9 @@ MonoBehaviour:
   viewRange: 15
   _isHeavy: 0
   seePlayer: 0
+  circleSegments: 30
+  attackColor: {r: 1, g: 0, b: 0, a: 1}
+  spriteRenderer: {fileID: 0}
   chargingTime: 1
 --- !u!114 &4615186692117375596
 MonoBehaviour:
@@ -140,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
+  attackRange: 0
   currentStateName: 
   hasPatrol: 0
   hasChase: 1
@@ -215,3 +225,49 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.8828125}
   m_EdgeRadius: 0
+--- !u!114 &6182714787481309670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641095010234817625}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d97866fd3ae99464490de1ca5d47a299, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  center: {fileID: 6630163598748705360}
+  attackRange: 10
+  circleSegments: 30
+--- !u!1 &6630163598748705360
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2079130747222394690}
+  m_Layer: 0
+  m_Name: EnemyCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2079130747222394690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630163598748705360}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7173814088289743309}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
