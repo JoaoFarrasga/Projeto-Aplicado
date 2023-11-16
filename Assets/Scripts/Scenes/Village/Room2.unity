@@ -764,7 +764,7 @@ PrefabInstance:
     - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
       propertyPath: startDialogueLines.Array.data[1]
       value: I'm not sure when or why this happened, the only thing I remember was
-        my pocket watch flashing flashing with a purple color.
+        my pocket watch flashing with a purple color.
       objectReference: {fileID: 0}
     - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
       propertyPath: startDialogueLines.Array.data[2]
