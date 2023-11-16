@@ -13,6 +13,7 @@ public class RoomSpawner : MonoBehaviour
     private RoomTemplates templates;
     private int rand;
     private bool spawned = false;
+    bool firstTime = true;
 
 
     void Start()
@@ -38,7 +39,17 @@ public class RoomSpawner : MonoBehaviour
             }
             else if (OpeningDirection == 3)
             {
-                //need to spawn room with left door
+                /* if (firstTime == true)
+                 {
+                     // On the first run exclude index 1
+                     rand = Random.Range(0, 1);
+                     firstTime = false; // Set firstTime to false after the first run
+                 }
+                 else
+                 {
+                     // On the rest of the runs include the full range
+                     rand = Random.Range(0, templates.leftRooms.Length);
+                 }*/
                 rand = Random.Range(0, templates.leftRooms.Length);
                 Instantiate(templates.leftRooms[rand], transform.position, templates.leftRooms[rand].transform.rotation);
             }
@@ -53,7 +64,8 @@ public class RoomSpawner : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("SpawnPoint")){
+        if (other.CompareTag("SpawnPoint"))
+        {
             Destroy(gameObject);
         }
     }
