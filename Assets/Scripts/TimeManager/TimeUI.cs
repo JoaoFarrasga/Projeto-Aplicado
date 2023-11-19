@@ -19,7 +19,4 @@ public class TimeUI : MonoBehaviour
     {
         text.text = Mathf.RoundToInt(timeManager.Value).ToString();
     }
-
-
-
 }

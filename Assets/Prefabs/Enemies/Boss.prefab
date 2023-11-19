@@ -33,8 +33,8 @@ Transform:
   m_GameObject: {fileID: 4794978537490621}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 18.475828, y: 18.475828, z: 3.6951656}
+  m_LocalPosition: {x: 0.5135, y: -0.0411, z: 0}
+  m_LocalScale: {x: 23.611134, y: 23.611134, z: 4.7222266}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5853476758265095004}
@@ -64,7 +64,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _value: 100
   <MaxValue>k__BackingField: 100
-  isTimeCoroutineRunning: 1
+  isTimeCoroutineRunning: 0
   multiplyer: 1
 --- !u!114 &844595145823572906
 MonoBehaviour:
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDamage: 10
   moveSpeed: 5
-  attackRange: 3
+  attackRange: 3.8
   attackSpeed: 0.4
   center: {fileID: 6981726966359332442}
   attackTimeOut: 4

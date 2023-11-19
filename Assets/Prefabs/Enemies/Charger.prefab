@@ -144,7 +144,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0.8207547, g: 0.15021354, b: 0.15021354, a: 1}
+  m_Color: {r: 1, g: 0.92855203, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -168,8 +168,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDamage: 5
   moveSpeed: 5
-  attackRange: 0
-  attackSpeed: 0
+  attackRange: 0.8
+  attackSpeed: 3
   center: {fileID: 7428360669937900577}
   attackTimeOut: 1
   deathTimeOut: 1
