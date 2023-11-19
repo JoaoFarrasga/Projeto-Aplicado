@@ -45,6 +45,20 @@ public class CameraFollow : MonoBehaviour
 			shouldFollow = true;
 		}
 
+        if (Target == null)
+        {
+			GameObject playerObject = GameObject.Find("Player");
+			if (playerObject != null)
+			{
+				Target = playerObject.GetComponent<CharacterController2D>().transform;
+			}
+			else
+			{
+				Debug.LogError("CanvasPlayer not found in the scene.");
+			}
+			Debug.Log("Target null");
+        }
+
 		if (shouldFollow) 
 		{
 			Vector3 newPosition = Target.position;

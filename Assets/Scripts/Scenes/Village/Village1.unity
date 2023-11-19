@@ -157,6 +157,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9599fa045ccbf344affbb105d07815c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &19640643 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6530740411755124079, guid: ac6e526a0dd3035429f5bc583c6c1705, type: 3}
+  m_PrefabInstance: {fileID: 1380996967}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19640599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 783f8b7882d2d2a42a5b76de9179978f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &90932848
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4041,7 +4052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryPanel: {fileID: 172331621}
-  player: {fileID: 0}
+  player: {fileID: 19640643}
   slots:
   - {fileID: 90932849}
   - {fileID: 956686416}
@@ -4240,6 +4251,19 @@ MonoBehaviour:
   _player: {fileID: 19640599}
   _menuPause: {fileID: 1327463319}
   _menuDeath: {fileID: 2068601614}
+  villageOutside:
+  - Village1
+  - Village2
+  - Village3
+  - Village4
+  - Village5
+  - Village6
+  villageRooms:
+  - Room1
+  - Room2
+  - Room3
+  - Room4
+  isInSafeZone: 0
 --- !u!1 &1254982168
 GameObject:
   m_ObjectHideFlags: 0
