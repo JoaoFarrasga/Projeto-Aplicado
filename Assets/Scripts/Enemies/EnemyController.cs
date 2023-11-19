@@ -37,6 +37,7 @@ public abstract class EnemyController : MonoBehaviour
         timeManager = GetComponent<TimeManager>();
         timeManager.MaxValue = Random.Range(15, 61);
         timeManager.Value = timeManager.MaxValue;
+        originalColor = spriteRenderer.color;
     }
 
     public virtual void Patrol()
@@ -65,6 +66,7 @@ public abstract class EnemyController : MonoBehaviour
     public virtual void Attack()
     {
         StartCoroutine(AttackDelay());
+        StartCoroutine(FlashColor(Color.red, attackSpeed));
     }
 
     private IEnumerator AttackDelay() 
@@ -77,7 +79,7 @@ public abstract class EnemyController : MonoBehaviour
             if (colliders[i].gameObject.tag == "Player")
             {
                 IDamageable damageable = colliders[i].GetComponent<IDamageable>();
-                damageable?.Damage(enemyDamage);
+                damageable?.Damage(enemyDamage);              
             }
         }
     }
@@ -104,13 +106,19 @@ public abstract class EnemyController : MonoBehaviour
 
     private IEnumerator FlashColor(Color flashColor, float duration)
     {
+        // Store the original color including alpha
+        Color startColor = spriteRenderer.color;
+
         // Change the color temporarily
         spriteRenderer.color = flashColor;
+
+        // Wait for the next frame
+        yield return null;
 
         // Wait for the specified duration
         yield return new WaitForSeconds(duration);
 
-        // Restore the original color
-        spriteRenderer.color = originalColor;
+        // Restore the original color, including alpha
+        spriteRenderer.color = startColor;
     }
 }

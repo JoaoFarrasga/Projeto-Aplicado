@@ -8,6 +8,12 @@ public class Inventory_UI : MonoBehaviour
     public CharacterController2D player;
     public List<Slots_UI> slots = new List<Slots_UI>();
 
+    void Start()
+    {
+        // Ensure the inventory panel is initially deactivated
+        inventoryPanel.SetActive(false);
+    }
+
     void Update()
     {
         GameObject playerObject = GameObject.Find("Player");
@@ -32,10 +38,12 @@ public class Inventory_UI : MonoBehaviour
         {
             inventoryPanel.SetActive(true);
             Setup();
+            Debug.Log("true");
         }
         else
         {
             inventoryPanel.SetActive(false);
+            Debug.Log("false");
         }
     }
 

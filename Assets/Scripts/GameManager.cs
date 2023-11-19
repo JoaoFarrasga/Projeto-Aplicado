@@ -16,10 +16,18 @@ public class GameManager : MonoBehaviour
     public GameObject _menuDeath;
     //public GameObject _menuVictory;
 
+    public string[] villageOutside;
+    public string[] villageRooms;
+    public int isInSafeZone;
+
+
+
     void Awake()
     {
         _player = GameObject.Find("Player");
-        
+
+        //villageOutside = new string[villageOutside.Length];
+        //villageRooms = new string[villageRooms.Length];
 
         if (instance != null && instance != this)
         {
@@ -36,7 +44,35 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (SceneManager.GetActiveScene().name == "FirstLevel")
+        for (int i = 0; i < villageOutside.Length; i++)
+        {
+            if (villageOutside[i] == SceneManager.GetActiveScene().name)
+            {
+                isInSafeZone++;
+            }
+        }
+        for (int i = 0; i < villageRooms.Length; i++)
+        {
+            if (villageOutside[i] == SceneManager.GetActiveScene().name)
+            {
+                isInSafeZone++;
+            }
+        }
+
+        if (isInSafeZone > 0)
+        {
+            Debug.Log("Player is safe");
+            timeManager.StopTimeCoroutine();
+            timeManager.Value = timeManager.MaxValue;
+            isInSafeZone = 0;
+        }
+        else
+        {
+            Debug.Log("Player is not safe");
+            timeManager.StartTimeCoroutine();
+        }
+        /*
+        if (SceneManager.GetActiveScene().name != "Village1")
         {
             timeManager.StartTimeCoroutine();
         }
@@ -45,6 +81,7 @@ public class GameManager : MonoBehaviour
             timeManager.StopTimeCoroutine();
             timeManager.Value = timeManager.MaxValue;
         }
+        */
     }
 
     public GameObject Player
