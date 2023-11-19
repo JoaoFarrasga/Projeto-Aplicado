@@ -234,7 +234,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &839546619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,7 +422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1799643475
 Transform:
   m_ObjectHideFlags: 0
@@ -874,12 +874,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8174798035801260864, guid: 59c8eb85deed7df4b9d499897ef11be9, type: 3}
+      propertyPath: isTimeCoroutineRunning
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 8383932604472608786, guid: 59c8eb85deed7df4b9d499897ef11be9, type: 3}
     - {fileID: 1972787309443274852, guid: 59c8eb85deed7df4b9d499897ef11be9, type: 3}
     - {fileID: 2089766521117021145, guid: 59c8eb85deed7df4b9d499897ef11be9, type: 3}
     - {fileID: 341285824257502474, guid: 59c8eb85deed7df4b9d499897ef11be9, type: 3}
+    - {fileID: 3848243258643255995, guid: 59c8eb85deed7df4b9d499897ef11be9, type: 3}
+    - {fileID: 2612144674060776549, guid: 59c8eb85deed7df4b9d499897ef11be9, type: 3}
+    - {fileID: 1888854188517530796, guid: 59c8eb85deed7df4b9d499897ef11be9, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59c8eb85deed7df4b9d499897ef11be9, type: 3}

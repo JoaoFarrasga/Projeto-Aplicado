@@ -42,7 +42,7 @@ public class EnemyPlayerRange : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(center.transform.position, attackRange);
+        //Gizmos.DrawWireSphere(center.transform.position, attackRange);
 
         // Draw a circle to visualize the attack range
         float angleStep = 360f / circleSegments;
@@ -53,7 +53,7 @@ public class EnemyPlayerRange : MonoBehaviour
             Vector3 newPos = center.transform.position + new Vector3(Mathf.Cos(angle) * attackRange, Mathf.Sin(angle) * attackRange, 0f);
             if (i > 0)
             {
-                Gizmos.DrawLine(prevPos, newPos);
+                //Gizmos.DrawLine(prevPos, newPos);
             }
             prevPos = newPos;
         }

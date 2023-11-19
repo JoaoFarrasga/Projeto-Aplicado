@@ -368,8 +368,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDamage: 10
   moveSpeed: 7
-  attackRange: 0
-  attackSpeed: 0
+  attackRange: 0.8
+  attackSpeed: 2
   center: {fileID: 1089752659047737486}
   attackTimeOut: 1
   deathTimeOut: 1
