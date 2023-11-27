@@ -361,7 +361,7 @@ GameObject:
   - component: {fileID: 2405243558640078406}
   m_Layer: 7
   m_Name: Fly
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -447,7 +447,7 @@ MonoBehaviour:
   seePlayer: 0
   circleSegments: 30
   attackColor: {r: 1, g: 0, b: 0, a: 1}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 782045805716830056}
   checkGround: {fileID: 6039700127665328353}
   checkRoof: {fileID: 3580094178815134435}
   checkFront: {fileID: 7982899888744252751}

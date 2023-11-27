@@ -53,9 +53,10 @@ public class GameManager : MonoBehaviour
         }
         for (int i = 0; i < villageRooms.Length; i++)
         {
-            if (villageOutside[i] == SceneManager.GetActiveScene().name)
+            if (villageRooms[i] == SceneManager.GetActiveScene().name)
             {
                 isInSafeZone++;
+                Debug.Log("YOU ARE IN A ROOM");
             }
         }
 
