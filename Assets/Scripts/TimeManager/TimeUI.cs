@@ -9,9 +9,17 @@ public class TimeUI : MonoBehaviour
 
     private void Awake()
     {
-        //timeManager = GetComponent<TimeManager>();
+        timeManager = FindObjectOfType<TimeManager>(); // Find TimeManager in the scene
         text = GetComponent<TMP_Text>();
-        timeManager.OnChange += UpdateInfo;
+
+        if (timeManager != null)
+        {
+            timeManager.OnChange += UpdateInfo;
+        }
+        else
+        {
+            Debug.LogError("TimeManager not found in the scene.");
+        }
 
     }
 

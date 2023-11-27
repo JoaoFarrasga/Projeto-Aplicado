@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7245501781095269886}
   m_Layer: 7
   m_Name: Melee
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   seePlayer: 0
   circleSegments: 30
   attackColor: {r: 1, g: 0, b: 0, a: 1}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 4095283726963311809}
   checkGround: {fileID: 4903613151392779999}
   groundLayer:
     serializedVersion: 2

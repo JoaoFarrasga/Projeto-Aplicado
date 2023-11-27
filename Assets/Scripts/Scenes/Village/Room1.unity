@@ -177,7 +177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3237480633400642901, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.48
+      value: 1.47
       objectReference: {fileID: 0}
     - target: {fileID: 3237480633400642901, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
       propertyPath: m_LocalPosition.y
@@ -412,7 +412,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3237480633400642901, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.18
+      value: 2.92
       objectReference: {fileID: 0}
     - target: {fileID: 3237480633400642901, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
       propertyPath: m_LocalPosition.y
@@ -457,6 +457,111 @@ PrefabInstance:
     - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
       propertyPath: startDialogueLines.Array.data[0]
       value: Press TAB to open your inventory.
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+--- !u!1001 &368349443
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1006804328545563784, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3d6a560a8e50aa84eae9886b7bc7711a, type: 3}
+    - target: {fileID: 1006804328545563784, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1006804328545563784, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1006804328545563784, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1006804328545563784, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007750931816412958, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 2007750931816412958, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.92
+      objectReference: {fileID: 0}
+    - target: {fileID: 2180940371514982966, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: m_Name
+      value: Diary1 (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237480633400642901, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5109
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237480633400642901, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5109
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237480633400642901, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5109
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237480633400642901, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237480633400642901, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237480633400642901, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237480633400642901, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237480633400642901, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237480633400642901, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237480633400642901, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237480633400642901, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237480633400642901, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237480633400642901, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: pressKeyToTalkText
+      value: Press F to read
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: startDialogueLines.Array.data[0]
+      value: Press SPACE to jump and double jump.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -709,7 +814,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3237480633400642901, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.24
+      value: -0.05
       objectReference: {fileID: 0}
     - target: {fileID: 3237480633400642901, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1217,3 +1322,4 @@ SceneRoots:
   - {fileID: 698955530}
   - {fileID: 5179150}
   - {fileID: 265880524}
+  - {fileID: 368349443}

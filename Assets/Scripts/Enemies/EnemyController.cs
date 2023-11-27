@@ -66,7 +66,7 @@ public abstract class EnemyController : MonoBehaviour
     public virtual void Attack()
     {
         StartCoroutine(AttackDelay());
-        StartCoroutine(FlashColor(Color.red, attackSpeed));
+        //StartCoroutine(FlashColor(Color.red, attackSpeed));
     }
 
     private IEnumerator AttackDelay() 
