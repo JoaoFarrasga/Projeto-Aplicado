@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class FireballBoss : MonoBehaviour
 {
-    [SerializeField]
-    private TimeManager timeManager;
+    [SerializeField] private TimeManager timeManager;
+    [SerializeField] private GameObject bossChild;
 
-    private float bossHealth;
-
-    private void Update()
+    private void Awake()
     {
-        timeManager = GetComponent<TimeManager>();
-        
+        gameObject.GetComponent<TimeManager>().OnDeathAction += SpawnLittleBosses;
+    }
+
+    private void SpawnLittleBosses()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            Instantiate(bossChild, transform.position, transform.rotation);
+        }
     }
 }
