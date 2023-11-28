@@ -9,7 +9,7 @@ public class TimeUI : MonoBehaviour
 
     private void Awake()
     {
-        timeManager = FindObjectOfType<TimeManager>(); // Find TimeManager in the scene
+        //timeManager = FindObjectOfType<TimeManager>(); // Find TimeManager in the scene
         text = GetComponent<TMP_Text>();
 
         if (timeManager != null)
