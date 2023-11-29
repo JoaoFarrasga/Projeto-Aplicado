@@ -16,7 +16,7 @@ public class SaveInScene : MonoBehaviour
 
         if (targetObject != null && targetObject != gameObject)
         {
-            Destroy(targetObject); // Removes the GameObject with the specified name
+            Destroy(gameObject); // Removes the GameObject with the specified name
         }
         else if (targetObject == gameObject)
         {
