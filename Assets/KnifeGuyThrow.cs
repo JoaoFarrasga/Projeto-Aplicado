@@ -10,14 +10,27 @@ public class KnifeGuyThrow : MonoBehaviour
     [SerializeField] private float knifeCooldownMax;
     [SerializeField] private float knifeCooldownMin;
     [SerializeField] private float throwForce;
+    [SerializeField] private float knifeLifeSpan;
+    [SerializeField] private GameObject player;
+    private bool knifeDespawn;
 
     private float timer;
     private float knifeCooldown;
+    private Vector2 knifeThrowDirection;
+
+    private void Awake()
+    {
+        if (player == null)
+        {
+            player = GameObject.Find("Player");
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
         knifeCooldown = Random.Range(knifeCooldownMin, knifeCooldownMax);
+        knifeThrowDirection = new Vector2((player.transform.position.x - transform.position.x), 2);
         timer += Time.deltaTime;
         if (timer >= knifeCooldown)
         {
@@ -35,7 +48,15 @@ public class KnifeGuyThrow : MonoBehaviour
         {
             // Apply an upward force to make the knife go up
             Debug.Log("Knife force");
-            knifeRb.AddForce(new Vector2(-1, 1).normalized * throwForce, ForceMode2D.Impulse);
+            knifeRb.AddForce(knifeThrowDirection * throwForce, ForceMode2D.Impulse);
+            float i = 0;
+            StartCoroutine(DestroyKnifeAfterDelay(newObject, knifeLifeSpan));
         }
+    }
+
+    IEnumerator DestroyKnifeAfterDelay(GameObject knifeObject, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(knifeObject);
     }
 }
