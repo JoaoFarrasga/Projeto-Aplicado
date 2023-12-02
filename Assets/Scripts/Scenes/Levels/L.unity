@@ -1285,6 +1285,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 507481930985106909, guid: 0fb68931b8258174ba774d86def42b49, type: 3}
       propertyPath: throwForce
+      value: 0.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 507481930985106909, guid: 0fb68931b8258174ba774d86def42b49, type: 3}
+      propertyPath: knifeLifeSpan
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 507481930985106909, guid: 0fb68931b8258174ba774d86def42b49, type: 3}
@@ -1299,13 +1303,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Knife Guy
       objectReference: {fileID: 0}
+    - target: {fileID: 6765643270044362246, guid: 0fb68931b8258174ba774d86def42b49, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8007665832674831666, guid: 0fb68931b8258174ba774d86def42b49, type: 3}
+      propertyPath: moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 9213811965052888662, guid: 0fb68931b8258174ba774d86def42b49, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.07
+      value: 14.38
       objectReference: {fileID: 0}
     - target: {fileID: 9213811965052888662, guid: 0fb68931b8258174ba774d86def42b49, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.5
+      value: -10.52
       objectReference: {fileID: 0}
     - target: {fileID: 9213811965052888662, guid: 0fb68931b8258174ba774d86def42b49, type: 3}
       propertyPath: m_LocalPosition.z

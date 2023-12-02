@@ -167,6 +167,7 @@ public class CharacterController2D : MonoBehaviour
     public void GrapplePull(Vector2 targetPosition)
     {
         Vector2 direction = (targetPosition - (Vector2)transform.position);
+
         if (Vector2.Distance(transform.position, targetPosition) > grappleDeadzone)
             rigidBody.MovePosition((Vector2)transform.position + (grappleSpeed * Time.deltaTime * direction.normalized));
     }

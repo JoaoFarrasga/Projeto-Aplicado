@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Windows;
+using System;
 using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
@@ -223,10 +224,13 @@ public class GrapplingState : PlayerState
 {
     public GrapplingState(PlayerStateMachine player) : base(player) { }
     float timePassed = 0f;
+    private GameObject grappleLineObject;
+    public Sprite yourGrappleLineSprite;
 
     Vector2 targetPosition;
     public override void OnEnter()
     {
+        /*
         Vector2 direction = new((input.move != Vector2.zero) ? input.move.x : controller.transform.localScale.x, input.move.y);
         targetPosition = Physics2D.Raycast((Vector2)controller.transform.position, direction.normalized, controller.grappleRange, controller.groundLayer).point;
         if (targetPosition == Vector2.zero)
@@ -238,7 +242,38 @@ public class GrapplingState : PlayerState
         timePassed = 0f;
         animator.SetTrigger(ANIM_PARAM_JUMP);
         controller.canGrapple = false;
-    
+        */
+
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
+
+        // Calculate the direction from player to mouse cursor
+        Vector2 direction = (mousePosition - (Vector2)controller.transform.position).normalized;
+
+        // Perform a raycast in the direction of the mouse cursor
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)controller.transform.position, direction, controller.grappleRange, controller.groundLayer);
+
+        if (hit.collider != null)
+        {
+            // If the ray hits something, set the hit point as the target position
+            targetPosition = hit.point;
+            grappleLineObject = new GameObject("GrappleLine");
+            SpriteRenderer grappleLineRenderer = grappleLineObject.AddComponent<SpriteRenderer>();
+            grappleLineRenderer.sprite = yourGrappleLineSprite;
+
+            // Set the initial position of the grapple line
+            grappleLineObject.transform.position = controller.transform.position;
+        }
+        else
+        {
+            // If the ray doesn't hit anything, switch to the idling state
+            playerStateMachine.SwitchState(playerStateMachine.idlingState);
+            return;
+        }
+
+        timePassed = 0f;
+        animator.SetTrigger(ANIM_PARAM_JUMP);
+        controller.canGrapple = false;
+
     }
 
     public override void OnUpdate(){
@@ -257,12 +292,28 @@ public class GrapplingState : PlayerState
             playerStateMachine.SwitchState(playerStateMachine.walkingState);
         else if (Mathf.Abs(input.move.x) <= controller.deadZone && !input.grapple)
             playerStateMachine.SwitchState(playerStateMachine.idlingState);
+
+        // Update the position and length of the grapple line
+        if (!controller.canGrapple)
+        {
+            Vector2 directionToTarget = targetPosition - (Vector2)controller.transform.position;
+            float distanceToTarget = directionToTarget.magnitude;
+
+            // Update the position of the grapple line
+            grappleLineObject.transform.position = controller.transform.position;
+
+            // Update the length of the grapple line based on distance
+            grappleLineObject.transform.localScale = new Vector3(1f, distanceToTarget, 1f);
+        }
     }
 
     public override void OnExit(){
+        MonoBehaviour.Destroy(grappleLineObject);
         controller.rigidBody.velocity = Vector3.zero;
          if (!controller.canGrapple)
             controller.StartGrappleCooldown();
+
+        
     }
 }
 
