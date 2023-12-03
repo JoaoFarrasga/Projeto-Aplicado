@@ -224,26 +224,13 @@ public class GrapplingState : PlayerState
 {
     public GrapplingState(PlayerStateMachine player) : base(player) { }
     float timePassed = 0f;
-    private GameObject grappleLineObject;
-    public Sprite yourGrappleLineSprite;
-
     Vector2 targetPosition;
+
+    // Add a field for the LineRenderer
+    LineRenderer grappleLineRenderer;
+
     public override void OnEnter()
     {
-        /*
-        Vector2 direction = new((input.move != Vector2.zero) ? input.move.x : controller.transform.localScale.x, input.move.y);
-        targetPosition = Physics2D.Raycast((Vector2)controller.transform.position, direction.normalized, controller.grappleRange, controller.groundLayer).point;
-        if (targetPosition == Vector2.zero)
-        {
-            playerStateMachine.SwitchState(playerStateMachine.idlingState);
-            return;
-        }
-
-        timePassed = 0f;
-        animator.SetTrigger(ANIM_PARAM_JUMP);
-        controller.canGrapple = false;
-        */
-
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
 
         // Calculate the direction from player to mouse cursor
@@ -256,12 +243,23 @@ public class GrapplingState : PlayerState
         {
             // If the ray hits something, set the hit point as the target position
             targetPosition = hit.point;
-            grappleLineObject = new GameObject("GrappleLine");
-            SpriteRenderer grappleLineRenderer = grappleLineObject.AddComponent<SpriteRenderer>();
-            grappleLineRenderer.sprite = yourGrappleLineSprite;
 
-            // Set the initial position of the grapple line
-            grappleLineObject.transform.position = controller.transform.position;
+            // Create or enable the LineRenderer
+            if (grappleLineRenderer == null)
+            {
+                grappleLineRenderer = controller.gameObject.AddComponent<LineRenderer>();
+                // Set LineRenderer properties (adjust as needed)
+                grappleLineRenderer.startWidth = 0.1f;
+                grappleLineRenderer.endWidth = 0.1f;
+                //grappleLineRenderer.material = new Material(Shader.Find("Sprites/GrappleLine"));
+                grappleLineRenderer.startColor = Color.white;
+                grappleLineRenderer.endColor = Color.white;
+            }
+
+            // Set the LineRenderer positions
+            grappleLineRenderer.positionCount = 2;
+            grappleLineRenderer.SetPosition(0, controller.transform.position);
+            grappleLineRenderer.SetPosition(1, targetPosition);
         }
         else
         {
@@ -273,15 +271,23 @@ public class GrapplingState : PlayerState
         timePassed = 0f;
         animator.SetTrigger(ANIM_PARAM_JUMP);
         controller.canGrapple = false;
-
     }
 
-    public override void OnUpdate(){
-                timePassed += Time.deltaTime;
+    public override void OnUpdate()
+    {
+        timePassed += Time.deltaTime;
+
         if (!controller.canGrapple)
             controller.GrapplePull(targetPosition);
 
-        if (timePassed < controller.grappleTimeout )
+        // Update the LineRenderer positions
+        if (grappleLineRenderer != null)
+        {
+            grappleLineRenderer.SetPosition(0, controller.transform.position);
+            grappleLineRenderer.SetPosition(1, targetPosition);
+        }
+
+        if (timePassed < controller.grappleTimeout)
             return;
 
         if (input.primaryAttack || input.secondaryAttack)
@@ -292,28 +298,20 @@ public class GrapplingState : PlayerState
             playerStateMachine.SwitchState(playerStateMachine.walkingState);
         else if (Mathf.Abs(input.move.x) <= controller.deadZone && !input.grapple)
             playerStateMachine.SwitchState(playerStateMachine.idlingState);
-
-        // Update the position and length of the grapple line
-        if (!controller.canGrapple)
-        {
-            Vector2 directionToTarget = targetPosition - (Vector2)controller.transform.position;
-            float distanceToTarget = directionToTarget.magnitude;
-
-            // Update the position of the grapple line
-            grappleLineObject.transform.position = controller.transform.position;
-
-            // Update the length of the grapple line based on distance
-            grappleLineObject.transform.localScale = new Vector3(1f, distanceToTarget, 1f);
-        }
     }
 
-    public override void OnExit(){
-        MonoBehaviour.Destroy(grappleLineObject);
-        controller.rigidBody.velocity = Vector3.zero;
-         if (!controller.canGrapple)
-            controller.StartGrappleCooldown();
+    public override void OnExit()
+    {
+        // Remove the LineRenderer component when exiting the grapple state
+        if (grappleLineRenderer != null)
+        {
+            MonoBehaviour.Destroy(grappleLineRenderer);
+            grappleLineRenderer = null;
+        }
 
-        
+        controller.rigidBody.velocity = Vector3.zero;
+        if (!controller.canGrapple)
+            controller.StartGrappleCooldown();
     }
 }
 
