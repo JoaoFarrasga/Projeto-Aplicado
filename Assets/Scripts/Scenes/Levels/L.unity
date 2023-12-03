@@ -551,6 +551,7 @@ GameObject:
   - component: {fileID: 1799643478}
   - component: {fileID: 1799643477}
   - component: {fileID: 1799643476}
+  - component: {fileID: 1799643487}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -957,6 +958,20 @@ MonoBehaviour:
   <MaxValue>k__BackingField: 60
   isTimeCoroutineRunning: 0
   multiplyer: 1
+--- !u!114 &1799643487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799643474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e97e5e6459cb154a92c3ea1eb94ab13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1799643485}
+  sprite: {fileID: 21300000, guid: 3a35e699e5495e444851f493267cdef1, type: 3}
 --- !u!1 &2019373850
 GameObject:
   m_ObjectHideFlags: 0
