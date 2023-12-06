@@ -9,9 +9,11 @@ public class EnemyPlayerRange : MonoBehaviour
 
     public int circleSegments = 30;
     private GameObject enemy;
+    public bool playerIsInRange = false;
 
     private void Update()
     {
+        playerIsInRange = false;
         enemy = gameObject;
         TimeZone();
     }
@@ -35,14 +37,15 @@ public class EnemyPlayerRange : MonoBehaviour
             {
                 timeManager.StartTimeCoroutine();
                 Debug.Log("PLAYER FOUND");
-            }
+                playerIsInRange = true;
+            }           
         }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        //Gizmos.DrawWireSphere(center.transform.position, attackRange);
+        Gizmos.DrawWireSphere(center.transform.position, attackRange);
 
         // Draw a circle to visualize the attack range
         float angleStep = 360f / circleSegments;
@@ -53,7 +56,7 @@ public class EnemyPlayerRange : MonoBehaviour
             Vector3 newPos = center.transform.position + new Vector3(Mathf.Cos(angle) * attackRange, Mathf.Sin(angle) * attackRange, 0f);
             if (i > 0)
             {
-                //Gizmos.DrawLine(prevPos, newPos);
+                Gizmos.DrawLine(prevPos, newPos);
             }
             prevPos = newPos;
         }

@@ -278,6 +278,7 @@ MonoBehaviour:
   center: {fileID: 6016090526960154498}
   attackRange: 10
   circleSegments: 30
+  playerIsInRange: 0
 --- !u!114 &507481930985106909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,8 +293,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knifeOrigin: {fileID: 7725211079857920617}
   knife: {fileID: 3062378093959574314, guid: a0228a7de9f5ddc4b843ec053ad309a1, type: 3}
-  knifeCooldown: 1
-  throwForce: 10
+  knifeCooldownMax: 2
+  knifeCooldownMin: 0.5
+  throwForce: 0.65
+  throwForceUp: 7.17
+  knifeLifeSpan: 5
+  player: {fileID: 0}
 --- !u!1 &6016090526960154498
 GameObject:
   m_ObjectHideFlags: 0

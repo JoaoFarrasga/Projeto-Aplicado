@@ -38,7 +38,9 @@ public class GameManager : MonoBehaviour
             instance = this;
         DontDestroyOnLoad(instance);
         Application.runInBackground = true;
-        CursorToggle(false);
+        //CursorToggle(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
     }
 
@@ -72,7 +74,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("Player is not safe");
             timeManager.StartTimeCoroutine();
         }
-        /*
+        
         if (SceneManager.GetActiveScene().name != "Village1")
         {
             timeManager.StartTimeCoroutine();
@@ -82,7 +84,10 @@ public class GameManager : MonoBehaviour
             timeManager.StopTimeCoroutine();
             timeManager.Value = timeManager.MaxValue;
         }
-        */
+        
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public GameObject Player
@@ -105,7 +110,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    
     public void CursorToggle(bool visible)
     {
         Cursor.visible = visible;
@@ -113,15 +118,16 @@ public class GameManager : MonoBehaviour
 
         if (visible)
         {
-            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 0f;
         }
         else
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 1f;
         }
     }
+    
 
 
     public void PauseMenu()

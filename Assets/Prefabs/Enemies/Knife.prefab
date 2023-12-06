@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8493583522097136644}
   - component: {fileID: 5339321102187204086}
   - component: {fileID: 1918064034261832358}
+  - component: {fileID: 8653428863704314445}
   m_Layer: 0
   m_Name: Knife
   m_TagString: Untagged
@@ -128,7 +129,7 @@ EdgeCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -172,3 +173,16 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &8653428863704314445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3062378093959574314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b0bf9f825789fc45ab99de1beccee00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeSpan: 6

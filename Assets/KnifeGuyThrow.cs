@@ -10,6 +10,7 @@ public class KnifeGuyThrow : MonoBehaviour
     [SerializeField] private float knifeCooldownMax;
     [SerializeField] private float knifeCooldownMin;
     [SerializeField] private float throwForce;
+    [SerializeField] private float throwForceUp;
     [SerializeField] private float knifeLifeSpan;
     [SerializeField] private GameObject player;
     private bool knifeDespawn;
@@ -17,6 +18,7 @@ public class KnifeGuyThrow : MonoBehaviour
     private float timer;
     private float knifeCooldown;
     private Vector2 knifeThrowDirection;
+    private EnemyPlayerRange range;
 
     private void Awake()
     {
@@ -24,18 +26,23 @@ public class KnifeGuyThrow : MonoBehaviour
         {
             player = GameObject.Find("Player");
         }
+        range = GetComponent<EnemyPlayerRange>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        knifeCooldown = Random.Range(knifeCooldownMin, knifeCooldownMax);
-        knifeThrowDirection = new Vector2((player.transform.position.x - transform.position.x), 2);
-        timer += Time.deltaTime;
-        if (timer >= knifeCooldown)
+        Debug.Log(range.playerIsInRange);
+        if (range.playerIsInRange)
         {
-            ThrowKnife();
-            timer = 0;
+            knifeCooldown = Random.Range(knifeCooldownMin, knifeCooldownMax);
+            knifeThrowDirection = new Vector2((player.transform.position.x - transform.position.x), throwForceUp);
+            timer += Time.deltaTime;
+            if (timer >= knifeCooldown)
+            {
+                ThrowKnife();
+                timer = 0;
+            }
         }
     }
 
