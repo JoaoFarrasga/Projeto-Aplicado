@@ -2792,7 +2792,7 @@ MonoBehaviour:
   player: {fileID: 0}
   notAffordable: {fileID: 0}
   notAffordableText: You can't buy this item.
-  delay: 0
+  screenTime: 0
 --- !u!114 &850415767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4728,6 +4728,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: isInteracting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
       propertyPath: pressKeyToTalk
       value: 
       objectReference: {fileID: 0}
@@ -4753,7 +4757,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
       propertyPath: unfrozenDialogue.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
       propertyPath: frozenDialogue.Array.data[0]
@@ -4785,7 +4789,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
       propertyPath: unfrozenDialogue.Array.data[1]
-      value: Oh! Thank you for saving me dude!
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
       propertyPath: startDialogueLines.Array.data[0]
@@ -4794,6 +4798,22 @@ PrefabInstance:
     - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
       propertyPath: startDialogueLines.Array.data[1]
       value: Have you ever killed a monster?
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: afterUnfreezingDialogue.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: afterUnfreezingDialogue.Array.data[0]
+      value: Oh! Thank you for saving me dude!
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: afterUnfreezingDialogue.Array.data[1]
+      value: cool
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: afterUnfreezingDialogue.Array.data[2]
+      value: bye now
       objectReference: {fileID: 0}
     - target: {fileID: 4766504898173516056, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
       propertyPath: canvas

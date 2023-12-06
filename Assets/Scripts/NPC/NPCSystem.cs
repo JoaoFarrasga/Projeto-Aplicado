@@ -38,6 +38,8 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
     private bool afterUnfreezingHasToTalk = false;
     private int afterUnfreezingIndex = 0;
 
+    private bool continueExecution = true;
+
     [HideInInspector] public CharacterController2D player;
 
     //private GameObject buyMenu;
@@ -97,30 +99,36 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
                     if (!playerHasNoShards)
                     {
                         WriteDialogue(unfrozenDialogue, ref unfrozenIndex);
-
-                        Debug.Log("OLA VACA");
-                        Debug.Log("numero de unfrozenindex: " + unfrozenDialogue.Length);
                         sprite.color = Color.white;
-                        isFrozen = false;
                         afterUnfreezingHasToTalk = true;
+                        //continueExecution = false;
+                        isFrozen = false;
 
-                        
                     }
                     else
                     {
                         WriteDialogue(frozenDialogue, ref frozenIndex);
-                        Debug.Log("OLA BOI");
                     }
                 }
-                else if (!isFrozen && afterUnfreezingHasToTalk) 
+                else // NPC is not frozen
                 {
-                    WriteDialogue(afterUnfreezingDialogue, ref afterUnfreezingIndex);
-                    afterUnfreezingHasToTalk = false;
-                } 
-                else if (!isFrozen && !afterUnfreezingHasToTalk)
-                {
-                    NPCActions(startDialogueLines, endDialogueLines);
-                }                
+                    if (afterUnfreezingHasToTalk)
+                    {
+                        WriteDialogue(afterUnfreezingDialogue, ref afterUnfreezingIndex);
+
+                        Debug.Log("after unfreezing: " + afterUnfreezingIndex);
+                        Debug.Log("Lenght: " + afterUnfreezingDialogue.Length);
+                        if (afterUnfreezingIndex == afterUnfreezingDialogue.Length)
+                        {
+                            afterUnfreezingHasToTalk = false;
+                            continueExecution = false;
+                        }
+                    }
+                    else
+                    {
+                        NPCActions(startDialogueLines, endDialogueLines);
+                    }
+                }     
             }
         }
         else if(isNearObject)
@@ -179,9 +187,9 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
         if (index < dialogue.Length)
         {
             dialogueText.text = dialogue[index];
-            Debug.Log(dialogueText.text);
+            //Debug.Log(dialogueText.text);
             index++;
-            Debug.Log(index);
+            //Debug.Log(index);
         }
         else
         {
@@ -195,7 +203,7 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
 
     private void DialogueVariablesReset()
     {
-        Debug.Log("Dialogue variables reset");
+        //Debug.Log("Dialogue variables reset");
         Destroy(textPrefab);
         Destroy(dialoguePrefab);
         if (buyMenu !=null)
