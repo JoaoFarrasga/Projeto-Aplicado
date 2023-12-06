@@ -231,6 +231,8 @@ public class GrapplingState : PlayerState
 
     public override void OnEnter()
     {
+        Debug.Log("Entered grappling state");
+
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
 
         // Calculate the direction from player to mouse cursor
@@ -260,17 +262,21 @@ public class GrapplingState : PlayerState
             grappleLineRenderer.positionCount = 2;
             grappleLineRenderer.SetPosition(0, controller.transform.position);
             grappleLineRenderer.SetPosition(1, targetPosition);
+
+            timePassed = 0f;
+            animator.SetTrigger(ANIM_PARAM_JUMP);
+            controller.canGrapple = false;
         }
         else
         {
             // If the ray doesn't hit anything, switch to the idling state
             playerStateMachine.SwitchState(playerStateMachine.idlingState);
+            Debug.Log("Raycast didn't hit anything.");
+            input.grapple = false;
             return;
         }
 
-        timePassed = 0f;
-        animator.SetTrigger(ANIM_PARAM_JUMP);
-        controller.canGrapple = false;
+        
     }
 
     public override void OnUpdate()
@@ -308,10 +314,13 @@ public class GrapplingState : PlayerState
             MonoBehaviour.Destroy(grappleLineRenderer);
             grappleLineRenderer = null;
         }
-
-        controller.rigidBody.velocity = Vector3.zero;
-        if (!controller.canGrapple)
+        
+        if (!controller.canGrapple) 
+        {
             controller.StartGrappleCooldown();
+            controller.rigidBody.velocity = Vector3.zero;
+        }
+        
     }
 }
 
