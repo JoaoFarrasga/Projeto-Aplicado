@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3062378093959574314
+--- !u!1 &3615834802011279396
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8398019008346049358}
-  - component: {fileID: 8493583522097136644}
-  - component: {fileID: 5339321102187204086}
-  - component: {fileID: 1918064034261832358}
-  - component: {fileID: 8653428863704314445}
+  - component: {fileID: 3621973928970523159}
+  - component: {fileID: 7843946230537389958}
+  - component: {fileID: 882078720381664730}
+  - component: {fileID: -8737467612998110943}
+  - component: {fileID: 7564443269257662140}
   m_Layer: 0
-  m_Name: Knife
+  m_Name: Fireball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8398019008346049358
+--- !u!4 &3621973928970523159
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3062378093959574314}
+  m_GameObject: {fileID: 3615834802011279396}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.6155, y: -13.5045, z: 0}
-  m_LocalScale: {x: 0.08845917, y: 0.08845917, z: 0.08845917}
+  m_LocalPosition: {x: 26.4678, y: -13.5258, z: 0}
+  m_LocalScale: {x: 0.17887276, y: 0.17887276, z: 0.17887276}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8493583522097136644
+--- !u!212 &7843946230537389958
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3062378093959574314}
+  m_GameObject: {fileID: 3615834802011279396}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8cb88801f3b9b20449d6588a107fde40, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c1f38b6a89b5f7c479b64d69f5bb23ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -87,14 +87,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &5339321102187204086
+--- !u!114 &882078720381664730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3615834802011279396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b0bf9f825789fc45ab99de1beccee00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeSpan: 5
+  knifeDamage: 10
+--- !u!50 &-8737467612998110943
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3062378093959574314}
+  m_GameObject: {fileID: 3615834802011279396}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -102,7 +116,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -114,13 +128,13 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!68 &1918064034261832358
-EdgeCollider2D:
+--- !u!58 &7564443269257662140
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3062378093959574314}
+  m_GameObject: {fileID: 3615834802011279396}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -129,7 +143,7 @@ EdgeCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 129
+    m_Bits: 193
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -146,44 +160,6 @@ EdgeCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0
-  m_Points:
-  - {x: -0.763587, y: 3.4237514}
-  - {x: -0.7707566, y: -4.187357}
-  - {x: -0.37747806, y: -4.1869793}
-  - {x: -0.3842377, y: -4.571331}
-  - {x: 0.38572732, y: -4.556227}
-  - {x: 0.38330162, y: -4.177773}
-  - {x: 0.75889933, y: -4.1847477}
-  - {x: 0.75801533, y: -3.4171548}
-  - {x: 0.3815443, y: -3.41999}
-  - {x: 0.38982412, y: -3.0465703}
-  - {x: 0.7578752, y: -3.0433686}
-  - {x: 0.7588239, y: -2.2764542}
-  - {x: 0.3830968, y: -2.279861}
-  - {x: 0.38315073, y: -1.5212698}
-  - {x: 0.76305, y: -1.5236417}
-  - {x: 0.76333034, y: -1.1449822}
-  - {x: 1.1399199, y: -1.141845}
-  - {x: 1.1433052, y: 2.2839546}
-  - {x: 0.0009442568, y: 3.4220464}
-  - {x: -0.7604306, y: 3.4237192}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
---- !u!114 &8653428863704314445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3062378093959574314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b0bf9f825789fc45ab99de1beccee00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifeSpan: 6
-  knifeDamage: 0
+  m_Offset: {x: 0, y: -0.17726168}
+  serializedVersion: 2
+  m_Radius: 1.6395593

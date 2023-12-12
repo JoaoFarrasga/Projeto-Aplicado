@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-        _player = GameObject.Find("Player");
+        _player = GameObject.FindGameObjectWithTag("Player");
 
         //villageOutside = new string[villageOutside.Length];
         //villageRooms = new string[villageRooms.Length];

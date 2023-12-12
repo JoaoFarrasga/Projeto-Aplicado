@@ -25,7 +25,38 @@ Transform:
   m_GameObject: {fileID: 73145261872276333}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.28, y: -1.45, z: 0}
+  m_LocalPosition: {x: -1.46, y: -1.79, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9213811965052888662}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &421584935611349929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5185898867467835644}
+  m_Layer: 7
+  m_Name: WallCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5185898867467835644
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421584935611349929}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.88, y: -0.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42,7 +73,6 @@ GameObject:
   - component: {fileID: 9213811965052888662}
   - component: {fileID: 3524169437656780700}
   - component: {fileID: 921779514270403660}
-  - component: {fileID: 8007665832674831666}
   - component: {fileID: 2774654210336163453}
   - component: {fileID: 6765643270044362246}
   - component: {fileID: 7368066210852749685}
@@ -63,12 +93,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4042989994453781810}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 12.297, y: -15.315, z: 0.12439172}
   m_LocalScale: {x: 0.3158, y: 0.3158, z: 0.3158}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3944331256755724910}
+  - {fileID: 5185898867467835644}
   - {fileID: 6879304073140247880}
   - {fileID: 4476375063695056174}
   - {fileID: 7725211079857920617}
@@ -87,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _value: 25
-  <MaxValue>k__BackingField: 5
+  <MaxValue>k__BackingField: 25
   isTimeCoroutineRunning: 0
   multiplyer: 1
 --- !u!114 &921779514270403660
@@ -103,42 +134,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
-  attackRange: 0
+  deathTest: {fileID: 8300000, guid: 7ba3946667ff2104bbc159acb4b90673, type: 3}
   currentStateName: 
   hasPatrol: 1
   hasChase: 0
---- !u!114 &8007665832674831666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4042989994453781810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2694266e76d5444a843540e18bccbf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyDamage: 10
-  moveSpeed: 3
-  attackRange: 1
-  attackSpeed: 2
-  center: {fileID: 6016090526960154498}
-  attackTimeOut: 0
-  deathTimeOut: 0
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  viewRange: 0
-  _isHeavy: 0
-  seePlayer: 0
-  circleSegments: 30
-  attackColor: {r: 1, g: 0, b: 0, a: 1}
-  spriteRenderer: {fileID: 7368066210852749685}
-  checkGround: {fileID: 73145261872276333}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!50 &2774654210336163453
 Rigidbody2D:
   serializedVersion: 4
@@ -181,7 +180,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -270,13 +269,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4042989994453781810}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d97866fd3ae99464490de1ca5d47a299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   center: {fileID: 6016090526960154498}
-  attackRange: 10
+  attackRange: 9.16
   circleSegments: 30
   playerIsInRange: 0
 --- !u!114 &507481930985106909
@@ -291,6 +290,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acdb4c127206fcf4bb12b1dc1b57fe22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyDamage: 0
+  moveSpeed: 1
+  attackRange: 0.7
+  attackSpeed: 2
+  center: {fileID: 6016090526960154498}
+  attackTimeOut: 0
+  deathTimeOut: 0
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  viewRange: 10
+  _isHeavy: 0
+  seePlayer: 0
+  circleSegments: 30
+  attackColor: {r: 1, g: 0, b: 0, a: 1}
+  spriteRenderer: {fileID: 7368066210852749685}
   knifeOrigin: {fileID: 7725211079857920617}
   knife: {fileID: 3062378093959574314, guid: a0228a7de9f5ddc4b843ec053ad309a1, type: 3}
   knifeCooldownMax: 2
@@ -299,6 +314,16 @@ MonoBehaviour:
   throwForceUp: 7.17
   knifeLifeSpan: 5
   player: {fileID: 0}
+  knifeThrowSound: {fileID: 8300000, guid: 6117ec0a2b42e504db390c180cfe7657, type: 3}
+  checkGround: {fileID: 73145261872276333}
+  checkWall: {fileID: 421584935611349929}
+  checkEnemy: {fileID: 421584935611349929}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &6016090526960154498
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,8 +391,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.0026, y: 0.0026}
+  m_SizeDelta: {x: 2.6156, y: 2.6156}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &8020787465418773668
 Canvas:
@@ -498,8 +523,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0.039, y: -0.0195}
+  m_SizeDelta: {x: 2.4349, y: 2.3162}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6374650205269277492
 CanvasRenderer:
@@ -569,8 +594,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.35
-  m_fontSizeBase: 0.35
+  m_fontSize: 1.49
+  m_fontSizeBase: 1.49
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

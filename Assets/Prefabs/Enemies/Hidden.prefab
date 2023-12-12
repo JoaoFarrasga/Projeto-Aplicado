@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1764097156252558918
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2673814506891158585}
+  m_Layer: 0
+  m_Name: WallCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2673814506891158585
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764097156252558918}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.85, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4070549432262942209}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2817828887606802197
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,12 +125,13 @@ Transform:
   m_GameObject: {fileID: 5924357541327549422}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15, y: 0, z: 0}
-  m_LocalScale: {x: 0.7815, y: 0.7815, z: 0.7815}
+  m_LocalPosition: {x: 14.8775, y: 0.1481, z: 0}
+  m_LocalScale: {x: 0.6772479, y: 0.6772479, z: 0.6772479}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 624159626970557707}
   - {fileID: 1729652076462714600}
+  - {fileID: 2673814506891158585}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4086153336039082356
@@ -255,9 +287,14 @@ MonoBehaviour:
   attackColor: {r: 1, g: 0, b: 0, a: 1}
   spriteRenderer: {fileID: 4086153336039082356}
   checkGround: {fileID: 2899239478522951726}
+  checkWall: {fileID: 1764097156252558918}
+  checkEnemy: {fileID: 1764097156252558918}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &6094127539848616329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,3 +343,4 @@ MonoBehaviour:
   center: {fileID: 2817828887606802197}
   attackRange: 10
   circleSegments: 30
+  playerIsInRange: 0

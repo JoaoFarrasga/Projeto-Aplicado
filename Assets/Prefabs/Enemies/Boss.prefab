@@ -117,7 +117,7 @@ MonoBehaviour:
   checkBack: {fileID: 8715338609475591762}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 576
+    m_Bits: 64
   moveDirection: {x: 0, y: 0}
 --- !u!50 &5525667800223342506
 Rigidbody2D:
@@ -213,7 +213,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1664
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -273,6 +273,7 @@ MonoBehaviour:
   center: {fileID: 6981726966359332442}
   attackRange: 10
   circleSegments: 30
+  playerIsInRange: 0
 --- !u!1 &67925642905522793
 GameObject:
   m_ObjectHideFlags: 0
