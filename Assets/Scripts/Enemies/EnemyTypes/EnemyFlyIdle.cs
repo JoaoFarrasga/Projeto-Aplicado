@@ -4,12 +4,15 @@ using System.Collections;
 public class EnemyFlyIdle : EnemyController
 {
     [SerializeField] private AudioClip flyingAudio;
+    [SerializeField] private float timeToFreeze;
     [SerializeField] private float freezeTime;
 
     //Player
     private Transform _playerTransform;
     private float timer = 0;
+    private float timer2 = 0;
     private float currentMoveSpeed;
+    private int currentEnemyDamage;
     private SpriteRenderer sprite;
 
     public void Start()
@@ -17,12 +20,13 @@ public class EnemyFlyIdle : EnemyController
         sprite = GetComponent<SpriteRenderer>();
         _playerTransform = GameManager.instance._player.transform;
         currentMoveSpeed = moveSpeed;
+        currentEnemyDamage = enemyDamage;
     }
 
     //If the Enemey sees the Player it starts chasing him
     public override void Chase()
     {
-        if (timer < freezeTime) 
+        if (timer < timeToFreeze) 
         {
             if (flyingAudio != null)
             {
@@ -31,21 +35,26 @@ public class EnemyFlyIdle : EnemyController
             Vector3 playerDirection = _playerTransform.position - transform.position;
             playerDirection.Normalize();
             transform.Translate(playerDirection * moveSpeed * Time.deltaTime);
-            timer++;
+            timer += Time.deltaTime;
+            
         }
         else
         {
-            sprite.color = Color.blue;
-            moveSpeed = 0;
-            StartCoroutine(UnfreezeFly(4));
+            if (timer2 < freezeTime)
+            {
+                sprite.color = Color.blue;
+                moveSpeed = 0;
+                enemyDamage = 0;
+                timer2 += Time.deltaTime;
+            }
+            else
+            {
+                timer = 0;
+                timer2 = 0;
+                moveSpeed = currentMoveSpeed;
+                enemyDamage = currentEnemyDamage;
+                sprite.color = Color.white;
+            }
         }
-    }
-
-    IEnumerator UnfreezeFly(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        sprite.color = Color.white;
-        moveSpeed = 0;
-        timer = 0;
     }
 }
