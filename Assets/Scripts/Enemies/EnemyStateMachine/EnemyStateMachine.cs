@@ -11,7 +11,7 @@ public class EnemyStateMachine : MonoBehaviour
     public AttackState attackState;
     public EnemyDeathState deathState;
 
-    public float attackRange;
+    public AudioClip deathTest;
 
     public string currentStateName;
 
@@ -50,5 +50,6 @@ public class EnemyStateMachine : MonoBehaviour
     public void OnDeathSwitchCase()
     {
         SwitchState(deathState);
+        AudioSource.PlayClipAtPoint(deathTest, transform.position);
     }
 }

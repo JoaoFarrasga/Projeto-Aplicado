@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class CameraFollow : MonoBehaviour
 {
+	public Camera mainCamera;
+	public float cameraSize;
+
 	public float FollowSpeed = 2f;
 	public Transform Target;
 
@@ -43,6 +46,7 @@ public class CameraFollow : MonoBehaviour
 		if (SceneManager.GetActiveScene().name == firstSceneName)
 		{
 			shouldFollow = true;
+			mainCamera.orthographicSize = cameraSize;
 		}
 
         if (Target == null)

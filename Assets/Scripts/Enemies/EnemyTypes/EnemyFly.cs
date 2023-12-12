@@ -12,6 +12,7 @@ public class EnemyFly : EnemyController
     
 
     private Rigidbody2D enemyRB;
+    private Vector2[] startingPositions;
 
     //Move Direction
     [SerializeField] private Vector2 moveDirection = new Vector2(0f, 0f);
@@ -29,18 +30,27 @@ public class EnemyFly : EnemyController
 
     public void Start()
     {
+        startingPositions = new Vector2[4];
+
+        startingPositions[0] = new Vector2(1, 1);
+        startingPositions[1] = new Vector2(1, -1);
+        startingPositions[2] = new Vector2(-1, 1);
+        startingPositions[3] = new Vector2(-1, -1);
         enemyRB = GetComponent<Rigidbody2D>();
         if (moveDirection != Vector2.zero)
             return;
 
         do
         {
-            moveDirection = new Vector2(Random.Range(-1, 2), Random.Range(-1, 2));
+            Debug.Log("random range accessed");
+            moveDirection = startingPositions[Random.Range(0, startingPositions.Length)];
         } while (moveDirection.x == 0 && moveDirection.y == 0);
+        
     }
 
     private void FixedUpdate()
     {
+        Debug.Log("move direction: " + moveDirection);
         enemyRB.velocity = moveDirection * moveSpeed;
     }
 

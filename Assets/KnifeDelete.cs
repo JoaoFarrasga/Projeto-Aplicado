@@ -22,8 +22,10 @@ public class KnifeDelete : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            Debug.Log("Knife touch player");
             IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
             damageable?.Damage(knifeDamage);
+            Destroy(gameObject);
         }
     }
 }
