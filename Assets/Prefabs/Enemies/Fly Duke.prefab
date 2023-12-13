@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7905246737927432467}
   - component: {fileID: 4541930781355586572}
   m_Layer: 10
-  m_Name: Boss
+  m_Name: Fly Duke
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

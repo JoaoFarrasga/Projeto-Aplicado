@@ -186,4 +186,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeSpan: 6
-  knifeDamage: 0
+  knifeDamage: 5
