@@ -5,12 +5,12 @@ public class Menu : MonoBehaviour
 {
     private void OnEnable()
     {
-        GameManager.instance.CursorToggle(true);
+        //GameManager.instance.CursorToggle(true);
     }
 
     public void ResumeGame()
     {
-        GameManager.instance.CursorToggle(false);
+        //GameManager.instance.CursorToggle(false);
         gameObject.SetActive(false);
     }
 

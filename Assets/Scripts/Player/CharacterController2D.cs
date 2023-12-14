@@ -154,12 +154,20 @@ public class CharacterController2D : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapCircleAll(attackCheck.position, attackRadius);
         for (int i = 0; i < colliders.Length; i++)
             if (colliders[i].gameObject != gameObject)
+            {
+                if (colliders[i].gameObject.tag == "Enemy")
+                {
+                    StartCoroutine(FlashEffect(colliders[i].gameObject));
+                }
+                //StartCoroutine(FlashEffect(colliders[i].gameObject));
                 colliders[i].GetComponent<IDamageable>()?.Damage(damageAmount);
+            }                
     }
 
     public void GrapplePull(Vector2 targetPosition)
     {
         Vector2 direction = (targetPosition - (Vector2)transform.position);
+
         if (Vector2.Distance(transform.position, targetPosition) > grappleDeadzone)
             rigidBody.MovePosition((Vector2)transform.position + (grappleSpeed * Time.deltaTime * direction.normalized));
     }
@@ -189,5 +197,23 @@ public class CharacterController2D : MonoBehaviour
                 return;
             }
         }
+    }
+
+    private IEnumerator FlashEffect(GameObject enemy)
+    {
+        // Assuming your enemy has a SpriteRenderer component
+        SpriteRenderer enemyRenderer = enemy.GetComponent<SpriteRenderer>();
+
+        // Store the original color of the enemy
+        Color originalColor = enemyRenderer.color;
+
+        // Set the enemy's color to red for a brief period
+        enemyRenderer.color = Color.red;
+
+        // Wait for a short duration
+        yield return new WaitForSeconds(0.1f); // Adjust the duration as needed
+
+        // Restore the original color of the enemy
+        enemyRenderer.color = originalColor;
     }
 }

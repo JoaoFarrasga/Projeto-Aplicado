@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 4541930781355586572}
   m_Layer: 10
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,7 +109,7 @@ MonoBehaviour:
   _isHeavy: 0
   seePlayer: 0
   circleSegments: 30
-  attackColor: {r: 1, g: 0, b: 0, a: 1}
+  attackColor: {r: 1, g: 0.5273675, b: 0, a: 1}
   spriteRenderer: {fileID: 4333851824488692042}
   checkGround: {fileID: 7801273343143247150}
   checkRoof: {fileID: 1010017658680646960}
@@ -117,7 +117,7 @@ MonoBehaviour:
   checkBack: {fileID: 8715338609475591762}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 576
+    m_Bits: 64
   moveDirection: {x: 0, y: 0}
 --- !u!50 &5525667800223342506
 Rigidbody2D:
@@ -273,6 +273,7 @@ MonoBehaviour:
   center: {fileID: 6981726966359332442}
   attackRange: 10
   circleSegments: 30
+  playerIsInRange: 0
 --- !u!1 &67925642905522793
 GameObject:
   m_ObjectHideFlags: 0

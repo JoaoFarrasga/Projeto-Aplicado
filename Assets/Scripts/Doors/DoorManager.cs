@@ -161,9 +161,13 @@ public class DoorManager : MonoBehaviour, InteractableInterface
         {
             if (slot.name == "Door Key")
             {
-                player.inventory.RemoveItem(slot.name, 1);
-                lockedState = false;
-                return false;
+                if (slot.quantity > 0)
+                {
+                    Debug.Log("The player has a time shard.");
+                    player.inventory.RemoveItem(slot.name, 1);
+                    lockedState = false;
+                    return false;
+                }
             }
         }
         return true;

@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 275980027326612886}
   m_Layer: 7
   m_Name: Fly Idle
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -312,7 +312,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8180101717211730988}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.7310452, y: -4.609553, z: 0.12439172}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
-  attackRange: 0
+  deathTest: {fileID: 8300000, guid: d8dc5ae3b6f71594bb1be10f2fc2867e, type: 3}
   currentStateName: 
   hasPatrol: 0
   hasChase: 1
@@ -376,12 +376,13 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
-  viewRange: 5
+  viewRange: 10
   _isHeavy: 0
   seePlayer: 0
   circleSegments: 30
   attackColor: {r: 1, g: 0, b: 0, a: 1}
   spriteRenderer: {fileID: 5545833759494704788}
+  flyingAudio: {fileID: 8300000, guid: af514ba33f8f78a42a248b93a4c899a9, type: 3}
 --- !u!212 &5545833759494704788
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -521,3 +522,4 @@ MonoBehaviour:
   center: {fileID: 1089752659047737486}
   attackRange: 10
   circleSegments: 30
+  playerIsInRange: 0

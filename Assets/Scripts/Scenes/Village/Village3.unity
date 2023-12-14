@@ -677,6 +677,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0c841ed9ff9d3a74cae84ec7faeb45ce, type: 2}
   - {fileID: 11400000, guid: f83a37af858260e4486aa4c7c64721ee, type: 2}
   player: {fileID: 0}
+  notAffordable: {fileID: 1350024999209430084, guid: 4cf458b50fa394c4c9628436d6c51cfa, type: 3}
+  notAffordableText: You can't buy this item.
+  screenTime: 3
 --- !u!114 &871577934
 MonoBehaviour:
   m_ObjectHideFlags: 0

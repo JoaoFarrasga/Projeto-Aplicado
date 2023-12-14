@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.Windows;
+using System;
 using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 
@@ -223,30 +224,76 @@ public class GrapplingState : PlayerState
 {
     public GrapplingState(PlayerStateMachine player) : base(player) { }
     float timePassed = 0f;
-
     Vector2 targetPosition;
+
+    // Add a field for the LineRenderer
+    LineRenderer grappleLineRenderer;
+
     public override void OnEnter()
     {
-        Vector2 direction = new((input.move != Vector2.zero) ? input.move.x : controller.transform.localScale.x, input.move.y);
-        targetPosition = Physics2D.Raycast((Vector2)controller.transform.position, direction.normalized, controller.grappleRange, controller.groundLayer).point;
-        if (targetPosition == Vector2.zero)
+        Debug.Log("Entered grappling state");
+
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(UnityEngine.Input.mousePosition);
+
+        // Calculate the direction from player to mouse cursor
+        Vector2 direction = (mousePosition - (Vector2)controller.transform.position).normalized;
+
+        // Perform a raycast in the direction of the mouse cursor
+        RaycastHit2D hit = Physics2D.Raycast((Vector2)controller.transform.position, direction, controller.grappleRange, controller.groundLayer);
+
+        if (hit.collider != null)
         {
+            // If the ray hits something, set the hit point as the target position
+            targetPosition = hit.point;
+
+            // Create or enable the LineRenderer
+            if (grappleLineRenderer == null)
+            {
+                grappleLineRenderer = controller.gameObject.AddComponent<LineRenderer>();
+                // Set LineRenderer properties (adjust as needed)
+                grappleLineRenderer.startWidth = 0.1f;
+                grappleLineRenderer.endWidth = 0.1f;
+                //grappleLineRenderer.material = new Material(Shader.Find("Sprites/GrappleLine"));
+                grappleLineRenderer.startColor = Color.white;
+                grappleLineRenderer.endColor = Color.white;
+            }
+
+            // Set the LineRenderer positions
+            grappleLineRenderer.positionCount = 2;
+            grappleLineRenderer.SetPosition(0, controller.transform.position);
+            grappleLineRenderer.SetPosition(1, targetPosition);
+
+            timePassed = 0f;
+            animator.SetTrigger(ANIM_PARAM_JUMP);
+            controller.canGrapple = false;
+        }
+        else
+        {
+            // If the ray doesn't hit anything, switch to the idling state
             playerStateMachine.SwitchState(playerStateMachine.idlingState);
+            Debug.Log("Raycast didn't hit anything.");
+            input.grapple = false;
             return;
         }
 
-        timePassed = 0f;
-        animator.SetTrigger(ANIM_PARAM_JUMP);
-        controller.canGrapple = false;
-    
+        
     }
 
-    public override void OnUpdate(){
-                timePassed += Time.deltaTime;
+    public override void OnUpdate()
+    {
+        timePassed += Time.deltaTime;
+
         if (!controller.canGrapple)
             controller.GrapplePull(targetPosition);
 
-        if (timePassed < controller.grappleTimeout )
+        // Update the LineRenderer positions
+        if (grappleLineRenderer != null)
+        {
+            grappleLineRenderer.SetPosition(0, controller.transform.position);
+            grappleLineRenderer.SetPosition(1, targetPosition);
+        }
+
+        if (timePassed < controller.grappleTimeout)
             return;
 
         if (input.primaryAttack || input.secondaryAttack)
@@ -259,10 +306,21 @@ public class GrapplingState : PlayerState
             playerStateMachine.SwitchState(playerStateMachine.idlingState);
     }
 
-    public override void OnExit(){
-        controller.rigidBody.velocity = Vector3.zero;
-         if (!controller.canGrapple)
+    public override void OnExit()
+    {
+        // Remove the LineRenderer component when exiting the grapple state
+        if (grappleLineRenderer != null)
+        {
+            MonoBehaviour.Destroy(grappleLineRenderer);
+            grappleLineRenderer = null;
+        }
+        
+        if (!controller.canGrapple) 
+        {
             controller.StartGrappleCooldown();
+            controller.rigidBody.velocity = Vector3.zero;
+        }
+        
     }
 }
 

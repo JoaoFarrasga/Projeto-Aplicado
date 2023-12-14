@@ -365,7 +365,7 @@ GameObject:
   - component: {fileID: 4474411578532674220}
   m_Layer: 9
   m_Name: ChildFly
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -463,7 +463,7 @@ MonoBehaviour:
   checkBack: {fileID: 8903274528196290441}
   groundLayer:
     serializedVersion: 2
-    m_Bits: 1088
+    m_Bits: 64
   moveDirection: {x: 0, y: 0}
 --- !u!50 &6702270707939341311
 Rigidbody2D:
@@ -559,7 +559,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1664
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -604,6 +604,7 @@ MonoBehaviour:
   center: {fileID: 945411093259359769}
   attackRange: 10
   circleSegments: 30
+  playerIsInRange: 0
 --- !u!1 &4969123916391206091
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,6 +25,8 @@ public class TimeManager : Progressive, IDamageable, IHealable, ITimeable
     public Action OnHitAction;
     public Action OnDeathAction;
 
+    private bool isDead = false;
+
 
     [HideInInspector]
     public int multiplyer = 1;
@@ -35,7 +37,7 @@ public class TimeManager : Progressive, IDamageable, IHealable, ITimeable
         return false;
     }
 
-    private bool CheckMinValue()
+    public bool CheckMinValue()
     {
         if (Value <= 0) return true;
         return false;
@@ -88,9 +90,13 @@ public class TimeManager : Progressive, IDamageable, IHealable, ITimeable
 
     private void OnDeath()
     {
-        StopAllCoroutines();
-        isTimeCoroutineRunning = false;
-        Value = 0f;
-        OnDeathAction?.Invoke();
+        if (!isDead)
+        {
+            StopAllCoroutines();
+            isTimeCoroutineRunning = false;
+            Value = 0f;
+            OnDeathAction?.Invoke();
+            isDead = true;
+        }
     }
 }

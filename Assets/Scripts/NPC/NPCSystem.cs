@@ -14,6 +14,11 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
     [SerializeField] private GameObject buyMenu;
     [SerializeField] private string pressKeyToTalkText = "Press F to talk";
     [SerializeField] private GameObject pressKeyToTalkPrefab;
+    [SerializeField] private bool isFrozen;
+    [SerializeField] public string[] frozenDialogue;
+    [SerializeField] public string[] unfrozenDialogue;
+    [SerializeField] public string[] afterUnfreezingDialogue;
+    
 
     private bool hasBarted = false;
     //private string dialogueText;
@@ -26,16 +31,34 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
     private GameObject dialoguePrefab;
     private TMP_Text dialogueText;
     private Canvas canvas;
+    private SpriteRenderer sprite;
+    private bool playerHasNoShards = true;
+    private int unfrozenIndex = 0;
+    private int frozenIndex = 0;
+    private bool afterUnfreezingHasToTalk = false;
+    private int afterUnfreezingIndex = 0;
+
+    private bool continueExecution = true;
+
+    [HideInInspector] public CharacterController2D player;
+
     //private GameObject buyMenu;
     [SerializeField] private bool isInteracting = false;
 
     private void Awake()
     {
-
+        sprite = GetComponent<SpriteRenderer>();
     }
     // Update is called once per frame
     void Update()
     {
+        player = FindObjectOfType<CharacterController2D>();
+
+        if (player == null)
+        {
+            Debug.LogError("CharacterController2D object not found in the scene.");
+        }
+
         // Find the CanvasPlayer GameObject by name and assign its Canvas component to the canvas variable
         GameObject canvasPlayer = GameObject.Find("CanvasPlayer");
         if (canvasPlayer != null)
@@ -51,7 +74,10 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
         //buyMenu = GameObject.Find("YourBuyMenuObjectName");
 
 
-
+        if (isFrozen)
+        {
+            sprite.color = Color.blue;
+        }
 
 
         if (playerDetection)
@@ -65,8 +91,44 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
             }
             
             if (isInteracting)
-            {    
-                NPCActions(startDialogueLines, endDialogueLines);               
+            {
+                if (isFrozen)
+                {
+                    Debug.Log("This NPC is frozen in time.");
+                    playerHasNoShards = SearchPlayerShard(playerHasNoShards);
+                    if (!playerHasNoShards)
+                    {
+                        WriteDialogue(unfrozenDialogue, ref unfrozenIndex);
+                        sprite.color = Color.white;
+                        afterUnfreezingHasToTalk = true;
+                        //continueExecution = false;
+                        isFrozen = false;
+
+                    }
+                    else
+                    {
+                        WriteDialogue(frozenDialogue, ref frozenIndex);
+                    }
+                }
+                else // NPC is not frozen
+                {
+                    if (afterUnfreezingHasToTalk)
+                    {
+                        WriteDialogue(afterUnfreezingDialogue, ref afterUnfreezingIndex);
+
+                        Debug.Log("after unfreezing: " + afterUnfreezingIndex);
+                        Debug.Log("Lenght: " + afterUnfreezingDialogue.Length);
+                        if (afterUnfreezingIndex == afterUnfreezingDialogue.Length)
+                        {
+                            afterUnfreezingHasToTalk = false;
+                            continueExecution = false;
+                        }
+                    }
+                    else
+                    {
+                        NPCActions(startDialogueLines, endDialogueLines);
+                    }
+                }     
             }
         }
         else if(isNearObject)
@@ -125,9 +187,9 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
         if (index < dialogue.Length)
         {
             dialogueText.text = dialogue[index];
-            Debug.Log(dialogueText.text);
+            //Debug.Log(dialogueText.text);
             index++;
-            Debug.Log(index);
+            //Debug.Log(index);
         }
         else
         {
@@ -141,7 +203,7 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
 
     private void DialogueVariablesReset()
     {
-        Debug.Log("Dialogue variables reset");
+        //Debug.Log("Dialogue variables reset");
         Destroy(textPrefab);
         Destroy(dialoguePrefab);
         if (buyMenu !=null)
@@ -152,6 +214,9 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
         endIndex = 0;
         hasBarted = false;
         isNearObject = false;
+        unfrozenIndex = 0;
+        frozenIndex = 0;
+        afterUnfreezingIndex = 0;
     }
 
     private void BuyMenuActions()
@@ -165,6 +230,24 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
         buyMenu.SetActive(true);
 
         hasBarted = true;
+    }
+
+    private bool SearchPlayerShard(bool lockedState)
+    {
+        foreach (Inventory.Slot slot in player.inventory.slots)
+        {
+            if (slot.name == "Time Shard")
+            {
+                if (slot.quantity > 0)
+                {
+                    Debug.Log("The player has a time shard.");
+                    player.inventory.RemoveItem(slot.name, 1);
+                    lockedState = false;
+                    return false;
+                }        
+            }
+        }
+        return true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

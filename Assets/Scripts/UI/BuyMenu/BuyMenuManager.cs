@@ -10,10 +10,18 @@ public class BuyMenuManager : MonoBehaviour
     public GameObject materialPrefab;
     public CellVariation[] cells;
     public CharacterController2D player;
+    public GameObject notAffordable;
+    public string notAffordableText = "You can't buy this item.";
+    public float screenTime;
 
-
+    private Canvas canvas;
+    private GameObject notAffordablePrefab;
+    private int counter = 0;
+    //private GameObject[] cellStore;
+    private List<GameObject> cellStore = new List<GameObject>();
+    private int affordableChecker = 0;
     
-    private void Start()
+    private void OnEnable()
     {
         GameObject findPlayer = GameObject.Find("Player");
         if (findPlayer != null)
@@ -33,14 +41,16 @@ public class BuyMenuManager : MonoBehaviour
         {
             //Debug.LogError("Player not found in the scene.");
         }
-    }
-    
-    //private GameObject[] cellStore;
-    private List<GameObject> cellStore = new List<GameObject>();
-    private int affordableChecker = 0;
-    private void OnEnable()
-    {
-        InitializeShop();
+
+        GameObject canvasPlayer = GameObject.Find("CanvasPlayer");
+        if (canvasPlayer != null)
+        {
+            canvas = canvasPlayer.GetComponent<Canvas>();
+        }
+        else
+        {
+            Debug.LogError("CanvasPlayer not found in the scene.");
+        }
     }
 
     
@@ -60,6 +70,8 @@ public class BuyMenuManager : MonoBehaviour
     {
         foreach (CellVariation cellVariation in cells)
         {
+            counter++;
+            Debug.Log("counter: " + counter + cellVariation.name);
             GameObject cell = Instantiate(cellPrefab, transform);
             
             CellItem cellItem = cell.GetComponent<CellItem>();
@@ -140,8 +152,17 @@ public class BuyMenuManager : MonoBehaviour
             else
             {
                 Debug.Log("Item not affordable");
+                notAffordablePrefab = Instantiate(notAffordable, canvas.transform);
+                notAffordablePrefab.GetComponent<TMP_Text>().text = notAffordableText;
+                StartCoroutine(DeleteNAText(notAffordablePrefab, screenTime));
             }
 
         }
+    }
+
+    IEnumerator DeleteNAText(GameObject notAffordable, float delay) 
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(notAffordable);
     }
 }
