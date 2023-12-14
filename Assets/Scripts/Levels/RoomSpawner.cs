@@ -39,17 +39,6 @@ public class RoomSpawner : MonoBehaviour
             }
             else if (OpeningDirection == 3)
             {
-                /* if (firstTime == true)
-                 {
-                     // On the first run exclude index 1
-                     rand = Random.Range(0, 1);
-                     firstTime = false; // Set firstTime to false after the first run
-                 }
-                 else
-                 {
-                     // On the rest of the runs include the full range
-                     rand = Random.Range(0, templates.leftRooms.Length);
-                 }*/
                 rand = Random.Range(0, templates.leftRooms.Length);
                 Instantiate(templates.leftRooms[rand], transform.position, templates.leftRooms[rand].transform.rotation);
             }
@@ -58,6 +47,12 @@ public class RoomSpawner : MonoBehaviour
                 //need to spawn room with right door
                 rand = Random.Range(0, templates.rightRooms.Length);
                 Instantiate(templates.rightRooms[rand], transform.position, templates.rightRooms[rand].transform.rotation);
+            }
+            else if (OpeningDirection == 5)
+            {
+                //need to spawn room with just for spawn
+                rand = Random.Range(0, templates.spawnRooms.Length);
+                Instantiate(templates.spawnRooms[rand], transform.position, templates.spawnRooms[rand].transform.rotation);
             }
             spawned = true;
         }

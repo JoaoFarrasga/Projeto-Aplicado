@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Damager : MonoBehaviour
 {
-    [SerializeField] private float _damageAmountePerSecond = 10f;
+    [SerializeField] private float _damageAmountePerSecond = 50f;
     private bool isDamaging;
 
     private void OnTriggerEnter2D(Collider2D other)
