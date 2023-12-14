@@ -94,8 +94,8 @@ Transform:
   m_GameObject: {fileID: 5924357541327549422}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15, y: 0, z: 0}
-  m_LocalScale: {x: 0.7815, y: 0.7815, z: 0.7815}
+  m_LocalPosition: {x: 14.8935, y: -0.0994, z: 0}
+  m_LocalScale: {x: 0.69084597, y: 0.7114776, z: 0.7815}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 624159626970557707}
@@ -253,7 +253,7 @@ MonoBehaviour:
   seePlayer: 0
   circleSegments: 30
   attackColor: {r: 1, g: 0, b: 0, a: 1}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 4086153336039082356}
   checkGround: {fileID: 2899239478522951726}
   groundLayer:
     serializedVersion: 2

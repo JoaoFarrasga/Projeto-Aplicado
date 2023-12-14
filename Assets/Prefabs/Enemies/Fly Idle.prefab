@@ -381,7 +381,7 @@ MonoBehaviour:
   seePlayer: 0
   circleSegments: 30
   attackColor: {r: 1, g: 0, b: 0, a: 1}
-  spriteRenderer: {fileID: 0}
+  spriteRenderer: {fileID: 5545833759494704788}
 --- !u!212 &5545833759494704788
 SpriteRenderer:
   m_ObjectHideFlags: 0
