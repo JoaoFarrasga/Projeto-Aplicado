@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
-  attackRange: 0
+  deathTest: {fileID: 8300000, guid: 7ba3946667ff2104bbc159acb4b90673, type: 3}
   currentStateName: 
   hasPatrol: 1
   hasChase: 1

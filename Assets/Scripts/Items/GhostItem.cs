@@ -14,7 +14,7 @@ public class GhostItem : Item
             player = GameObject.FindGameObjectWithTag("Player");
         }
     }
-    public override void OnPickUp(Collider2D collider)
+    public override void OnPickUp(Collider2D collision)
     {
         originalLayer = player.layer;
 

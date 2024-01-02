@@ -416,7 +416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
-  attackRange: 0
+  deathTest: {fileID: 8300000, guid: 7ba3946667ff2104bbc159acb4b90673, type: 3}
   currentStateName: 
   hasPatrol: 1
   hasChase: 0
@@ -595,6 +595,7 @@ MonoBehaviour:
   center: {fileID: 340504203406093486}
   attackRange: 10
   circleSegments: 30
+  playerIsInRange: 0
 --- !u!1 &6039700127665328353
 GameObject:
   m_ObjectHideFlags: 0
