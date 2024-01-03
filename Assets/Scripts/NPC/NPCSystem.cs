@@ -48,6 +48,7 @@ public class NPCSystem : MonoBehaviour, InteractableInterface
     private void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
+        
     }
     // Update is called once per frame
     void Update()

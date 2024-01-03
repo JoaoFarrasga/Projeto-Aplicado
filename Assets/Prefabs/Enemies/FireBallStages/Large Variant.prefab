@@ -80,6 +80,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Large Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 5013033391641035890, guid: 50fe12fd68bb9954b80915d97cef9caf, type: 3}
+      propertyPath: deathTest
+      value: 
+      objectReference: {fileID: 8300000, guid: 7ba3946667ff2104bbc159acb4b90673, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
