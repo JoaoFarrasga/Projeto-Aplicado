@@ -10,7 +10,7 @@ public class EnemyFlyIdle : EnemyController
     //Player
     private Transform _playerTransform;
     private float timer = 0;
-    private float timer2 = 0;
+    //private float timer2 = 0;
     private float currentMoveSpeed;
     private int currentEnemyDamage;
     private SpriteRenderer sprite;
@@ -40,21 +40,24 @@ public class EnemyFlyIdle : EnemyController
         }
         else
         {
-            if (timer2 < freezeTime)
-            {
-                sprite.color = Color.blue;
-                moveSpeed = 0;
-                enemyDamage = 0;
-                timer2 += Time.deltaTime;
-            }
-            else
-            {
-                timer = 0;
-                timer2 = 0;
-                moveSpeed = currentMoveSpeed;
-                enemyDamage = currentEnemyDamage;
-                sprite.color = Color.white;
-            }
+            FreezeFly();
+            StartCoroutine(UnfreezeFly(freezeTime));
         }
+    }
+
+    private IEnumerator UnfreezeFly(float delay) 
+    {
+        yield return new WaitForSeconds(delay);
+        timer = 0;
+        moveSpeed = currentMoveSpeed;
+        enemyDamage = currentEnemyDamage;
+        sprite.color = Color.white;
+    }
+
+    private void FreezeFly() 
+    {
+        sprite.color = Color.blue;
+        moveSpeed = 0;
+        enemyDamage = 0;
     }
 }

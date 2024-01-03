@@ -9,20 +9,25 @@ public class BossSpawnFlies : MonoBehaviour
     [SerializeField] private Transform spawnLocation;
 
     private float time;
-    void Start()
+    private EnemyPlayerRange range;
+
+    private void Awake()
     {
-        
+        range = GetComponent<EnemyPlayerRange>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
-        if (time >= spawnInterval)
+        if (range.playerIsInRange)
         {
-            Instantiate(smallFly, spawnLocation.position, spawnLocation.rotation);
-            Debug.Log("Spawn fly");
-            time = 0;
+            time += Time.deltaTime;
+            if (time >= spawnInterval)
+            {
+                Instantiate(smallFly, spawnLocation.position, spawnLocation.rotation);
+                Debug.Log("Spawn fly");
+                time = 0;
+            }
         }
     }
 }

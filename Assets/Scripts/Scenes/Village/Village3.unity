@@ -1251,8 +1251,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: isFrozen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: frozenDialogue.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
       propertyPath: endDialogueLines.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: unfrozenDialogue.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: frozenDialogue.Array.data[0]
+      value: This person seems to be frozen in time.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: frozenDialogue.Array.data[1]
+      value: Maybe there's some way to free them...
       objectReference: {fileID: 0}
     - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
       propertyPath: startDialogueLines.Array.size
@@ -1263,12 +1283,40 @@ PrefabInstance:
       value: Careful out there
       objectReference: {fileID: 0}
     - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: unfrozenDialogue.Array.data[0]
+      value: You have unfrozen this person.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
       propertyPath: startDialogueLines.Array.data[0]
-      value: Oh, you again.
+      value: Hey...
       objectReference: {fileID: 0}
     - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
       propertyPath: startDialogueLines.Array.data[1]
       value: Why don't you take a look at my wares?
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: afterUnfreezingDialogue.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: afterUnfreezingDialogue.Array.data[0]
+      value: Wh- What...?
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: afterUnfreezingDialogue.Array.data[1]
+      value: What happened to me...?
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: afterUnfreezingDialogue.Array.data[2]
+      value: How much time have I been in this state...?
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: afterUnfreezingDialogue.Array.data[3]
+      value: ...
+      objectReference: {fileID: 0}
+    - target: {fileID: 4530287104320132376, guid: c30b960b00abd2d408a7001de70e2347, type: 3}
+      propertyPath: afterUnfreezingDialogue.Array.data[4]
+      value: Thank you...
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

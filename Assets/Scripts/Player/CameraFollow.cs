@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class CameraFollow : MonoBehaviour
 {
 	public Camera mainCamera;
-	public float cameraSize;
+	public float dungeonCameraSize;
+	public float villageCameraSize;
 
 	public float FollowSpeed = 2f;
 	public Transform Target;
@@ -24,6 +25,7 @@ public class CameraFollow : MonoBehaviour
 
 	public bool shouldFollow;
 	public string firstSceneName = "FirstLevel";
+	public string villageSceneName = "Village1";
 
 	Vector3 originalPos;
 
@@ -46,10 +48,17 @@ public class CameraFollow : MonoBehaviour
 		if (SceneManager.GetActiveScene().name == firstSceneName)
 		{
 			shouldFollow = true;
-			mainCamera.orthographicSize = cameraSize;
+			mainCamera.orthographicSize = dungeonCameraSize;
 		}
 
-        if (Target == null)
+		if (SceneManager.GetActiveScene().name == villageSceneName)
+		{
+			shouldFollow = false;
+			mainCamera.orthographicSize = villageCameraSize;
+			mainCamera.transform.position = new Vector3(0, -1, -0.3f);
+		}
+
+		if (Target == null)
         {
 			GameObject playerObject = GameObject.Find("Player");
 			if (playerObject != null)
