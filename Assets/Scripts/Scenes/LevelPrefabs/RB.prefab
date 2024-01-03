@@ -12786,6 +12786,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3984832272712040310}
     m_Modifications:
+    - target: {fileID: -6245716926262912168, guid: fe52409e1ad0dc04880b457b2ec99803, type: 3}
+      propertyPath: deathTest
+      value: 
+      objectReference: {fileID: 8300000, guid: 7ba3946667ff2104bbc159acb4b90673, type: 3}
     - target: {fileID: 5488688429655985107, guid: fe52409e1ad0dc04880b457b2ec99803, type: 3}
       propertyPath: m_Name
       value: Fly
@@ -12914,6 +12918,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChargerFly
       objectReference: {fileID: 0}
+    - target: {fileID: 4615186692117375596, guid: 98f1a50c6292a1142b8aea12664d69da, type: 3}
+      propertyPath: deathTest
+      value: 
+      objectReference: {fileID: 8300000, guid: 7ba3946667ff2104bbc159acb4b90673, type: 3}
     - target: {fileID: 7173814088289743309, guid: 98f1a50c6292a1142b8aea12664d69da, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.9675694
@@ -13264,6 +13272,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hidden
       objectReference: {fileID: 0}
+    - target: {fileID: 7219562981626624113, guid: 4837aa2ed2b355d4f957e199566c1e85, type: 3}
+      propertyPath: deathTest
+      value: 
+      objectReference: {fileID: 8300000, guid: 7ba3946667ff2104bbc159acb4b90673, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13530,6 +13542,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3984832272712040310}
     m_Modifications:
+    - target: {fileID: 5402656149982711427, guid: 5509373e74b50ef45a72c74313b4d9b0, type: 3}
+      propertyPath: deathTest
+      value: 
+      objectReference: {fileID: 8300000, guid: 7ba3946667ff2104bbc159acb4b90673, type: 3}
     - target: {fileID: 8069259976912236268, guid: 5509373e74b50ef45a72c74313b4d9b0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.417

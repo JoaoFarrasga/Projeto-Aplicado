@@ -41,7 +41,7 @@ public class CharacterController2D : MonoBehaviour
 
     [Header("SecondaryAttack")]
     public float secondaryAttackDamage = 10f;
-    public float secondaryAttackTimeout = 0.5f;
+    public float secondaryAttackTimeout = 1f;
     public float secondaryAttackSpeed = 1f;
 
     [Header("Jump")]
