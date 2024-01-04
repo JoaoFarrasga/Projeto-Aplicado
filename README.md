@@ -19,9 +19,9 @@ Esta Máquina de Estados ajuda o nosso Jogo a Ordenar o que cada um dos Inimigos
 ![1704404889403](image/README/1704404889403.png)
 
 
-Temos também a opção de guardar se o inimigo tem patrol ou chase state, pois pode ser que não tenha, pois devido ao Design de Cada Inimigo ele pode ser somente Patrol ou somente Chase, por isso temos a necessidade de implementar essa condição para a nossa Maquina de Estados.
+Temos também a opção de guardar se o inimigo tem patrol ou chase state, pois pode ser que não tenha, pois devido ao Design de Cada Inimigo ele pode ser somente Patrol ou somente Chase, por isso temos a necessidade de implementar essa condição para a nossa Máquina de Estados.
 
-No nosso jogo a vida dos inimigos e do jogador é tempo, e está constantemente a diminuir, por isso caso o inimigo chegue a 0 de vida, o state dele passa a ser o DeathState.
+No nosso jogo a vida dos inimigos e do jogador é tempo, e diminui constantemente, por isso caso o inimigo chegue a 0 de vida, o state dele passa a ser o DeathState.
 
 
 ![1704404939237](image/README/1704404939237.png)
