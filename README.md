@@ -38,3 +38,13 @@ E durante o chase state, caso o inimigo perca o jogador do seu campo de visão, 
 
 
 ### Pathfinding A*
+
+Para o pathfinding dos inimigos usamos o A*.
+
+Começamos por dar uma posição inicial, (posição do inimigo), e uma posição final, (posição do player), em seguida criamos uma open list e uma closed list, ambas vazias, e damos à open list a posição do player como primeiro elemento, já que os elementos da open list são os que estão em fila para serem testados e os da closed list são aqueles que já foram testados.
+
+Nós usamos dois tipos de custos, o custo A é o custo de se deslocar de um node para o outro, o custo B que é custo necessário para alcançar o node final, e o custo C, que é a soma do custo A e do custo B.
+
+Em seguida, passamos por todos os nodes e alteramos os custos A para infinito e calculamos o custo C.
+
+E para inicializar a lista, identificamos que o node anterior é igual a “null”
