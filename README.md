@@ -21,35 +21,58 @@ Esta Máquina de Estados ajuda o nosso Jogo a Ordenar o que cada um dos Inimigos
 
 Temos também a opção de guardar se o inimigo tem patrol ou chase state, pois pode ser que não tenha, pois devido ao Design de Cada Inimigo ele pode ser somente Patrol ou somente Chase, por isso temos a necessidade de implementar essa condição para a nossa Máquina de Estados.
 
-No nosso jogo a vida dos inimigos e do jogador é tempo, e diminui constantemente, por isso caso o inimigo chegue a 0 de vida, o state dele passa a ser o DeathState.
+No nosso jogo a vida dos inimigos e do jogador é tempo, e diminui constantemente, por isso caso o inimigo chegue a 0 de vida, o Estado dele passa a ser o DeathState.
 
 
 ![1704404939237](image/README/1704404939237.png)
 
 
-A função que troca cada estado, quando não houver nenhum estado ativo a state machine mete o IdleState por norma, isto pelo o facto de que o Idle State é o Estado que o Inimigo usa para mover-se de Estado em Estado, pois em qualquer transição existe um pequeno momento em que Inimigo tende a parar.
+A função que troca cada estado, quando não houver nenhum estado ativo, a Máquina de Estados mete o IdleState por norma, isto pelo facto de que o Idle State é o Estado que o Inimigo usa para mover-se de Estado em Estado, pois em qualquer transição existe um pequeno momento em que Inimigo tende a parar.
 
-Os inimigos que têm patrol state estão com esse state ativo por norma, caso o inimigo possua chase state e o player entre no seu campo de visão, o state passa a ser o chase state
+Os inimigos que têm patrol state estão com esse state ativo por norma, caso o inimigo possua chase state e o jogador entre no seu campo de visão, o state passa a ser o chase state
 
 Caso o inimigo esteja em idle state este troca para chase state da mesma forma, e caso o inimigo tenha patrol state, este automaticamente passa de idle para patrol state.
 
 E durante o chase state, caso o inimigo perca o jogador do seu campo de visão, ele volta para o idle state.
 
 
-### Dugeon Generator
+### Dungeon Generator
+
+
+O Dungeon Generator é um código relativamente simples este método consiste em spawnpoints creados em frente a cada porta no local que seria o centro da próxima sala, para isto ser possível as salas terão de ser todas com o mesmo tamanho.
+
+Cada spawnpoint terá uma designação correspondente a um número de 1 a 4 ( ou mais caso necessário mas 1 a 4 é o minimo ), este número servirá para identificar a direção em que obrigatoriamente terá que existir uma porta na sala gerada. Assim com este sistema podemos atribuir um valor a cada direção necessária.
+
+Assim as salas terão todas um spawnpoint em cada passagem e esse spawnpoint terá atribuido um número que identifica a porta que tem de existir obrigatóriamente na sala a criar para que não sejam criadas portas em cima de paredes.
+
+
+
+![1704411263845](image/README/1704411263845.png)
+
+
+Desta forma ao conforme a dungeon é gerada os spawnpoints apareceriam conforme as salas são criadas e se tudo correr como esperado haverá spawnpoints a sobrepor-se no centro de salas cujas portas ja apontam para salas criadas, para garantir que salas não são criadas por cima umas das outras no momento em que dois spawnpoints se sobrepõe estes desaparecem.
+
+
+![1704411281694](image/README/1704411281694.png)
+
+
+Próximo passo será criar o spawner inicial que funciona também como o ponto de partida de geração desta dungeon, este consiste num gameobject que guardará as informações em listas de todas as salas disponiveis para spawn. Após isso é colocar nas listas de cada número de direção as prefabs das salas com a porta associada a direção (pode ter mais mas precisa obrigatoriamente dessa).
+
+
+![1704411299293](image/README/1704411299293.png)
 
 
 ### Pathfinding A*
 
 Para o pathfinding dos inimigos usamos o A*, no caso este método não está implementado no jogo devido a problemas na implementação, mas conseguimos realizar o Código necessário para a realização do tal.
 
-Começamos por dar uma posição inicial, (posição do inimigo), e uma posição final, (posição do player), em seguida criamos uma open list e uma closed list, ambas vazias, e damos à open list a posição do player como primeiro elemento, já que os elementos da open list são os que estão em fila para serem testados e os da closed list são aqueles que já foram testados.
+Começamos por dar uma posição inicial, (posição do Inimigo), e uma posição final, (posição do Jogador), em seguida criamos uma open list e uma closed list, ambas vazias, e damos à open list a posição do Jogador como primeiro elemento, já que os elementos da open list são os que estão em fila para serem testados e os da closed list são aqueles que já foram testados.
 
 
 ![1704408395028](image/README/1704408395028.png)
 
 
-Nós usamos dois tipos de custos, o custo A é o custo de se deslocar de um node para o outro, o custo B que é custo necessário para alcançar o node final, e o custo C, que é a soma do custo A e do custo B.
+Nós usamos dois tipos de custos, o custo A é o custo de se deslocar de um node para o outro, o custo B que é custo necessário para alcançar o node final, e o custo C, a soma do custo A e do custo B.
 
 
 ![1704408372099](image/README/1704408372099.png)
@@ -65,6 +88,8 @@ Com isso o Pathfinding encontra o valor menor entre os Costs de todos os Nodes p
 
 
 ![1704408574218](image/README/1704408574218.png)
+
+
 
 Com isso escolhe-se o menor Cost pertencente aos Nodes adjacentes ao Node onde o Inimigo está para então escolher esse para fazer o Inimigo mover-se.
 
