@@ -6,6 +6,7 @@ public class BossSpawnPortalOnDeath : MonoBehaviour
 {
     [SerializeField] private TimeManager timeManager;
     [SerializeField] private GameObject portal;
+    [SerializeField] private GameObject spawnPosition;
 
     // Start is called before the first frame update
     private void Awake()
@@ -17,13 +18,7 @@ public class BossSpawnPortalOnDeath : MonoBehaviour
     {
         for (int i = 0; i < 2; i++)
         {
-            Instantiate(portal, transform.position, transform.rotation);
+            Instantiate(portal, spawnPosition.transform.position, transform.rotation);
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
