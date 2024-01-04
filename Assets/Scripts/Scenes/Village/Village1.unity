@@ -5126,6 +5126,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 64500908278106861, guid: ac6e526a0dd3035429f5bc583c6c1705, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1115934824, guid: d961e526d18077e46bad30debe14563a, type: 3}
     - target: {fileID: 359566085204687862, guid: ac6e526a0dd3035429f5bc583c6c1705, type: 3}
       propertyPath: isTimeCoroutineRunning
       value: 1
@@ -5170,6 +5174,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5652135562115367249, guid: ac6e526a0dd3035429f5bc583c6c1705, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 5652135562115367249, guid: ac6e526a0dd3035429f5bc583c6c1705, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 6530740411755124079, guid: ac6e526a0dd3035429f5bc583c6c1705, type: 3}
       propertyPath: canGrapple
       value: 1
@@ -5186,9 +5198,33 @@ PrefabInstance:
       propertyPath: interactDistance
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6950395796594042544, guid: ac6e526a0dd3035429f5bc583c6c1705, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 6950395796594042544, guid: ac6e526a0dd3035429f5bc583c6c1705, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 7310751048658668097, guid: ac6e526a0dd3035429f5bc583c6c1705, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749429232514573963, guid: ac6e526a0dd3035429f5bc583c6c1705, type: 3}
+      propertyPath: m_Size.x
+      value: 0.5735407
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749429232514573963, guid: ac6e526a0dd3035429f5bc583c6c1705, type: 3}
+      propertyPath: m_Size.y
+      value: 1.8051317
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749429232514573963, guid: ac6e526a0dd3035429f5bc583c6c1705, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.15291882
+      objectReference: {fileID: 0}
+    - target: {fileID: 8749429232514573963, guid: ac6e526a0dd3035429f5bc583c6c1705, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.012745142
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
